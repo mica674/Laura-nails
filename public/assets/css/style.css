@@ -213,6 +213,12 @@ form{
     width: 100vw;
 }
 
+.loginFieldset{
+    font-size: 1.25rem;
+    color: #fff;
+    
+}
+
 label{
     width: 80vw;
     position: relative;
@@ -220,7 +226,6 @@ label{
     font-family: belleza;
     font-size: 0.75rem;
     color: #fbbc04;
-    margin-top: 0.375rem;
 }
 
 input{
@@ -244,11 +249,9 @@ input{
     font-family: Belleza;
     font-size: 0.7rem;
     color: #fbbc04;
-    margin-left: 10vw;
 }
 
 /* CONNEXION.HTML */
-.forgotPassword{
-    text-decoration: none;
+.forgotPassword, .noRegistered, .alreadyRegistered{
     color: #fbbc04;
 }
