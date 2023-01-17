@@ -1,4 +1,5 @@
 /* GLOBAL */
+/* Appel d'une nouvelle police de caractères qui s'appelera 'Belleza' */
 @font-face {
     font-family: Belleza;
     src: url('../font/Belleza/Belleza-Regular.ttf');
@@ -7,27 +8,31 @@
 
 /* MAIN.HTML */
 body{
-    background-color: #242424;
-    color: #fff;
+    background-color: #242424; /* Couleur du background dans toute la page */
+    color: #fff; /* Couleur par défaut dans tout le body */
 }
 
 h2{
-    font-family: Belleza;
+    font-family: Belleza; /* TITRE H2 - Police de caractères */
 }
 
 h3{
-    font-family: Belleza;
+    font-family: Belleza; /* TITRE H3 - Police de caractères */
 }
 
 p{
-    font-family: Belleza;
+    font-family: Belleza; /* PARAGRAPHE P - Police de caractères */
 }
 
 button{
-    font-family: Belleza;
+    font-family: Belleza; /* BOUTON BUTTON - Police de caractères */
 }
 
-.hr{
+fieldset{
+    font-family: Belleza; /* ZONE DE FORMULAIRE FIELDSET- Police de caractères */
+}
+
+.hr{ /* DIV contenant les HR */
     display: flex;
     justify-content: center ;
     height: 1px;
@@ -42,7 +47,7 @@ hr{
 /* NAVBAR */
 /* NavBar Burger button/text */
 h1{
-    font-family: Belleza;
+    font-family: Belleza; /* TITRE H1 - Police de caractères */
     color: #fbbc04;
     font-size: 2.1875rem;
     margin-left: 9vw;
@@ -78,40 +83,60 @@ h1{
     padding: 0;
 }
 
-.navbar-nav{
-    font-family: Belleza;
-    font-size: 0.875rem;
-    margin-left: 60vw;
+.navbar-nav{ /* items list navbar*/
+    font-family: Belleza; /* Police de caractère */
+    font-size: 0.875rem; /* Taille texte  */
+    margin-left: 60vw; /* left margin in mobile */
     /* border: 1px solid #fbbc04; */
 }
 
-.nav-link{
-    padding: 0;
-}
-
-.nav-item{
+.nav-item{ /* Elements liste NAVBAR */
     width: 26vw;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* centrer le contenu/liens */
 }
 
-.nav-button{
+.nav-button{ /* Boutons NAVBAR */
     width: 26vw;
     border: 0.1rem solid #fbbc04;
     border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0.3rem;
+}
+
+.nav-link{
+    padding: 0; /* supprimer les padding par défaut de bootstrap de chaque liens */
+}
+
+.nav-link:focus, .nav-link:hover{ /* passage de la souris sur les liens de la NAVBAR*/
+    color: #fbbc04; /* changer la couleur du texte */
+}
+
+.nav-button:focus, .nav-button:hover{ /* au passage de la souris sur les boutons NAVBAR */
+    background-color: #fbbc04; /* changer la couleur du fond des boutons */
+}
+
+.nav-link-button{ /* Liens des boutons NAVBAR */
+    padding: 0.2rem 2rem; /* Augmente la zone cliquable du lien des boutons */
+}
+
+.nav-link-button:focus, .nav-link-button:hover{ /* au passage de la souris sur les liens des boutons NAVBAR */
+    color: #242424; /* changer la couleur des liens de boutons */
 }
 
 
 /* CAROUSEL */
+.carouselItem>img{
+    width: 100vw; /* Largeur images carousel*/
+    height: 60vh; /* Hauteur images carousel*/
+}
+
 .carouselTitle{
-    font-family: Belleza;
     font-size: 0.875rem;
     color: #fbbc04;
     margin: 5rem 0 2rem 0;
 }
 
-
+ 
 /* PLACE & DATE + MAPS */
 .placeDate{
     display: flex;
@@ -207,6 +232,8 @@ iframe{
 
 
 
+
+
 /* INSCRIPTION.HTML */
 
 form{
@@ -216,7 +243,6 @@ form{
 .loginFieldset{
     font-size: 1.25rem;
     color: #fff;
-    
 }
 
 label{
@@ -251,7 +277,54 @@ input{
     color: #fbbc04;
 }
 
+.alreadyRegistered{
+    color: #fbbc04;
+
+}
+
+
 /* CONNEXION.HTML */
-.forgotPassword, .noRegistered, .alreadyRegistered{
+.forgotPassword, .noRegistered{
     color: #fbbc04;
 }
+
+
+
+
+/* PRESTATIONS */
+/* Section 1 */
+.prestationsImgPres{
+    height: 25.5vh;
+}
+
+#imgPrestaPres1{
+    position: absolute;
+    width: 100vw;
+    height: 25.5vh;
+    opacity: 0.5;
+}
+
+#imgPrestaPres2{
+    position: relative;
+    top: 8vw;
+    left: 60vw;
+    width: 30vw;
+    border: 1px solid #fbbc04;
+    border-radius: 30vw;
+}
+
+.card{
+    background-color: #242424;
+    margin: 0 auto;
+}
+
+/* Section 2 */
+.section2Img{
+    width: 94vw;
+}
+
+.section2Img>img{
+    height: 27.2vh;
+    width: 43.75vw;
+}
+

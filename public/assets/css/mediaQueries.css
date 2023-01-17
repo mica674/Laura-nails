@@ -1,0 +1,17 @@
+@media screen and (min-width : 990px) {
+    .navbar-collapse{
+        justify-content: space-between;
+
+    }
+
+    .navbar-nav{
+        margin-left: 0;
+        font-size: 1.1rem;
+    }
+
+    .nav-item{
+        width: auto;
+        align-items: center;
+    }
+
+}
