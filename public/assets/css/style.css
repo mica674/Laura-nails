@@ -401,3 +401,19 @@ input{
 .openingHours li{
     list-style-type: none;
 }
+
+.onlyRdv{
+    background-image: url(../img/rdv1.jpg);
+    background-size: cover;
+    width: 2rem;
+    height: 2rem;
+}
+
+.place{
+    background-color: #484848;
+    
+}
+
+.metroMap Img{
+    width: 100vw;
+}
