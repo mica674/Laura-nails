@@ -288,8 +288,18 @@ input{
     color: #fbbc04;
 }
 
+#forgotPassword:hover, #noRegistered:hover, #alreadyRegistered:hover{
+    color:#fff;
+    border: #fbbc04 1px solid;
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+}
 
+#loginBtn:hover, #registrerBtn:hover{
+    background-color: #484848;
+    color: #fbbc04;
 
+}
 
 /* PRESTATIONS */
 /* Section 1 */
@@ -328,3 +338,66 @@ input{
     width: 43.75vw;
 }
 
+/* Section 3 */
+.cardPresta{
+    height: 310px;
+    padding: 1rem 0 0 0;
+}
+
+.cardPresta1{
+    background: url(../img/photos/pexels-photo-998405.webp) no-repeat center;
+}
+
+.cardPresta2{
+    background: url(../img/photos/pexels-photo-963757.webp) no-repeat center;
+}
+
+.cardPresta3{
+    background: url(../img/photos/pexels-photo-808960.webp) no-repeat center;
+}
+
+.cardPresta4{
+    background: url(../img/photos/pexels-photo-3997381.webp) no-repeat center;
+}
+
+.cardPresta5{
+    background: url(../img/photos/french.jpg) no-repeat;
+}
+
+.titleCard{
+    border-radius: 0.3rem;
+    background-color: #242424;
+    width:max-content;
+    margin: 1rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.contentCard{
+    background-color: #484848;
+    border-radius: 0.3rem;
+    width: 60vw;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.contentCard>span{
+    display:inline-flex;
+    justify-self: center;
+}
+
+/* PLACE & DATE */
+.placeDateSection1Head{
+    background: url(../img/photos/pexels-photo-4542998.webp) no-repeat center;
+    height: 240px;
+}
+
+.openingHours{
+    background-color: #727272;
+    opacity: 0.75;
+    margin: 3vw;
+    width: 94vw;
+}
+
+.openingHours li{
+    list-style-type: none;
+}
