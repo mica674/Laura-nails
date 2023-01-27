@@ -124,96 +124,6 @@ h1{
 }
 
 
-/* CAROUSEL */
-.carouselItem>img{
-    width: 100vw; /* Largeur images carousel*/
-    height: 60vh; /* Hauteur images carousel*/
-}
-
-.carouselTitle{
-    font-size: 0.875rem;
-    color: #fbbc04;
-    margin: 5rem 0 2rem 0;
-}
-
- 
-/* PLACE & DATE + MAPS */
-.placeDate{
-    display: flex;
-    flex-direction: column;
-}
-
-.placeDate-placeText{
-    width: 40vw;
-    margin: 0 auto;
-}
-
-iframe{
-    width: 100vw;
-    height: 80vh;
-}
-
-
-/* RENDEZ-VOUS */
-.calendarRendezVous{
-    display: flex;
-    justify-content: center;
-    height: 60vh;
-}
-
-.calendarRendezVous>img{
-    width: 100vw;
-}
-
-.buttonPrendreRDV{
-    background-color: transparent;
-    color: #fff;
-    border-color: #fbbc04;
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    width: 60vw;
-}
-
-
-/* REVIEW */
-.reviewCard{
-    background-color: #484848;
-}
-
-.reviewRow{
-    padding: 0.2rem;
-}
-
-.reviewNickname, .reviewDate, .reviewComment{
-    background-color: #242424;
-    padding: 0 0.1rem;
-}
-
-.reviewComment{
-    height: 3rem;
-}
-
-#reviewBtn{
-    background-color: transparent;
-    color: #fff;
-    border-color: #fbbc04;
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    width: 60vw;
-}
-
-
-/* CONTACT */
-#contactBtn{
-    background-color: transparent;
-    color: #fff;
-    border-color: #fbbc04;
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    width: 50vw;
-}
-
-
 /* FOOTER */
 /* CLIKABLE LINKS */
 .clickableLinks{
@@ -231,3 +141,87 @@ iframe{
 }
 
 
+
+/* PRESTATIONS */
+/* Section 1 */
+.prestationsImgPres{
+    height: 25.5vh;
+}
+
+#imgPrestaPres1{
+    position: absolute;
+    width: 100vw;
+    height: 25.5vh;
+    opacity: 0.5;
+}
+
+#imgPrestaPres2{
+    position: relative;
+    top: 8vw;
+    left: 60vw;
+    width: 30vw;
+    border: 1px solid #fbbc04;
+    border-radius: 30vw;
+}
+
+.card{
+    background-color: #242424;
+    margin: 0 auto;
+}
+
+/* Section 2 */
+.section2Img{
+    width: 94vw;
+}
+
+.section2Img>img{
+    height: 27.2vh;
+    width: 43.75vw;
+}
+
+/* Section 3 */
+.cardPresta{
+    height: 310px;
+    padding: 1rem 0 0 0;
+}
+
+.cardPresta1{
+    background: url(../img/photos/pexels-photo-998405.webp) no-repeat center;
+}
+
+.cardPresta2{
+    background: url(../img/photos/pexels-photo-963757.webp) no-repeat center;
+}
+
+.cardPresta3{
+    background: url(../img/photos/pexels-photo-808960.webp) no-repeat center;
+}
+
+.cardPresta4{
+    background: url(../img/photos/pexels-photo-3997381.webp) no-repeat center;
+}
+
+.cardPresta5{
+    background: url(../img/photos/french.jpg) no-repeat;
+}
+
+.titleCard{
+    border-radius: 0.3rem;
+    background-color: #242424;
+    width:max-content;
+    margin: 1rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.contentCard{
+    background-color: #484848;
+    border-radius: 0.3rem;
+    width: 60vw;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.contentCard>span{
+    display:inline-flex;
+    justify-self: center;
+}

@@ -124,96 +124,6 @@ h1{
 }
 
 
-/* CAROUSEL */
-.carouselItem>img{
-    width: 100vw; /* Largeur images carousel*/
-    height: 60vh; /* Hauteur images carousel*/
-}
-
-.carouselTitle{
-    font-size: 0.875rem;
-    color: #fbbc04;
-    margin: 5rem 0 2rem 0;
-}
-
- 
-/* PLACE & DATE + MAPS */
-.placeDate{
-    display: flex;
-    flex-direction: column;
-}
-
-.placeDate-placeText{
-    width: 40vw;
-    margin: 0 auto;
-}
-
-iframe{
-    width: 100vw;
-    height: 80vh;
-}
-
-
-/* RENDEZ-VOUS */
-.calendarRendezVous{
-    display: flex;
-    justify-content: center;
-    height: 60vh;
-}
-
-.calendarRendezVous>img{
-    width: 100vw;
-}
-
-.buttonPrendreRDV{
-    background-color: transparent;
-    color: #fff;
-    border-color: #fbbc04;
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    width: 60vw;
-}
-
-
-/* REVIEW */
-.reviewCard{
-    background-color: #484848;
-}
-
-.reviewRow{
-    padding: 0.2rem;
-}
-
-.reviewNickname, .reviewDate, .reviewComment{
-    background-color: #242424;
-    padding: 0 0.1rem;
-}
-
-.reviewComment{
-    height: 3rem;
-}
-
-#reviewBtn{
-    background-color: transparent;
-    color: #fff;
-    border-color: #fbbc04;
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    width: 60vw;
-}
-
-
-/* CONTACT */
-#contactBtn{
-    background-color: transparent;
-    color: #fff;
-    border-color: #fbbc04;
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    width: 50vw;
-}
-
-
 /* FOOTER */
 /* CLIKABLE LINKS */
 .clickableLinks{
@@ -230,4 +140,34 @@ iframe{
     width: 3rem;
 }
 
+/* PLACE & DATE */
+.placeDateSection1Head{
+    background: url(../img/photos/pexels-photo-4542998.webp) no-repeat center;
+    height: 240px;
+}
 
+.openingHours{
+    background-color: #727272;
+    opacity: 0.75;
+    margin: 3vw;
+    width: 94vw;
+}
+
+.openingHours li{
+    list-style-type: none;
+}
+
+.onlyRdv{
+    background-image: url(../img/rdv1.jpg);
+    background-size: cover;
+    width: 2rem;
+    height: 2rem;
+}
+
+.place{
+    background-color: #484848;
+}
+
+.metroMap Img{
+    width: 100vw;
+}
