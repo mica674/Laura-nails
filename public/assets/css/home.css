@@ -1,0 +1,138 @@
+/* GLOBAL */
+/* Appel d'une nouvelle police de caractères qui s'appelera 'Belleza' */
+@font-face {
+    font-family: Belleza;
+    src: url('../font/Belleza/Belleza-Regular.ttf');
+}
+
+
+/* MAIN.HTML */
+body{
+    background-color: #242424; /* Couleur du background dans toute la page */
+    color: #fff; /* Couleur par défaut dans tout le body */
+}
+
+h2{
+    font-family: Belleza; /* TITRE H2 - Police de caractères */
+}
+
+h3{
+    font-family: Belleza; /* TITRE H3 - Police de caractères */
+}
+
+p{
+    font-family: Belleza; /* PARAGRAPHE P - Police de caractères */
+}
+
+button{
+    font-family: Belleza; /* BOUTON BUTTON - Police de caractères */
+}
+
+fieldset{
+    font-family: Belleza; /* ZONE DE FORMULAIRE FIELDSET- Police de caractères */
+}
+
+.hr{ /* DIV contenant les HR */
+    display: flex;
+    justify-content: center ;
+    height: 1px;
+}
+
+hr{
+    margin: 0;
+    color: #fbbc04;
+    width: 80vw;
+}
+
+/* CAROUSEL */
+.carouselItem>img{
+    width: 100vw; /* Largeur images carousel*/
+    height: 60vh; /* Hauteur images carousel*/
+}
+
+.carouselTitle{
+    font-size: 0.875rem;
+    color: #fbbc04;
+    margin: 5rem 0 2rem 0;
+}
+
+ 
+/* PLACE & DATE + MAPS */
+.placeDate{
+    display: flex;
+    flex-direction: column;
+}
+
+.placeDate-placeText{
+    width: 40vw;
+    margin: 0 auto;
+}
+
+iframe{
+    width: 100vw;
+    height: 80vh;
+}
+
+
+/* RENDEZ-VOUS */
+.calendarRendezVous{
+    display: flex;
+    justify-content: center;
+    height: 60vh;
+}
+
+.calendarRendezVous>img{
+    width: 100vw;
+}
+
+.buttonPrendreRDV{
+    background-color: transparent;
+    color: #fff;
+    border-color: #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    width: 60vw;
+}
+
+
+/* REVIEW */
+.reviewCard{
+    background-color: #484848;
+}
+
+.reviewRow{
+    padding: 0.2rem;
+}
+
+.reviewNickname, .reviewDate, .reviewComment{
+    background-color: #242424;
+    padding: 0 0.1rem;
+}
+
+.reviewComment{
+    height: 3rem;
+}
+
+#reviewBtn{
+    background-color: transparent;
+    color: #fff;
+    border-color: #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    width: 60vw;
+}
+
+
+/* CONTACT */
+#contactBtn{
+    background-color: transparent;
+    color: #fff;
+    border-color: #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    width: 50vw;
+}
+
+
+
+

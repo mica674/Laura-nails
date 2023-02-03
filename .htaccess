@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteRule Accueil /controllers/homeCtrl.php
+
+ErrorDocument 404 /404page.html

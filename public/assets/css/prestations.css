@@ -1,0 +1,227 @@
+/* GLOBAL */
+/* Appel d'une nouvelle police de caractères qui s'appelera 'Belleza' */
+@font-face {
+    font-family: Belleza;
+    src: url('../font/Belleza/Belleza-Regular.ttf');
+}
+
+
+/* MAIN.HTML */
+body{
+    background-color: #242424; /* Couleur du background dans toute la page */
+    color: #fff; /* Couleur par défaut dans tout le body */
+}
+
+h2{
+    font-family: Belleza; /* TITRE H2 - Police de caractères */
+}
+
+h3{
+    font-family: Belleza; /* TITRE H3 - Police de caractères */
+}
+
+p{
+    font-family: Belleza; /* PARAGRAPHE P - Police de caractères */
+}
+
+button{
+    font-family: Belleza; /* BOUTON BUTTON - Police de caractères */
+}
+
+fieldset{
+    font-family: Belleza; /* ZONE DE FORMULAIRE FIELDSET- Police de caractères */
+}
+
+.hr{ /* DIV contenant les HR */
+    display: flex;
+    justify-content: center ;
+    height: 1px;
+}
+
+hr{
+    margin: 0;
+    color: #fbbc04;
+    width: 80vw;
+}
+
+/* NAVBAR */
+/* NavBar Burger button/text */
+h1{
+    font-family: Belleza; /* TITRE H1 - Police de caractères */
+    color: #fbbc04;
+    font-size: 2.1875rem;
+    margin-left: 9vw;
+    margin-top: 1.2rem;
+}
+
+:root{
+    --bs-border-width: 0px; /*retire les bordures du bouton burger*/
+    /* --bs-light-rgb:#626262;retire le background de la navbar, qui est géré aussi par opacity */
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+.navbar{
+    padding: 0;
+    --bs-navbar-toggler-focus-width: 0; /*retire la bordure au clic sur le bouton burger*/
+    --bs-navbar-color:#fff;/*Couleur des items de la liste de la navbar*/
+}
+
+.navbar-toggler-icon {
+    background: url("../img/icones/nailIconeLine.png");/*icone de burger personnalisé*/
+    background-size: 100%; /*Taille de l'icone burger dans le bouton*/
+    margin: 0;
+}
+
+.navbar-toggler{
+    --bs-navbar-toggler-font-size:150%;/*Taille de l'icone burger par rapport à la taille d'origine*/
+}
+
+.navbar-brand{
+    padding: 0;
+}
+
+.navbar-nav{ /* items list navbar*/
+    font-family: Belleza; /* Police de caractère */
+    font-size: 0.875rem; /* Taille texte  */
+    margin-left: 60vw; /* left margin in mobile */
+    /* border: 1px solid #fbbc04; */
+}
+
+.nav-item{ /* Elements liste NAVBAR */
+    width: 26vw;
+    display: flex;
+    justify-content: center; /* centrer le contenu/liens */
+}
+
+.nav-button{ /* Boutons NAVBAR */
+    width: 26vw;
+    border: 0.1rem solid #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.3rem;
+}
+
+.nav-link{
+    padding: 0; /* supprimer les padding par défaut de bootstrap de chaque liens */
+}
+
+.nav-link:focus, .nav-link:hover{ /* passage de la souris sur les liens de la NAVBAR*/
+    color: #fbbc04; /* changer la couleur du texte */
+}
+
+.nav-button:focus, .nav-button:hover{ /* au passage de la souris sur les boutons NAVBAR */
+    background-color: #fbbc04; /* changer la couleur du fond des boutons */
+}
+
+.nav-link-button{ /* Liens des boutons NAVBAR */
+    padding: 0.2rem 2rem; /* Augmente la zone cliquable du lien des boutons */
+}
+
+.nav-link-button:focus, .nav-link-button:hover{ /* au passage de la souris sur les liens des boutons NAVBAR */
+    color: #242424; /* changer la couleur des liens de boutons */
+}
+
+
+/* FOOTER */
+/* CLIKABLE LINKS */
+.clickableLinks{
+    height: 80vh;
+}
+
+/* SOCIAL NETWORK */
+.socialNetwork>div{
+    padding: 0;
+}
+
+.socialNetwork>div>img{
+    height: 3rem;
+    width: 3rem;
+}
+
+
+
+/* PRESTATIONS */
+/* Section 1 */
+.prestationsImgPres{
+    height: 25.5vh;
+}
+
+#imgPrestaPres1{
+    position: absolute;
+    width: 100vw;
+    height: 25.5vh;
+    opacity: 0.5;
+}
+
+#imgPrestaPres2{
+    position: relative;
+    top: 8vw;
+    left: 60vw;
+    width: 30vw;
+    border: 1px solid #fbbc04;
+    border-radius: 30vw;
+}
+
+.card{
+    background-color: #242424;
+    margin: 0 auto;
+}
+
+/* Section 2 */
+.section2Img{
+    width: 94vw;
+}
+
+.section2Img>img{
+    height: 27.2vh;
+    width: 43.75vw;
+}
+
+/* Section 3 */
+.cardPresta{
+    height: 310px;
+    padding: 1rem 0 0 0;
+}
+
+.cardPresta1{
+    background: url(../img/photos/pexels-photo-998405.webp) no-repeat center;
+}
+
+.cardPresta2{
+    background: url(../img/photos/pexels-photo-963757.webp) no-repeat center;
+}
+
+.cardPresta3{
+    background: url(../img/photos/pexels-photo-808960.webp) no-repeat center;
+}
+
+.cardPresta4{
+    background: url(../img/photos/pexels-photo-3997381.webp) no-repeat center;
+}
+
+.cardPresta5{
+    background: url(../img/photos/french.jpg) no-repeat;
+}
+
+.titleCard{
+    border-radius: 0.3rem;
+    background-color: #242424;
+    width:max-content;
+    margin: 1rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.contentCard{
+    background-color: #484848;
+    border-radius: 0.3rem;
+    width: 60vw;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.contentCard>span{
+    display:inline-flex;
+    justify-self: center;
+}

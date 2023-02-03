@@ -1,0 +1,15 @@
+/* FOOTER */
+/* CLIKABLE LINKS */
+.clickableLinks{
+    height: 80vh;
+}
+
+/* SOCIAL NETWORK */
+.socialNetwork>div{
+    padding: 0;
+}
+
+.socialNetwork>div>img{
+    height: 3rem;
+    width: 3rem;
+}
