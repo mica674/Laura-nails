@@ -141,6 +141,7 @@ h1{
 }
 
 
+<<<<<<<< HEAD:public/assets/css/prestations.css
 
 /* PRESTATIONS */
 /* Section 1 */
@@ -225,3 +226,5 @@ h1{
     display:inline-flex;
     justify-self: center;
 }
+========
+>>>>>>>> 2588f253119ac44a5aec500a766d95e0865fb6e0:public/assets/css/style.css

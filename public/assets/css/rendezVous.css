@@ -24,6 +24,32 @@ body{
 .prestaField{
     background-color:#484848;
 }
+body{
+    color: white;
+    font-family: Belleza;
+}
+
+/* RENDEZ VOUS */
+.placeDateSection1Head{
+    background: url(../img/photos/pexels-photo-4542998.webp) no-repeat center;
+    height: 5rem;
+}
+
+.onlyRdv{
+    background-image: url(../img/rdv1.jpg);
+    background-size: cover;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.3rem 0.3rem 1rem 0.3rem;
+}
+
+.place{
+    background-color: #484848;
+}
+
+.prestaField{
+    background-color:#484848;
+}
 
 .labels{
     width: 80%;
