@@ -34,25 +34,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-2 mb-lg-0 ms-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/controllers/prestationsCtrl.php">Prestations</a>
+                            <a class="nav-link" href="/Prestations">Prestations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/controllers/placeDateCtrl.php">Lieux et horaires</a>
+                            <a class="nav-link" href="/Lieux_et_horaires">Lieux et horaires</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/controllers/rendezVousCtrl.php">Rendez-vous</a>
+                            <a class="nav-link" href="/Rendez_vous">Rendez-vous</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/controllers#avis">Avis</a>
+                            <a class="nav-link" href="/Avis">Avis</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/controllers#contact">Contact</a>
+                            <a class="nav-link" href="/Contact">Contact</a>
                         </li>
                         <li class="nav-item nav-button">
-                            <a class="nav-link nav-link-button" href="/controllers/registrerCtrl.php">Inscription</a>
+                            <a class="nav-link nav-link-button" href="/Inscription">Inscription</a>
                         </li>
                         <li class="nav-item nav-button">
-                            <a class="nav-link nav-link-button" href="/controllers/loginCtrl.php">Connexion</a>
+                            <a class="nav-link nav-link-button" href="/Connexion">Connexion</a>
                         </li>
                     </ul>
                 </div>

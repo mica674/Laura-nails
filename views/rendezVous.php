@@ -26,7 +26,6 @@
         </div>
 
         <!-- Section 3 - Liste des prestations à cocher -->
-
         <form>
             <fieldset>
                 <div class="prestaField d-flex m-3 justify-content-between rounded">
