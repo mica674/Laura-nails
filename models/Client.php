@@ -332,7 +332,7 @@ class Client
      * 
      * @return bool
      */
-    public function isExist($lastname, $firstname, $email, $birthdate): bool
+    public static function isExist($lastname, $firstname, $email, $birthdate): bool
     {
         // Connexion à la base de données
         if (!isset($db)) {

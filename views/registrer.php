@@ -25,9 +25,9 @@
             <!-- Phone number -->
             <label for="phoneNumber" class="mt-1">Numéro de téléphone <span class="registrationRequired">*</span></label>
             <input type="text" name="phoneNumber" id="phoneNumber" class="inputForm" placeholder="Numéro de téléphone" required autocomplete="tel-local" maxlength="10" value="<?=$phoneNumber??''?>" pattern="<?=REGEXP_PHONE_NUMBER?>">
-            <!-- Birthday -->
-            <label for="Birthday" class="mt-1">Date de naissance</label>
-            <input type="date" name="birthday" id="birthday" class="inputForm" placeholder="Date de naissance" autocomplete="bday" value="<?= $birthday ?? '' ?>" min="1900-01-01" max="2010-01-01">
+            <!-- Birthdate -->
+            <label for="birthdate" class="mt-1">Date de naissance</label>
+            <input type="date" name="birthdate" id="birthdate" class="inputForm" placeholder="Date de naissance" autocomplete="bday" value="<?= $birthdate ?? '' ?>" min="1900-01-01" max="2010-01-01">
             
             <!-- Required fields informations -->
             <small class="registrationSmall me-5">* Champs obligatoires pour s'inscrire</small>

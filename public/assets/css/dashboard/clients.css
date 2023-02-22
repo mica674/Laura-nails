@@ -1,0 +1,84 @@
+body{
+    background-color: #262626;
+    color: beige;
+}
+
+
+h1{
+    color: beige;
+    }
+
+
+a{
+    text-decoration: none;
+    color: beige!important;
+    font-size: large!important;
+}
+
+
+.row{
+    justify-content: center;
+}
+
+
+/* Home */
+.homeCard{
+    border-radius: 1rem;
+    border: beige 1px solid;
+}
+
+
+/* clients List */
+.tableclientList{
+    width: 96vw;
+    margin: 2vw;
+}
+
+
+tr>th{
+    border-top: #fbbc04 solid 1px;
+    border-bottom: #fbbc04 solid 1px;
+}
+
+
+th{
+    padding: 1rem 0;
+}
+
+
+td{
+    padding: 0.5rem 0 ;
+}
+
+
+.trclient2{
+    background-color: #363636;
+}
+
+
+td>a{
+    color: #fbbc04!important;
+}
+
+
+td>a:hover{
+    color: #fbbd0486!important;
+}
+
+
+.trclient1:hover, .trclient2:hover{
+    background-color: #646464;
+    color: #fbbc04!important;
+}
+
+
+/* client profil */
+li{
+    list-style-type: none;
+}
+
+
+input:read-only{
+    background-color: #484848;
+    color: white;
+}
