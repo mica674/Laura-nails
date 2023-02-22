@@ -1,5 +1,11 @@
 RewriteEngine on
 
 RewriteRule Accueil /controllers/homeCtrl.php
+RewriteRule Inscription /controllers/registrerCtrl.php
+RewriteRule Connexion /controllers/loginCtrl.php
+RewriteRule Lieux_et_horaires /controllers/placeDateCtrl.php
+RewriteRule Prestations /controllers/prestationsCtrl.php
+RewriteRule Rendez_vous /controllers/rendezVousCtrl.php
+
 
 ErrorDocument 404 /404page.html
