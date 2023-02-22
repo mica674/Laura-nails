@@ -10,7 +10,7 @@
     }
 
     .nav-item{
-        width: auto;
+        width: auto!important;
         align-items: center;
     }
 

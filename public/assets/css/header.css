@@ -49,19 +49,18 @@ h1{
 }
 
 .nav-item{ /* Elements liste NAVBAR */
-    width: 26vw;
+    width: 40vw!important;
     display: flex;
     justify-content: center; /* centrer le contenu/liens */
 }
 
 .nav-button{ /* Boutons NAVBAR */
-    width: 26vw;
     border: 0.1rem solid #fbbc04;
     border-radius: 0.5rem;
     padding: 0.2rem 0.3rem;
 }
 
-.nav-link{
+.nav-link, .loginButton{
     padding: 0; /* supprimer les padding par défaut de bootstrap de chaque liens */
 }
 
@@ -69,16 +68,20 @@ h1{
     color: #fbbc04; /* changer la couleur du texte */
 }
 
-.nav-button:focus, .nav-button:hover{ /* au passage de la souris sur les boutons NAVBAR */
+.nav-button:focus, .nav-button:hover, .loginButton:hover{ /* au passage de la souris sur les boutons NAVBAR */
     background-color: #fbbc04; /* changer la couleur du fond des boutons */
 }
 
-.nav-link-button{ /* Liens des boutons NAVBAR */
-    padding: 0.2rem 2rem; /* Augmente la zone cliquable du lien des boutons */
-}
-
-.nav-link-button:focus, .nav-link-button:hover{ /* au passage de la souris sur les liens des boutons NAVBAR */
+.nav-link-button:focus, .nav-link-button:hover , .loginButton:hover{ /* au passage de la souris sur les liens des boutons NAVBAR */
     color: #242424; /* changer la couleur des liens de boutons */
 }
 
+.loginButton{
+    text-decoration: none;
+    color: white;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    border: 0.1rem solid #fbbc04;
+    padding: 0.6rem;
 
+}

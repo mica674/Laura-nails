@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
 // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
-// Si au moins un des cookies en lien avec l'inscription existe alors les affectés à 
+// Si au moins un des cookies en lien avec l'inscription existe alors les affectés à la variable correspondante
 if (isset($_COOKIE['lastname']) || isset($_COOKIE['firstname']) || isset($_COOKIE['email']) || isset($_COOKIE['password']) || isset($_COOKIE['$phoneNumber']) || isset($_COOKIE['$birthday'])) {
     $lastname = $_COOKIE['lastname']??'';
     $firstname = $_COOKIE['firstname']??'';

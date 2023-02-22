@@ -10,7 +10,7 @@
             <small <?= ($error['lastname'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['lastname'] ?? '' ?></small>
             <!-- Firstname -->
             <label for="firstname" class="mt-1">Prénom <span class="registrationRequired">*</span></label>
-            <input type="text" name="firstname" id="firstname" class="inputForm" placeholder="Prénom" required autocomplete="given-name" value="<?=$lastname??''?>" pattern="<?= REGEXP_FIRSTNAME ?>">
+            <input type="text" name="firstname" id="firstname" class="inputForm" placeholder="Prénom" required autocomplete="given-name" value="<?=$firstname??''?>" pattern="<?= REGEXP_FIRSTNAME ?>">
             <small <?= ($error['firstname'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['firstname'] ?? '' ?></small>
             <!-- Email -->
             <label for="email" class="mt-1">email <span class="registrationRequired">*</span></label>
