@@ -26,7 +26,7 @@ class Client
     {
     }
 
-    
+
     // ?GETTER SETTER
     // ----------  ID  ----------
     //getter
@@ -187,7 +187,7 @@ class Client
 
 
     // ? CRUD FUNCTIONS
-    // ADD - Ajouter un client à la base de données
+    // !ADD - Ajouter un client à la base de données
     /**
      * Cette fonction permet d'ajouter un client à la base données.
      * Elle attend aucun paramètre en entrée et return un booleen true si tout s'est bien passé
@@ -214,7 +214,7 @@ class Client
         $sth->bindValue(':phone',       $this->phone,       PDO::PARAM_STR);
         $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR);
 
-        // Executer la requête 
+        // Exécuter la requête 
         $sth->execute();
 
         // Compter le nombre d'enregistrements affecter par la requête
@@ -224,16 +224,17 @@ class Client
         return !empty($nbResults);
     }
 
-    // READ - Lire les informations d'un ou plusieurs client(s) de la base de données
-    // GETONE _ Récupère toutes les informations d'un client défini par son id
+    // !READ - Lire les informations d'un ou plusieurs client(s) de la base de données
+    // *GETONE _ Récupère toutes les informations d'un client défini par son id
     /**
      * Cette fonction permet de récupérer toutes les informations d'un client de la base données.
      * Elle attend un paramètre en entrée (format int), qui est l'id du client ciblé et retourne un tableau (array) avec ses informations
      * 
+     * @param int $id
      * 
-     * @return array
+     * @return array|bool
      */
-    public static function getOne($id): array
+    public static function getOne(int $id): array|bool
     {
         // Connexion à la base de données
         if (!isset($db)) {
@@ -243,18 +244,19 @@ class Client
         // Requête SQL
         $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
                 FROM `clients` 
-                WHERE `id` = ' . $id . ';';
+                WHERE `id` = ' . :id . ';';
 
-        // Preparer la requête SQl (prepare) et affectater des valeurs sur l'objet en cours
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
         $sth = $db->prepare($sql);
-        // Executer la requête
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        // Exécuter la requête
         $sth->execute();
         $result = $sth->fetch();
-        // retourner le tableau $result contenant les informations du client
+        // retourner l'objet $result contenant les informations du client
         return $result;
     }
 
-    // GETALL _ Récupère toutes les informations de tous les clients de la base de données
+    // *GETALL _ Récupère toutes les informations de tous les clients de la base de données
     /**
      * Cette fonction permet de récupérer toutes les informations de tous les clients de la base de données.
      * Elle attend aucun paramètre en entrée et retourne un tableau (array) avec les informations de tous les clients
@@ -280,7 +282,7 @@ class Client
         return $results;
     }
 
-    // UPDATE - Modifier un client dans la base de données
+    // !UPDATE - Modifier un client dans la base de données
     /**
      * Cette fonction permet de modifier un client dans la base données.
      * Elle attend aucun paramètre en entrée et return un booleen true si tout s'est bien passé
@@ -319,28 +321,47 @@ class Client
         return $sth->execute();
     }
 
-    // DELETE - Supprimer un ou plusieurs client dans la base de données
+    // !DELETE - Supprimer un client de la base de données
+    /**
+     * Cette fonction permet de supprimer un client de la base données.
+     * Elle attend un paramètre d'entrée l'id du client à supprimer (format int)
+     * 
+     * 
+     * @return bool
+     */
+    public static function delete($idClient): bool
+    {
+        if (!isset($db)) {
+            $db = dbConnect();
+        }
+        $sql = 'DELETE
+                FROM `clients`
+                WHERE `id` = :id;
+                ;';
 
-    //??//
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':id', $idClient, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
+    }
 
-    // DELETE END
 
 
     // ?OTHERS FUNCTIONS
-    // IS EXIST - Controler si un client existe déjà dans la base de données
+    // IS CLIENT EXIST - Controler si un client existe déjà dans la base de données
     /**
      * Cette fonction permet de contrôler si un client existe déjà dans la base données.
-     * Elle attend 5 paramètres en entrées (format string) et return un booleen true si tout s'est bien passé
+     * Elle attend 4 paramètres en entrées (format string) et return un booleen true si un client avec ces 4 informations existe déjà
      * 
      * @param string $lastname
      * @param string $firstname
      * @param string $email
-     * @param string $phone
      * @param string $birthdate
      * 
      * @return bool
      */
-    public static function isExist($lastname, $firstname, $email, $birthdate): bool
+    public static function isClientExist($lastname, $firstname, $email, $birthdate): bool
     {
         // Connexion à la base de données
         if (!isset($db)) {
@@ -350,19 +371,51 @@ class Client
         // Requête SQL
         $sql = "SELECT `lastname`, `firstname`, `email`, `birthdate`
                 FROM `clients`
-                WHERE   `lastname`  =   '$lastname'
-                    AND `firstname` =   '$firstname'
-                    AND `email`     =   '$email'
-                    AND `birthdate` =   '$birthdate'
+                WHERE   `lastname`  =   :lastname
+                    AND `firstname` =   :firstname
+                    AND `email`     =   :email
+                    AND `birthdate` =   :birthdate
                 ;";
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
+        $sth->bindValue(':lastname', $lastname);
+        $sth->bindValue(':firstname', $firstname);
+        $sth->bindValue(':email', $email);
+        $sth->bindValue(':birthdate', $birthdate);
 
-        // Executer la requête et retourner l'état de l'opération (true si tout s'est bien passé, sinon false)
+        // Executer la requête et retourner l'état de l'opération (true si un client avec ces 4 informations existe déjà, sinon false)
         $sth->execute();
-        $result = $sth->fetchAll();
+        $result = $sth->rowCount();
         return !empty($result);
+    }
 
+    /**
+     * Cette fonction permet de contrôler si un id de client existe
+     * Elle attend un paramètre d'entrée (format int), l'id a tester, et retourne un booleen true si l'id existe sinon false
+     * @param int $id
+     * 
+     * @return bool
+     */
+    public static function isIdExist(int $id): bool
+    {
+        // Connexion à la base de données
+        if (!isset($db)) {
+            $db = dbConnect();
+        }
 
+        // Requête SQL
+        $sql = "SELECT `id`
+            FROM `patients`
+            WHERE   `id`  =   :id
+            ;";
+
+        // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
     }
 }
