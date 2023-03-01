@@ -8,4 +8,9 @@ RewriteRule Prestations /controllers/prestationsCtrl.php
 RewriteRule Rendez_vous /controllers/rendezVousCtrl.php
 
 
+RewriteRule Dashboard /controllers/dashboard/dashboardHomeCtrl.php
+RewriteRule Dashboard/Clients /controllers/dashboard/clientsCtrl.php
+RewriteRule Dashboard/Client /controllers/dashboard/clientCtrl.php
+
+
 ErrorDocument 404 /404page.html

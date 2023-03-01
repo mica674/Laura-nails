@@ -21,9 +21,17 @@ body{
     background-color: #484848;
 }
 
-.prestaField{
-    background-color:#484848;
+fieldset{
+    width: 100%;
 }
+
+.prestaField{
+    margin: 0 auto;
+    background-color:#484848;
+    width: 80%;
+    max-width: 400px;
+}
+
 body{
     color: white;
     font-family: Belleza;
@@ -53,4 +61,29 @@ body{
 
 .labels{
     width: 80%;
+}
+
+.btnRdvSubmit{
+    margin: 0 auto;
+    width: 40%;
+}
+
+/* Date heure demande de rendez vous */
+input#appointment{
+    width: 50%;
+    height: 3rem;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    color: #fbbc04;
+    background-color: #484848;
+    border: none;
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 3px 10px 2px;
+}
+
+select#hour, select#minutes{
+    color: #fbbc04;
+    background-color: #484848;
+    border: 1px solid #484848;
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 3px 10px 2px;
+   
 }

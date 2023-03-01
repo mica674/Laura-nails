@@ -4,7 +4,6 @@ require_once(__DIR__ . '/../models/Database.php');
 
 class Client
 {
-
     private int $id;
     private string $lastname;
     private string $firstname;
@@ -12,6 +11,9 @@ class Client
     private string $password;
     private string $phone;
     private string $birthdate;
+    private string $created_at;
+    private string $updated_at;
+    private string $deleted_at;
 
     // METHODES
     // ?MAGIQUES
@@ -24,6 +26,7 @@ class Client
     {
     }
 
+    
     // ?GETTER SETTER
     // ----------  ID  ----------
     //getter
@@ -199,7 +202,7 @@ class Client
             $db = dbConnect();
         }
         // Requête SQL
-        $sql = 'INSERT INTO `clients` (`lastname`, `firstname`, `mail`, `password`, `phone`, `birthdate`) 
+        $sql = 'INSERT INTO `clients` (`lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`) 
                 VALUES (:lastname, :firstname, :email, :password, :phone, :birthdate);';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec les marqueurs nommés (bindValue)
@@ -211,8 +214,14 @@ class Client
         $sth->bindValue(':phone',       $this->phone,       PDO::PARAM_STR);
         $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR);
 
-        // Executer la requête et retourner l'état de l'opération (true si tout s'est bien passé, sinon false)
-        return $sth->execute();
+        // Executer la requête 
+        $sth->execute();
+
+        // Compter le nombre d'enregistrements affecter par la requête
+        $nbResults = $sth->rowCount();
+
+        // Retourner l'état de l'opération (true si tout s'est bien passé, sinon false)
+        return !empty($nbResults);
     }
 
     // READ - Lire les informations d'un ou plusieurs client(s) de la base de données
@@ -232,8 +241,8 @@ class Client
         }
 
         // Requête SQL
-        $sql = 'SELECT `id`, `lastname`, `firstname`, `mail` AS `email`, `phone`, `birthdate`
-                FROM `patients` 
+        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
+                FROM `clients` 
                 WHERE `id` = ' . $id . ';';
 
         // Preparer la requête SQl (prepare) et affectater des valeurs sur l'objet en cours
@@ -260,16 +269,15 @@ class Client
         }
 
         // Requête SQL
-        $sql = 'SELECT `id`, `lastname`, `firstname`, `mail` AS `email`, `phone`, `birthdate`
-                FROM `patients`;';
+        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
+                FROM `clients`;';
 
-        // Preparer la requête SQl (prepare) et affectater des valeurs sur l'objet en cours
-        $sth = $db->prepare($sql);
-        // Executer la requête
-        $sth->execute();
-        $result = $sth->fetchAll();
+        // Execution de la requete sql
+        $sth = $db->query($sql);
+        // Récupère les résultats dans $result
+        $results = $sth->fetchAll();
         // retourner le tableau $result contenant les informations des clients
-        return $result;
+        return $results;
     }
 
     // UPDATE - Modifier un client dans la base de données
@@ -288,10 +296,10 @@ class Client
         }
 
         // Requête SQL
-        $sql =  'UPDATE `patients`
+        $sql =  'UPDATE `clients`
                 SET `lastname`  =   :lastname,
                     `firstname` =   :firstname,
-                    `mail`      =   :email,
+                    `email`      =   :email,
                     `birthdate` =   :birthdate,
                     `phone`     =   :phone
                 WHERE `id`      =   :id
@@ -340,11 +348,11 @@ class Client
         }
 
         // Requête SQL
-        $sql = "SELECT `lastname`, `firstname`, `mail` AS `email`, `birthdate`
-                FROM `patients`
+        $sql = "SELECT `lastname`, `firstname`, `email`, `birthdate`
+                FROM `clients`
                 WHERE   `lastname`  =   '$lastname'
                     AND `firstname` =   '$firstname'
-                    AND `mail`     =   '$email'
+                    AND `email`     =   '$email'
                     AND `birthdate` =   '$birthdate'
                 ;";
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)

@@ -2,10 +2,8 @@
 // !CONSTANTS
 require_once(__DIR__ . '/../config/constants.php');
 
-
 // !MODEL
-require_once(__DIR__ . '/../models/client.php');
-
+require_once(__DIR__ . '/../../models/client.php');
 
 
 // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
@@ -20,12 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
 
     // Validation des données
     if (empty($lastname)) { //Si $lastname est vide
-        $error['lastname'] = 'Vous n\'avez pas renseigné votre "Nom"'; // Message d'erreur lastname vide
+        $error['lastname'] = 'Vous n\'avez pas renseigné le "Nom"'; // Message d'erreur lastname vide
     } elseif (!filter_var($lastname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_LASTNAME . '/')))) { //Sinon si $lastname ne correspond pas à un format lastname
         $error['lastname'] = 'Le nom ne correspond pas au format requis pour un nom'; //Message d'erreur lastname format
     }
     // Mettre en minuscule tous les caractères et en majuscule le premier caractère
-    if (empty($error['lastname'])){
+    if (empty($error['lastname'])) {
         $lastname = ucfirst(strtolower($lastname));
     }
 
@@ -37,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
 
     // Validation des données
     if (empty($firstname)) { //Si $firstname est vide
-        $error['firstname'] = 'Vous n\'avez pas renseigné votre "Prénom"'; // Message d'erreur firstname vide
+        $error['firstname'] = 'Vous n\'avez pas renseigné le "Prénom"'; // Message d'erreur firstname vide
     } elseif (!filter_var($firstname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_FIRSTNAME . '/')))) { //Sinon si $firstname ne correspond pas à un format firstname
         $error['firstname'] = 'Le prénom ne correspond pas au format requis pour un prénom'; //Message d'erreur firstname format
     }
     // Mettre en minuscule tous les caractères et en majuscule le premier caractère
-    if (empty($error['firstname'])){
+    if (empty($error['firstname'])) {
         $firstname = ucfirst(strtolower($firstname));
     }
 
@@ -59,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
         $error['email'] = 'L\'email ne correspond pas au format requis pour un email'; //Message d'erreur EMAIL format
     }
     // Mettre en minuscule tous les caractères
-    if (empty($error['email'])){
+    if (empty($error['email'])) {
         $email = strtolower($email);
     }
 
@@ -90,21 +88,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
 
 
     // ?Compare with previous values and new values
-    if ((   $lastname != $_GET['lastname'] 
-        ||  $firstname != $_GET['firstname']
-        ||  $email != $_GET['email']
-        ||  $birthdate != $_GET['birthdate']
-        ) 
+    if (($lastname != filter_input(INPUT_GET, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS)
+            ||  $firstname != filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS)
+            ||  $email != filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL)
+            ||  $birthdate != filter_input(INPUT_GET, 'birthdate', FILTER_SANITIZE_SPECIAL_CHARS)
+        )
         && !Client::isExist($lastname, $firstname, $email, $birthdate)
-        ) {
-            $error['exist'] = 'Un client a déjà ces informations dans la base de données ! ';
+    ) {
+        $error['exist'] = 'Un client a déjà ces informations dans la base de données ! ';
     }
     // ?No error -> redirect to clientsList page
     if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
 
 
         $client = new client();
-        $client->setId($_GET['id']);
+        $client->setId(intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
         $client->setLastname($lastname);
         $client->setFirstname($firstname);
         $client->setEmail($email);
@@ -131,8 +129,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
     // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
-// Appel de la méthode static getOne de la class Client pour récupérer les infos du client -> ($_GET['id'])
-$client = Client::getOne($_GET['id']);
+// Récupérer l'id passé en GET avec le filtrage au passge
+$idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+if (empty($idClient)) {
+    header('Location: /clientsList');
+    exit;
+}
+// Appel de la méthode static getOne de la class Client pour récupérer les infos du client 
+$client = Client::getOne(intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
 
 
 // Fichiers JS à appeler dans le footer

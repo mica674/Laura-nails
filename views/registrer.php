@@ -26,19 +26,17 @@
             <label for="phoneNumber" class="mt-1">Numéro de téléphone <span class="registrationRequired">*</span></label>
             <input type="text" name="phoneNumber" id="phoneNumber" class="inputForm" placeholder="Numéro de téléphone" required autocomplete="tel-local" maxlength="10" value="<?=$phoneNumber??''?>" pattern="<?=REGEXP_PHONE_NUMBER?>">
             <!-- Birthdate -->
-            <label for="birthdate" class="mt-1">Date de naissance</label>
-            <input type="date" name="birthdate" id="birthdate" class="inputForm" placeholder="Date de naissance" autocomplete="bday" value="<?= $birthdate ?? '' ?>" min="1900-01-01" max="2010-01-01">
+            <label for="birthdate" class="mt-1">Date de naissance <small>(Cadeaux, promotions)</small></label>
+            <input type="date" name="birthdate" id="birthdate" class="inputForm" placeholder="Date de naissance" autocomplete="bday" value="<?= $birthdate ?? '' ?>" min="1900-01-01" max="<?=date('Y-m-d', time()-(86400*365*12))?>">
             
             <!-- Required fields informations -->
-            <small class="registrationSmall me-5">* Champs obligatoires pour s'inscrire</small>
+            <small class="registrationSmall me-5 mt-3">* Champs obligatoires pour s'inscrire</small>
 
             <!-- Button to registrer -->
-            <div class="registrationBtns mt-2">
-                <button class="registrationBtn" id="registrerBtn">S'inscrire</button>
-            </div>
+                <input type="submit" class="registrationBtn text-center" id="registrerBtn" value="S'inscrire">
 
             <!-- Already Registered -->
-            <a href="/controllers/loginCtrl.php" class="alreadyRegistered text-decoration-none mt-2" id="alreadyRegistered">Déjà inscrit ?</a>
+            <a href="/Connexion" class="alreadyRegistered text-decoration-none mt-2" id="alreadyRegistered">Déjà inscrit ?</a>
         </form>
     </div>
 </main>

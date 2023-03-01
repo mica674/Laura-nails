@@ -1,0 +1,14 @@
+Model Prestation
+Model Appointment
+Dashboard calque page avec numéro des photos et input pour modifier les images
+Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
+
+Intégration page avis
+Intégration page contact
+Intégration page dashboard home + controller
+Finir intégration rendez vous
+
+mentions légales
+
+REQUETE SQL:
+- Sélectionner les 5 derniers avis postés par les utilisateurs
