@@ -6,7 +6,7 @@
             <fieldset class="loginFieldset"><h2>Profil du client</h2></fieldset>
             <!-- Lastname -->
             <label for="lastname" class="mt-2">Nom</label>
-            <input type="text" name="lastname" id="lastname" class="inputForm" placeholder="Nom (ex: Dupond)" required autocomplete="family-name" value="<?=$client->GetLastname()?>" pattern="<?= REGEXP_LASTNAME ?>" readonly>
+            <input type="text" name="lastname" id="lastname" class="inputForm" placeholder="Nom (ex: Dupond)" required autocomplete="family-name" value="<?=$client->getLastname()?>" pattern="<?= REGEXP_LASTNAME ?>" readonly>
             <small <?= ($error['lastname'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['lastname'] ?? '' ?></small>
             <!-- Firstname -->
             <label for="firstname" class="mt-2">Prénom</label>

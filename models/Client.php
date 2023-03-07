@@ -225,16 +225,18 @@ class Client
     }
 
     // !READ - Lire les informations d'un ou plusieurs client(s) de la base de données
-    // *GETONE _ Récupère toutes les informations d'un client défini par son id
+    // *GET _ Récupère toutes les informations d'un client si le paramètre $id est renseigné
+    // sinon tous les clients
     /**
-     * Cette fonction permet de récupérer toutes les informations d'un client de la base données.
-     * Elle attend un paramètre en entrée (format int), qui est l'id du client ciblé et retourne un tableau (array) avec ses informations
+     * Cette fonction permet de récupérer toutes les informations d'un client si $id est renseigné
+     * OU toutes les informations de tous les clients si AUCUN $id n'est renseigné.
+     * Elle attend un paramètre en entrée (format int) FACULTATIF, qui est l'id du client ciblé et retourne un tableau (array) avec ses informations
      * 
-     * @param int $id
+     * @param int|null $id
      * 
-     * @return array|bool
+     * @return array|object|bool
      */
-    public static function getOne(int $id): array|bool
+    public static function get(int|null $id = null): array|object|bool
     {
         // Connexion à la base de données
         if (!isset($db)) {
@@ -243,43 +245,18 @@ class Client
 
         // Requête SQL
         $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
-                FROM `clients` 
-                WHERE `id` = ' . :id . ';';
+                FROM `clients`' .
+            ($id) ? 'WHERE `id` = :id' : ''
+            . 'ORDER BY `lastname`;';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        ($id) ? ($sth->bindValue(':id', $id, PDO::PARAM_INT)) : '';
         // Exécuter la requête
         $sth->execute();
-        $result = $sth->fetch();
+        $result = ($id) ? ($sth->fetch()) : ($sth->fetchAll());
         // retourner l'objet $result contenant les informations du client
         return $result;
-    }
-
-    // *GETALL _ Récupère toutes les informations de tous les clients de la base de données
-    /**
-     * Cette fonction permet de récupérer toutes les informations de tous les clients de la base de données.
-     * Elle attend aucun paramètre en entrée et retourne un tableau (array) avec les informations de tous les clients
-     * 
-     * @return array
-     */
-    public static function getAll(): array
-    {
-        // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
-
-        // Requête SQL
-        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
-                FROM `clients`;';
-
-        // Execution de la requete sql
-        $sth = $db->query($sql);
-        // Récupère les résultats dans $result
-        $results = $sth->fetchAll();
-        // retourner le tableau $result contenant les informations des clients
-        return $results;
     }
 
     // !UPDATE - Modifier un client dans la base de données
@@ -301,7 +278,7 @@ class Client
         $sql =  'UPDATE `clients`
                 SET `lastname`  =   :lastname,
                     `firstname` =   :firstname,
-                    `email`      =   :email,
+                    `email`     =   :email,
                     `birthdate` =   :birthdate,
                     `phone`     =   :phone
                 WHERE `id`      =   :id
@@ -309,7 +286,7 @@ class Client
 
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id',          $this->id,          PDO::PARAM_STR);
+        $sth->bindValue(':id',          $this->id,          PDO::PARAM_INT);
         $sth->bindValue(':lastname',    $this->lastname,    PDO::PARAM_STR);
         $sth->bindValue(':firstname',   $this->firstname,   PDO::PARAM_STR);
         $sth->bindValue(':email',       $this->email,       PDO::PARAM_STR);

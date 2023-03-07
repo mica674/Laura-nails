@@ -1,10 +1,8 @@
 # Models
-Model Prestation
-Model Appointment
--> Pas de get all; juste get($id = false) si pas de $id faire la requete de getAll
-
+Méthode pour controler que le client existe pas déjà dans Client (isExist(lastname, firstname, email, birthdate))
 
 # Intégration
+dropdown navbar clients, rdv (add, list, (edit, delete))
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 
@@ -15,6 +13,11 @@ Finir intégration rendez vous
 
 # Autres
 mentions légales
+AJAX champ de recherche clients
+AJAX champ de recherche rendezvous
+Balise title dans les a
+if ($id = Patient::getid == false) // Exemple pour les controle de l'ID et affectation en meme temps 
+fonction explode(separateur, string, limit optionnelle) pour séparer date et heure
 
 REQUETE SQL:
 - Sélectionner les 5 derniers avis postés par les utilisateurs

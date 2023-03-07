@@ -46,7 +46,7 @@ hr{
 
 /* REGISTRATION */
 form{
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -78,7 +78,7 @@ input{
     border-color: #fbbc04;
     border-radius: 0.5rem;
     padding: 0.2rem 1rem;
-    width: 65%;
+    /* width: 65%; */
 }
 
 .registrationSmall{

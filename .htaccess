@@ -1,16 +1,21 @@
 RewriteEngine on
 
-RewriteRule Accueil /controllers/homeCtrl.php
-RewriteRule Inscription /controllers/registrerCtrl.php
-RewriteRule Connexion /controllers/loginCtrl.php
-RewriteRule Lieux_et_horaires /controllers/placeDateCtrl.php
-RewriteRule Prestations /controllers/prestationsCtrl.php
-RewriteRule Rendez_vous /controllers/rendezVousCtrl.php
+# Main pages
+RewriteRule ^Accueil$ /controllers/homeCtrl.php [L]
+RewriteRule ^Inscription$ /controllers/registrerCtrl.php [L]
+RewriteRule ^Connexion$ /controllers/loginCtrl.php [L]
+RewriteRule ^Lieux_et_horaires$ /controllers/placeDateCtrl.php [L]
+RewriteRule ^Prestations$ /controllers/prestationsCtrl.php [L]
+RewriteRule ^Rendez_vous$ /controllers/rendezVousCtrl.php [L]
 
+# Dashboard
+RewriteRule ^Dashboard$ /controllers/dashboard/dashboardHomeCtrl.php [L]
+# Clients
+RewriteRule ^Dashboard/AddClient$ /controllers/dashboard/clients/addCtrl.php [L]
+RewriteRule ^Dash/EditClient$ /controllers/dashboard/clients/clientsCtrl.php [L]
 
-RewriteRule Dashboard /controllers/dashboard/dashboardHomeCtrl.php
-RewriteRule Dashboard/Clients /controllers/dashboard/clientsCtrl.php
-RewriteRule Dashboard/Client /controllers/dashboard/clientCtrl.php
+# RewriteRule ^Dashboard/Clients$ /controllers/dashboard/clientsCtrl.php [L]
+# RewriteRule ^Dashboard/Client$ /controllers/dashboard/clientCtrl.php [L]
 
 
 ErrorDocument 404 /404page.html

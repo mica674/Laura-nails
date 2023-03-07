@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../models/Database.php');
+require_once(__DIR__ . '/Database.php');
 
 class Appointment
 {
@@ -100,7 +100,7 @@ class Appointment
     // !ADD - Ajouter un rendez-vous à la base de données
     /**
      * Cette fonction permet d'ajouter un rendez-vous à la base données.
-     * Elle attend aucun paramètre en entrées et retourne un booleen true si tout s'est bien passé
+     * Elle attend aucun paramètre en entrées et retourne un booleen true si tout s'est bien passé, sinon false
      * 
      * 
      * @return bool
@@ -108,9 +108,7 @@ class Appointment
     public function add(): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        if (!isset($db)) {$db = dbConnect();}
 
         // Requête SQL
         $sql = 'INSERT INTO `appointments` (`dateHour`, `idClients`) 
@@ -132,15 +130,17 @@ class Appointment
     }
 
     // !READ - Lire les informations d'un ou plusieurs rendez-vous de la base de données
-    // *GETONE - Récupère toutes les informations d'un rendez-vous spécifié par son id
+    // *GET _ Récupère toutes les informations d'un rendez-vous si le paramètre $id est renseigné
+    // sinon tous les rendez-vous
     /**
-     * Cette fonction permet de récupérer toutes les informations d'un rendez-vous de la base données.
-     * Elle attend un paramètre en entrée (format int), qui est l'id du rendez-vous ciblé et retourne un tableau (array) avec ses informations
-     * @param int $idAppt
+     * Cette fonction permet de récupérer toutes les informations d'un rendez-vous si $id est renseigné
+     * OU toutes les informations de tous les rendez-vous si AUCUN $id n'est renseigné.
+     * Elle attend un paramètre en entrée (format int) FACULTATIF, qui est l'id du rendez-vous ciblé et retourne un tableau (array) avec ses informations
+     * @param int|bool $idAppointment
      * 
-     * @return object|bool
+     * @return array|bool
      */
-    public static function getOne(int $idAppt): object|bool
+    public static function get(int|null $idAppointment = null): array|bool
     {
         // Connexion à la base de données
         if (!isset($db)) {
@@ -149,50 +149,22 @@ class Appointment
 
         // Requête SQL
         $sql = 'SELECT `id`, `dateHour`, `idClients`
-                FROM `appointments`
-                WHERE `id` = :id;';
+                FROM `appointments`'.
+                ($idAppointment) ? 'WHERE `id` = :id': ''
+                . 'ORDER BY lastname';
 
-        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue s'il y en a
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $idAppt, PDO::PARAM_INT);
+        ($idAppointment) ? $sth->bindValue(':id', $idAppointment, PDO::PARAM_INT) : '';
         // Exécuter la requête
         $sth->execute();
-        $result = $sth->fetch();
+        $results = $sth->fetchAll();
         // retourner l'objet $result contenant les informations du client
-        return $result;
-    }
-
-    // *GETALL - Récupère toutes les informations de tous les rendez-vous de la base de données
-    /**
-     * Cette fonction permet de retourner la liste de tous les rendez-vous des Clients avec leurs informations.
-     * @return array
-     */
-    public static function getAll($id = false): array
-    {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
-        if (!$id) {
-            $sql = 'SELECT `rdv`.`id`, `dateHour`, `rdv`.`idClients` AS `idP`, `p`.`lastname`, `p`.`firstname`, `p`.`mail` AS `email`, `p`.`phone`
-            FROM `appointments` AS `rdv`
-            JOIN `Clients` AS `p`
-            ON `rdv`.`idClients` = `p`.`id`
-            ORDER BY `dateHour`, `p`.`lastname`;';
-        } else {
-            $sql = 'SELECT `rdv`.`id`, `dateHour`, `rdv`.`idClients` AS `idP`, `p`.`lastname`, `p`.`firstname`, `p`.`mail` AS `email`, `p`.`phone`
-                    FROM `appointments` AS `rdv`
-                    JOIN `Clients` AS `p`
-                    ON `idClients` = `p`.`id`
-                    WHERE `idClients` = ' . $id . ';';
-        }
-        $sth = $db->query($sql);
-        $result = $sth->fetchAll();
-        return $result;
+        return $results;
     }
 
 
-
-    // UPDATE
+    // !UPDATE
     /**
      * Cette fonction permet de modifier un rendez-vous dans la base données.
      * Elle attend aucun paramètre d'entrée et return un booleen true si tout s'est bien passé
@@ -208,13 +180,13 @@ class Appointment
         $sql = 'UPDATE `appointments`
                 SET `dateHour` = :dateHour,
                     `idClients` = :idClients
-                WHERE `id` = :id;
+                WHERE `id` = :id
                 ;';
 
         $sth = $db->prepare($sql);
         $sth->bindValue(':dateHour',    $this->dateHour,    PDO::PARAM_STR);
-        $sth->bindValue(':idClients',  $this->idClients,  PDO::PARAM_STR);
-        $sth->bindValue(':id',          $this->id,          PDO::PARAM_STR);
+        $sth->bindValue(':idClients',   $this->idClients,   PDO::PARAM_STR);
+        $sth->bindValue(':id',          $this->id,          PDO::PARAM_INT);
         $sth->execute();
 
         // Compter le nombre d'enregistrements affecter par la requête
@@ -223,11 +195,11 @@ class Appointment
         return !empty($nbResults);
     }
 
-    // DELETE
+    // !DELETE
     /**
      * Cette fonction permet de supprimer un rendez-vous dans la base données.
      * Elle attend un paramètre d'entrée id du rdv à supprimer (format int)
-     * 
+     * et retourne un bool si la suppression a bien été effectué ou non
      * 
      * @return bool
      */
@@ -248,7 +220,7 @@ class Appointment
         return !empty($result);
     }
 
-    // DELETE ALL
+    // !DELETE ALL
     /**
      * Cette fonction permet de supprimer tous les rendez-vous d'un patient dans la base données.
      * Elle attend un paramètre d'entrée, l'id du patient pour supprimer ses rendez-vous (format int)
