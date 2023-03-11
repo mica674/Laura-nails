@@ -91,8 +91,12 @@ h1{
     font-size: 1.5rem;
 }
 
+#siteLogoHeader{
+    width: 70%;
+}
+
 /* DROPDOWN MENU */
-#dropdownClient{
+.nav-item.dropend div{
     background-color: #555555;
 }
 

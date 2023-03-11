@@ -27,7 +27,8 @@
             <div class="row flex-nowrap">
                 <div class="col-3 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <a href="/" class="d-flex align-items-center justify-content-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <img src="/public/assets/img/icones/logoSite/lauraNailsFavicon.png" alt="Logo site" class="d-sm-none mt-2" id="siteLogoHeader">
                             <span class="fs-5 d-none d-sm-inline">
                                 <h1>Laura's nails</h1>
                             </span>
@@ -69,6 +70,17 @@
                                     <a class="dropdown-item fs-5" href="/Dashboard/AddClient">Ajouter</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fs-5" href="/Dashboard/Clients">Liste</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropend">
+                                <a class="nav-link dropdown-toggle fs-5" data-bs-target="dropdownAppointment" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-regular fa-calendar-check"></i>
+                                    <span class="ms-1 d-none d-sm-inline">Appointments</span>
+                                </a>
+                                <div class="dropdown-menu text-end" id="dropdownAppointment">
+                                    <a class="dropdown-item fs-5" href="/Dashboard/AddAppointment">Ajouter</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Appointments">Liste</a>
                                 </div>
                             </li>
                         </ul>

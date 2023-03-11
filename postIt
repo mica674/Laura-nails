@@ -1,13 +1,13 @@
 # Models
-Méthode pour controler que le client existe pas déjà dans Client (isExist(lastname, firstname, email, birthdate))
 
 # Intégration
-dropdown navbar clients, rdv (add, list, (edit, delete))
+Client : Add, edit, list, delete
+Appointment : Add, edit, list, delete
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 
-Intégration page avis
-Intégration page contact
+Intégration page avis reviews
+Intégration page contact 
 Intégration page dashboard home + controller
 Finir intégration rendez vous
 

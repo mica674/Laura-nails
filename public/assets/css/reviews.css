@@ -1,0 +1,36 @@
+/* REVIEW */
+.reviewCard{
+    background-color: #484848;
+}
+
+.reviewRow{
+    padding: 0.2rem;
+}
+
+.reviewNickname, .reviewDate, .reviewComment{
+    background-color: #242424;
+    padding: 0 0.1rem;
+}
+
+.reviewComment{
+    height: 3rem;
+}
+
+#reviewBtn{
+    background-color: transparent;
+    color: #fff;
+    border-color: #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    width: 40vw;
+}
+
+p{
+    color: #fff;
+    font-family: Belleza;
+}
+
+#loginForm a{
+    text-decoration: none;
+    color: #fbbc04;
+}
