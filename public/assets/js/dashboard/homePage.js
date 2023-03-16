@@ -7,14 +7,11 @@ const rowImages = images[0].parentNode.parentNode;
 const submitBtn = document.getElementById('submitBtn');
 // Cibler la croix de suppression
 var closeBtns = document.querySelectorAll('.closeBtn');
-
 function updateSelectors() {
     // Mise à jour des ciblage HTML
     images = document.querySelectorAll('.carouselImageInput');
     imagePreviews = document.querySelectorAll('.previewImage');
     closeBtns = document.querySelectorAll('.closeBtn');
-    console.log(closeBtns);
-
 }
 
 function changePreviews() {
@@ -55,7 +52,8 @@ function closeItem() {
 
 btnAddImage.addEventListener('click', (e) => {
     e.preventDefault();
-    let newId = images.length + 1;
+    
+    let newId = parseInt(images[images.length-1].id.substring(5,)) + 1;
     let newImage = document.createElement("div");
     newImage.classList.add('col-3', 'carouselImage')
     newImage.innerHTML +=
@@ -73,5 +71,4 @@ btnAddImage.addEventListener('click', (e) => {
     changePreviews();
 })
 
-console.log(images[0].files.length);
 changePreviews(); closeItem();
