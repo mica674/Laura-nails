@@ -8,11 +8,11 @@ if (isset($_COOKIE['lastname'], $_COOKIE['firstname'], $_COOKIE[''])) {
     # code...
 }
 
-    // HEADER
-    $linkCss = 'home';
-    include_once(__DIR__ . '/../views/templates/header.php');
+// HEADER
+$linkCss = 'home';
+include_once(__DIR__ . '/../views/templates/header.php');
 
-    include_once(__DIR__ . '/../views/home.php');
+include_once(__DIR__ . '/../views/home.php');
 
 
 

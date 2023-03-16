@@ -4,14 +4,15 @@
 
 // ?BDD
 // Données de connexion à la base de données
-// Langage de la base de données, nom de la base de données et adresse de l'hote
-$dbName = 'maurouardnails';
-$host = '127.0.0.1';
-define('DB_DSN',        'mysql:' . $dbName . '=;host=' . $host);
+// Nom de la base de données
+define('DB_NAME', 'maurouardnails');
+// Hote de la base de données
+define('DB_HOST', '127.0.0.1');
+define('DB_DSN', 'mysql:dbname='.DB_NAME.';host='.DB_HOST);
 // Nom de l'utilisateur ayant les droits administrateur sur la base de données
-define('DB_USER',       'ouioui');
+define('DB_USER', 'ouioui');
 // Mot de passe de cet utilisateur
-define('DB_PASSWORD',   'ouiOUI123&');
+define('DB_PASSWORD', 'ouiOUI123&');
 
 // ?REGEX
 // Lastname

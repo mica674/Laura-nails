@@ -1,13 +1,15 @@
         <!-- CAROUSEL -->
         <section>
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div id="carouselHomePage" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="0"
                         class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="1"
                         aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item carouselItem active">
@@ -22,13 +24,17 @@
                         <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block"
                             alt="mains manucurées en forme de cercle">
                     </div>
+                    <div class="carousel-item carouselItem">
+                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block"
+                            alt="mains manucurées en forme de cercle">
+                    </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHomePage"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -80,9 +86,9 @@
                 <img src="/public/assets/img/rdv1.jpg" alt="Calendrier des rendez-vous">
             </div>
             <div class="buttonRendezVous d-flex justify-content-center my-3">
-                <button class="buttonPrendreRDV">
+                <a href="/Rendez_vous" class="text-center buttonPrendreRDV">
                     Prendre rendez-vous
-                </button>
+                </a>
             </div>
         </section>
         <!-- RENDEZ-VOUS end -->
@@ -178,9 +184,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-                <button id="reviewBtn">
+                <a href="/Avis" id="reviewBtn" class="text-center">
                     Soumettre un avis
-                </button>
+                </a>
             </div>
         </section>
         <!-- REVIEW end -->
@@ -194,9 +200,9 @@
         <!-- CONTACT -->
         <section>
             <div class="d-flex justify-content-center my-4">
-                <button id="contactBtn">
+                <a href="/Contact" id="contactBtn" class="text-center">
                     Contact
-                </button>
+                </a>
             </div>
         </section>
         <!-- CONTACT end -->

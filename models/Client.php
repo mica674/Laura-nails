@@ -198,9 +198,7 @@ class Client
     public function add(): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+            $db = Database::connect();
         // Requête SQL
         $sql = 'INSERT INTO `clients` (`lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`) 
                 VALUES (:lastname, :firstname, :email, :password, :phone, :birthdate);';
@@ -239,9 +237,7 @@ class Client
     public static function get(int|null $id = null): array|object|bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+            $db = Database::connect();
 
         // Requête SQL
         $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
@@ -270,9 +266,7 @@ class Client
     public function update(): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+            $db = Database::connect();
 
         // Requête SQL
         $sql =  'UPDATE `clients`
@@ -308,9 +302,7 @@ class Client
      */
     public static function delete($idClient): bool
     {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+            $db = Database::connect();
         $sql = 'DELETE
                 FROM `clients`
                 WHERE `id` = :id;
@@ -341,9 +333,7 @@ class Client
     public static function isClientExist($lastname, $firstname, $email, $birthdate): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+            $db = Database::connect();
 
         // Requête SQL
         $sql = "SELECT `lastname`, `firstname`, `email`, `birthdate`
@@ -376,9 +366,7 @@ class Client
     public static function isIdExist(int $id): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+            $db = Database::connect();
 
         // Requête SQL
         $sql = "SELECT `id`

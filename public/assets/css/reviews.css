@@ -30,7 +30,17 @@ p{
     font-family: Belleza;
 }
 
-#loginForm a{
+#loginForm button i{
     text-decoration: none;
+    color: #fbbc04;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+}
+
+#reviewBtn:hover{
+    background-color: #484848;
     color: #fbbc04;
 }

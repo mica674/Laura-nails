@@ -4,7 +4,7 @@
         <section class="prestationsImgPres">
             <img class="imgPrestaPres" id="imgPrestaPres1" src="/public/assets/img/photos/pexels-photo-1373748.jpeg"
                 alt="image vernis">
-            <img class="imgPrestaPres" id="imgPrestaPres2" src="/public/assets/img/photos/pexels-photo-3557600.jpeg"
+            <img class="imgPrestaPres rounded-circle" id="imgPrestaPres2" src="/public/assets/img/photos/pexels-photo-3557600.jpeg"
                 alt="image ongle">
         </section>
         <!-- Section 1 end -->

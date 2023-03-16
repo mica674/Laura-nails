@@ -14,8 +14,8 @@
                     </ul>
                 </div>
                 <div class="d-flex justify-content-center mt-2">
-                    <p>Uniquement sur rendez-vous :</p>
-                    <div class="d-block onlyRdv ms-2"></div>
+                    <p class="p-0 my-auto me-1">Uniquement sur rendez-vous :</p>
+                    <a href="/Rendez_vous" title="Prendre rendez-vous"><i class="fa-regular fa-calendar-check"></i></a>
                 </div>
             </div>
         </section>
@@ -55,6 +55,7 @@
         <section id="section4">
             <div class="metroMap">
                 <a href="/public/assets/img/Plan-Metro-Paris.png"
+                title="Agrandir le plan"
                     target="_blank">
                     <img class=""
                         src="/public/assets/img/Plan-Metro-Paris.png"

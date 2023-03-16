@@ -1,8 +1,11 @@
 # Models
+<!--* Client : Add, edit, list, delete -->
+<!--* Appointment : Add, edit, list, delete -->
+?????????????????????????Client/Appointment getter/setter validated,updated,etc?
+<!--* Créer class pour la connexion à la base de données -->
 
 # Intégration
-Client : Add, edit, list, delete
-Appointment : Add, edit, list, delete
+<!--! Dashboard homepage.php calque liste pour le carousel -->
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 
@@ -10,7 +13,11 @@ Intégration page avis reviews
 Intégration page contact 
 Intégration page dashboard home + controller
 Finir intégration rendez vous
+HOME faire une boucle pour les slides du carrousel
+HOME hover styles des touches
 
+# Controllers
+Filtrer et valider les données des checkbox et de la demande de rdv
 # Autres
 mentions légales
 AJAX champ de recherche clients

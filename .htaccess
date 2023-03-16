@@ -1,19 +1,29 @@
 RewriteEngine on
 
 # Main pages
-RewriteRule Accueil /controllers/homeCtrl.php [L]
-RewriteRule Inscription /controllers/registrerCtrl.php [L]
-RewriteRule Connexion /controllers/loginCtrl.php [L]
-RewriteRule Lieux_et_horaires /controllers/placeDateCtrl.php [L]
-RewriteRule Prestations /controllers/prestationsCtrl.php [L]
-RewriteRule Rendez_vous /controllers/rendezVousCtrl.php [L]
-RewriteRule Avis /controllers/reviewsCtrl.php [L]
+RewriteRule ^Accueil$ /controllers/homeCtrl.php [L]
+RewriteRule ^Inscription$ /controllers/registrerCtrl.php [L]
+RewriteRule ^Connexion$ /controllers/loginCtrl.php [L]
+RewriteRule ^Lieux_et_horaires$ /controllers/placeDateCtrl.php [L]
+RewriteRule ^Prestations$ /controllers/prestationsCtrl.php [L]
+RewriteRule ^Rendez_vous$ /controllers/rendezVousCtrl.php [L]
+RewriteRule ^Avis$ /controllers/reviewsCtrl.php [L]
+RewriteRule ^Contact$ /controllers/contactCtrl.php [L]
 
 # Dashboard
 RewriteRule ^Dashboard$ /controllers/dashboard/dashboardHomeCtrl.php [L]
+
+# Pages
+RewriteRule Dashboard/Home /controllers/dashboard/pages/homePageCrtl.php [L]
+RewriteRule Dashboard/Prestations /controllers/dashboard/pages/prestationsPageCrtl.php [L]
+RewriteRule Dashboard/PlaceDate /controllers/dashboard/pages/placeDatePageCrtl.php [L]
+RewriteRule Dashboard/Appointments /controllers/dashboard/pages/appointmentsPageCrtl.php [L]
+RewriteRule Dashboard/Reviews /controllers/dashboard/pages/reviewsPageCrtl.php [L]
+RewriteRule Dashboard/Contact /controllers/dashboard/pages/contactPageCrtl.php [L]
+
 # Clients
 RewriteRule Dashboard/AddClient /controllers/dashboard/clients/addCtrl.php [L]
-RewriteRule Dash/EditClient /controllers/dashboard/clients/clientsCtrl.php [L]
+RewriteRule Dashboard/EditClient /controllers/dashboard/clients/clientsCtrl.php [L]
 
 # RewriteRule Dashboard/Clients /controllers/dashboard/clientsCtrl.php
 # RewriteRule Dashboard/Client /controllers/dashboard/clientCtrl.php

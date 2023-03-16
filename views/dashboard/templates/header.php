@@ -14,7 +14,7 @@
     <!-- Link to header.css, footer.css, 'special'.css & mediaQueries -->
     <link rel="stylesheet" href="/public/assets/css/dashboard/header.css">
     <link rel="stylesheet" href="/public/assets/css/dashboard/footer.css">
-    <?php echo (empty($linkCss) ? '' : "<link rel=\"stylesheet\" href=\"/public/assets/css/$linkCss.css\">") ?> <!-- Si '$linkCss' existe et qu'il n'est pas vide, je link le css initialisé dans le controller correspondant à la page en cours -->
+    <?php echo (empty($linkCss) ? '' : "<link rel=\"stylesheet\" href=\"/public/assets/css/dashboard/$linkCss.css\">") ?> <!-- Si '$linkCss' existe et qu'il n'est pas vide, je link le css initialisé dans le controller correspondant à la page en cours -->
     <link rel="stylesheet" href="/public/assets/css/mediaQueries.css">
     <title>Laura's nails</title>
 </head>
@@ -26,7 +26,7 @@
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 <div class="col-3 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <div class="d-flex flex-column align-items-center px-3 pt-2 text-white min-vh-100">
                         <a href="/" class="d-flex align-items-center justify-content-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <img src="/public/assets/img/icones/logoSite/lauraNailsFavicon.png" alt="Logo site" class="d-sm-none mt-2" id="siteLogoHeader">
                             <span class="fs-5 d-none d-sm-inline">
@@ -34,45 +34,37 @@
                             </span>
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                            <li class="nav-item my-lg-2">
+                            <li class="nav-item my-lg-3 mt-lg-5">
                                 <a href="/Dashboard" class="nav-link align-middle px-0">
                                     <i class="fa-solid fa-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle my-lg-2">
-                                    <i class="fa-solid fa-pager"></i> <span class="ms-1 d-none d-sm-inline">Page</span> </a>
-                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                    <li class="ms-lg-2 w-100">
-                                        <a href="#" class="nav-link px-0 my-lg-2"><i class="fa-solid fa-tag"></i> <span class="d-none d-sm-inline">Preatations</span></a>
-                                    </li>
-                                    <li class="ms-lg-2">
-                                        <a href="#" class="nav-link px-0 my-lg-2"><i class="fa-regular fa-clock"></i> <span class="d-none d-sm-inline">Lieux et horaires</span></a>
-                                    </li>
-                                    <li class="ms-lg-2">
-                                        <a href="#" class="nav-link px-0 my-lg-2"><i class="fa-regular fa-calendar-check"></i> <span class="d-none d-sm-inline">Rendez-vous</span></a>
-                                    </li>
-                                    <li class="ms-lg-2">
-                                        <a href="#" class="nav-link px-0 my-lg-2"><i class="fa-solid fa-star-half-stroke"></i> <span class="d-none d-sm-inline">Avis</span></a>
-                                    </li>
-                                    <li class="ms-lg-2">
-                                        <a href="#" class="nav-link px-0 my-lg-2"><i class="fa-regular fa-address-card"></i> <span class="d-none d-sm-inline">Contact</span></a>
-                                    </li>
-
-                                </ul>
+                            <li class="nav-item dropend my-lg-3">
+                                <a class="nav-link dropdown-toggle fs-5" data-bs-target="dropdownPages" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span class="ms-1 d-none d-sm-inline">Pages</span>
+                                </a>
+                                <div class="dropdown-menu ms-5 text-end" id="dropdownPages">
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Home">Accueil</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Prestations">Prestations</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/PlaceDate">Lieux/horaires</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Appointments">Rendez-vous</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Reviews">Avis</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Contact">Contact</a>
+                                </div>
                             </li>
-                            <li class="nav-item dropend">
+                            <li class="nav-item dropend my-lg-3">
                                 <a class="nav-link dropdown-toggle fs-5" data-bs-target="dropdownClient" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-people-group"></i>
                                     <span class="ms-1 d-none d-sm-inline">Clients</span>
                                 </a>
-                                <div class="dropdown-menu text-end" id="dropdownClient">
+                                <div class="dropdown-menu ms-5 text-end" id="dropdownClient">
                                     <a class="dropdown-item fs-5" href="/Dashboard/AddClient">Ajouter</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fs-5" href="/Dashboard/Clients">Liste</a>
                                 </div>
                             </li>
-                            <li class="nav-item dropend">
+                            <li class="nav-item dropend my-lg-3">
                                 <a class="nav-link dropdown-toggle fs-5" data-bs-target="dropdownAppointment" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-regular fa-calendar-check"></i>
                                     <span class="ms-1 d-none d-sm-inline">Appointments</span>

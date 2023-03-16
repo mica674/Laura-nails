@@ -3,7 +3,7 @@
 // !CONSTANTS
 require_once(__DIR__ . '/../../config/constants.php');
 
-$linkCss = 'dashboard/client';
+$linkCss = 'client';
 
 // !HEADER
 include(__DIR__ . '/../../views/dashboard/templates/header.php');

@@ -220,31 +220,6 @@ class Appointment
         return !empty($result);
     }
 
-    // !DELETE ALL
-    /**
-     * Cette fonction permet de supprimer tous les rendez-vous d'un patient dans la base données.
-     * Elle attend un paramètre d'entrée, l'id du patient pour supprimer ses rendez-vous (format int)
-     * 
-     * 
-     * @return bool
-     */
-    public static function deleteAll($idPatient): bool
-    {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
-        $sql = 'DELETE
-                FROM `appointments`
-                WHERE `idClients` = :idPatient;
-                ;';
-
-        $sth = $db->prepare($sql);
-        $sth->bindValue(':idPatient', $idPatient, PDO::PARAM_INT);
-        $sth->execute();
-        $result = $sth->rowCount();
-        return !empty($result);
-    }
-
     // IS NOT EXIST
     public static function isExist($dateHour): bool
     {

@@ -40,7 +40,7 @@
         </div>
         <div class="row reviewRow align-items-center">
             <div class="reviewComment col-11 ms-3 mb-3">
-                <p class="mb-0 ms-2">Nul à chier, à fuir !</p>
+                <p class="mb-0 ms-2">Nul à chier, à fuire !</p>
             </div>
         </div>
     </div>
@@ -91,11 +91,11 @@
         <small class="text-center <?= ($error['reviewMessage'] ?? false) ? 'text-danger' : '' ?>"><?= $error['reviewMessage'] ?? 'Message limité à 500 caractères' ?></small>
         <!-- STARS -->
         <div class="d-flex text-decoration-none text-white"">
-            <a href="#loginForm" id="star1" class="mx-1"><i class="fa-regular fa-star"></i></a>
-            <a href="#loginForm" id="star2" class="mx-1"><i class="fa-regular fa-star"></i></a>
-            <a href="#loginForm" id="star3" class="mx-1"><i class="fa-regular fa-star"></i></a>
-            <a href="#loginForm" id="star4" class="mx-1"><i class="fa-regular fa-star"></i></a>
-            <a href="#loginForm" id="star5" class="mx-1"><i class="fa-regular fa-star"></i></a>
+            <button type="button" id="star1" class=""><i class="fa-regular fa-star"></i></button>
+            <button type="button" id="star2" class=""><i class="fa-regular fa-star"></i></button>
+            <button type="button" id="star3" class=""><i class="fa-regular fa-star"></i></button>
+            <button type="button" id="star4" class=""><i class="fa-regular fa-star"></i></button>
+            <button type="button" id="star5" class=""><i class="fa-regular fa-star"></i></button>
         </div>
         <div class="d-flex justify-content-center">
             <input id="reviewBtn" type="submit" value="Soumettre">
