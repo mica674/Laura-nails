@@ -7,13 +7,13 @@ const rowImages = images[0].parentNode.parentNode;
 const submitBtn = document.getElementById('submitBtn');
 // Cibler la croix de suppression
 var closeBtns = document.querySelectorAll('.closeBtn');
-console.log(closeBtns);
 
-function update() {
+function updateSelectors() {
     // Mise à jour des ciblage HTML
     images = document.querySelectorAll('.carouselImageInput');
     imagePreviews = document.querySelectorAll('.previewImage');
     closeBtns = document.querySelectorAll('.closeBtn');
+    console.log(closeBtns);
 
 }
 
@@ -48,7 +48,7 @@ function closeItem() {
         closeBtn.addEventListener('click', () => {
             // Suppression du parent du parent
             closeBtn.parentNode.parentNode.remove();
-            update();
+            updateSelectors();
         })
     })
 }
@@ -67,7 +67,7 @@ btnAddImage.addEventListener('click', (e) => {
         </div>
         `;
     rowImages.insertBefore(newImage, btnAddImage.parentNode);
-    update();
+    updateSelectors(); closeItem();
     // Masquer la touche enregistrer
     submitBtn.classList.add('d-none');
     changePreviews();
