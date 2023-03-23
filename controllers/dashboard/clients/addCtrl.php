@@ -58,9 +58,21 @@ try {
             $email = strtolower($email);
         }
 
+        // ?PASSWORD
+        // Nettoyage du mot de passe
+        $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS));
+
+        // Validation des données
+        if (empty($password)) { //Si $password est vide
+            $error['password'] = 'Le mot de passe n\'est pas renseigné'; //Message d'erreur password
+        } elseif (!filter_var($password, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_PASSWORD . '/')))) { //Sinon si $password ne correspond pas à un format lastname
+            $error['password'] = 'Le mot de passe ne correspond pas au format requis pour un mot de passe (1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial au minimum, entre 6 et 15 caractères)'; //Message d'erreur password format
+        }
+        // HACHAGE
+
         // ?PHONE NUMBER
         // Nettoyage des caractères autres que les chiffres & '+' & '-'
-        $phone = intval(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT));
+        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT);
 
         // Validation des données
         if (empty($phone)) {
@@ -96,16 +108,17 @@ try {
             $client->setLastname($lastname);
             $client->setFirstname($firstname);
             $client->setEmail($email);
+            $client->setPassword($password);
             $client->setPhone($phone);
             $client->setBirthdate($birthdate);
 
             // Ajouter le client à la base de donnée & affecter le résultat de l'exécution de la requête à $result
             $result = $client->add();
             if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
-                flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
+                Flash::flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
             } else { //Si pas d'erreur retour à la page d'Accueil
-                flash('clientAdded', 'Patient ajouté avec succès', FLASH_SUCCESS);
-                header('location: /Accueil');
+                Flash::flash('clientAdded', 'Patient ajouté avec succès', FLASH_SUCCESS);
+                header('location: /Dashboard');
                 die;
             }
         }
@@ -113,14 +126,14 @@ try {
         // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 } catch (\Throwable $th) {
-    include(__DIR__ . '/../views/templates/header.php');
-    include(__DIR__ . '/../views/templates/errors.php');
-    include(__DIR__ . '/../views/templates/footer.php');
+    include(__DIR__ . '/../../../views/dashboard/templates/header.php');
+    include(__DIR__ . '/../../../views/templates/errors.php');
+    include(__DIR__ . '/../../../views/dashboard/templates/footer.php');
     die;
 }
 
 // Appel du header
-$linkCss = 'registration';
+$linkCss = 'clients/add';
 include(__DIR__ . '/../../../views/dashboard/templates/header.php');
 
 // Appel de la view

@@ -40,3 +40,11 @@ $dayMonthYearFormatStringFr = new IntlDateFormatter(
     'dd MMMM yyyy'
 );
 define('DATE_FORMAT', $dayMonthYearFormatStringFr);
+
+
+// ?SESSION FLASH
+define('FLASH', 'FLASH_MESSAGES');
+define('FLASH_DANGER', 'danger');
+define('FLASH_WARNING', 'warning');
+define('FLASH_INFO', 'info');
+define('FLASH_SUCCESS', 'success');

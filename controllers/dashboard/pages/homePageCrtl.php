@@ -3,7 +3,7 @@
 // CONSTANTES
 require_once(__DIR__ . '/../../../config/constants.php');
 
-var_dump($_FILES['carouselImage'])??'';
+var_dump($_FILES['carouselImage']??'');
 
 if(isset($_FILES['carouselImage'])){
     $images = $_FILES['carouselImage']['full_path'];

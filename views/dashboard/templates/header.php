@@ -95,4 +95,4 @@
                     </div>
                 </div>
 
-                <div class="col-8 py-3 px-0">
+                <div class="col-9 py-3 px-0">

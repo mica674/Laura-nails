@@ -5,7 +5,9 @@
 <!--* Créer class pour la connexion à la base de données -->
 
 # Intégration
-<!--! Dashboard homepage.php calque liste pour le carousel -->
+<!--* Dashboard homepage.php calque liste pour le carousel -->
+<!-- Dashboard homepage.php afficher la touche enregistrer lorsque toutes les images ont une source NON VIDE -->
+Dashboard C'EST QUOI CE BLOB ?
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 

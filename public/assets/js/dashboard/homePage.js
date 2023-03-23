@@ -7,6 +7,9 @@ const rowImages = images[0].parentNode.parentNode;
 const submitBtn = document.getElementById('submitBtn');
 // Cibler la croix de suppression
 var closeBtns = document.querySelectorAll('.closeBtn');
+
+var isEmpty = false;
+
 function updateSelectors() {
     // Mise à jour des ciblage HTML
     images = document.querySelectorAll('.carouselImageInput');
@@ -20,22 +23,13 @@ function changePreviews() {
             // Récupérer les infos de l'image sélectionnée
             let picture = image.files[0];
             // Récupérer le numéro de la photo avec son id
-            let idImage = image.id.substr(-1);
+            let idImage = image.id.substring(5,);
             // Affecte l'url de l'image sélectionnée dans la balise image correspondante
             imagePreviews[idImage - 1].src = URL.createObjectURL(picture);
             // Force la taille de l'image à 100% de la hauteur du parent
             imagePreviews[idImage - 1].style.height = '100%';
             // Vérif si les zones ont toutes une image implémenter pour afficher la touche 'Enregistrer'
-            var isEmpty = false;
-            images.forEach(image => {
-                if (image.files.length == 0) {
-                    isEmpty = true;
-                }
-            })
-            if (!isEmpty) {
-                // Affichage de la touche 'Enregistrer'
-                submitBtn.classList.remove('d-none');
-            }
+            displaySaveBtn();
         })
     });
 }
@@ -46,14 +40,27 @@ function closeItem() {
             // Suppression du parent du parent
             closeBtn.parentNode.parentNode.remove();
             updateSelectors();
+            displaySaveBtn();
         })
     })
 }
 
+function displaySaveBtn() { //Affiche la touche enregistrer si toute les images ont une source NON vide
+    imagePreviews.forEach(image => {
+        if (image.src == '') {
+            isEmpty = true;
+        }
+    })
+    if (!isEmpty) {
+        // Affichage de la touche 'Enregistrer'
+        submitBtn.classList.remove('d-none');
+    }
+}
+
 btnAddImage.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    let newId = parseInt(images[images.length-1].id.substring(5,)) + 1;
+
+    let newId = parseInt(images[images.length - 1].id.substring(5,)) + 1;
     let newImage = document.createElement("div");
     newImage.classList.add('col-3', 'carouselImage')
     newImage.innerHTML +=
@@ -71,4 +78,4 @@ btnAddImage.addEventListener('click', (e) => {
     changePreviews();
 })
 
-changePreviews(); closeItem();
+changePreviews(); closeItem(); displaySaveBtn();

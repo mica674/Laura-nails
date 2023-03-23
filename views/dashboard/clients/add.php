@@ -1,6 +1,6 @@
 <!-- MAIN -->
 <main>
-<?=flash('clientExist')??'';?>
+<?=Flash::flash()??'';?>
     <!-- Client profil form -->
     <div class="mt-2">
         <form method="post" class="d-flex flex-column align-items-center" id="registrationForm">
@@ -17,12 +17,18 @@
             <label for="email" class="mt-2">E-mail <span class="registrationRequired">*</span></label>
             <input type="email" name="email" id="email" class="inputForm" placeholder="E-mail (ex: maurouard.laura.10@example.com)" required autocomplete="email" value="<?= $email ?? '' ?>">
             <small <?= ($error['email'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['email'] ?? '' ?></small>
+            <!-- Password -->
+            <label for="password" class="mt-2">Mot de passe <span class="registrationRequired">*</span></label>
+            <input type="text" name="password" id="password" class="inputForm" placeholder="Mot de passe (ex: Guigui18!)" required value="<?= $password ?? '' ?>">
+            <small <?= ($error['password'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['password'] ?? '' ?></small>
             <!-- Phone number -->
             <label for="phone" class="mt-2">Numéro de téléphone <span class="registrationRequired">*</span></label>
-            <input type="tel" name="phone" id="phone" class="inputForm" placeholder="Numéro de téléphone (ex: 0612345678)" autocomplete="tel-local" maxlength="10" value="<?=$phoneNumber??''?>" pattern="<?=REGEXP_PHONE_NUMBER?>">
+            <input type="text" name="phone" id="phone" class="inputForm" placeholder="Numéro de téléphone (ex: 0612345678)" autocomplete="tel-local" maxlength="10" value="<?=$phone??''?>" pattern="<?=REGEXP_PHONE_NUMBER?>">
+            <small <?= ($error['phone'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['phone'] ?? '' ?></small>
             <!-- Birthday -->
             <label for="birthdate" class="mt-2">Date de naissance <span class="registrationRequired">*</span></label>
             <input type="date" name="birthdate" id="birthdate" class="inputForm" required autocomplete="bday" value="<?= $birthdate ?? '' ?>" min="<?=date('Y-m-d',time()-(86400*365*150))?>" max="<?=date('Y-m-d')?>">
+            <small <?= ($error['birthdate'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['birthdate'] ?? '' ?></small>
             
             <!-- Button to registrer -->
             <div class="registrationBtns mt-2">

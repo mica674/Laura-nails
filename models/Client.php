@@ -242,12 +242,11 @@ class Client
         // Requête SQL
         $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
                 FROM `clients`' .
-            ($id) ? 'WHERE `id` = :id' : ''
-            . 'ORDER BY `lastname`;';
-
-        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
-        $sth = $db->prepare($sql);
-        ($id) ? ($sth->bindValue(':id', $id, PDO::PARAM_INT)) : '';
+            (($id) ? 'WHERE `id` = :id' : '')
+            . ' ORDER BY `lastname`;';
+            // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
+            $sth = $db->prepare($sql);
+            (($id) ? ($sth->bindValue(':id', $id, PDO::PARAM_INT)) : '');
         // Exécuter la requête
         $sth->execute();
         $result = ($id) ? ($sth->fetch()) : ($sth->fetchAll());
