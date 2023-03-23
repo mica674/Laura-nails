@@ -69,6 +69,9 @@ try {
             $error['password'] = 'Le mot de passe ne correspond pas au format requis pour un mot de passe (1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial au minimum, entre 6 et 15 caractères)'; //Message d'erreur password format
         }
         // HACHAGE
+                // Encodage du mot de passe
+                // $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
 
         // ?PHONE NUMBER
         // Nettoyage des caractères autres que les chiffres & '+' & '-'

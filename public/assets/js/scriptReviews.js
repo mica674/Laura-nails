@@ -1,5 +1,8 @@
 // Ciblage éléments HTML
+const form = document.getElementById('reviewForm');
 const stars = document.querySelectorAll('.fa-star');
+const inputValStar = document.getElementById('starVal');
+const errorMessage = document.getElementById('errorMessageStars');
 
 // Déclarations de variables
 var numberClick = 0;
@@ -34,11 +37,25 @@ stars.forEach(star => {
     })
     star.addEventListener('mouseover', () => {
         let numberStar = star.parentNode.id.substr(-1);
-        starToFill(numberStar);    
+        starToFill(numberStar);
     })
     star.addEventListener('click', (e) => {
-        // e.preventDefault();
         numberClick = star.parentNode.id.substr(-1);
         starToEmpty();
     })
 });
+
+// Event form
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (numberClick == 0) {
+        // Message d'erreur sur les étoiles
+        // errorMessage.removeAttribute('hidden');
+        errorMessage.innerHTML = 'Veuillez sélectioner au moins 1 étoile';
+        
+    } else {
+        inputValStar.value = numberClick;
+        form.submit();
+    }
+    console.log(inputValStar.value);
+})

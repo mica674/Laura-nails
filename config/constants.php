@@ -25,6 +25,8 @@ define('REGEXP_PASSWORD',       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&
 define('REGEXP_PHONE_NUMBER',   '^(0[1-9]{1})(\d{8})$');
 // Birthday
 define('REGEXP_BIRTHDATE',      '^((19\d{2}|20[01]\d|202[1-3])\-(0[1-9]|1[0-2])\-(0[1-9]|[12][0-9]|3[01]))$');
+// Message (textarea)
+define('REGEXP_MESSAGE',      '^(([\W\w]){1,500})$');
 
 // ?OTHERS
 // Définir le fuseau horaire sur Paris

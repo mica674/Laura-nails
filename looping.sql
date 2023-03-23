@@ -53,7 +53,7 @@ CREATE TABLE comments(
    updated_at DATETIME,
    deleted_at DATETIME,
    moderated_at DATETIME,
-   id_services INT NOT NULL,
+   id_services INT,
    id_users INT NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_services) REFERENCES services(id),

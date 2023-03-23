@@ -30,9 +30,9 @@ p{
     font-family: Belleza;
 }
 
-#loginForm button i{
+#reviewForm button i{
     text-decoration: none;
-    color: #fbbc04;
+    color: #fbbc04!important;
 }
 
 button{

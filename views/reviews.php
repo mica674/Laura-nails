@@ -76,19 +76,21 @@
     </div>
 </div>
 
+<!-- FORM -->
 <div class="mt-2 text-white">
-    <form method="post" class="d-flex flex-column align-items-center" id="loginForm">
+    <form method="post" class="d-flex flex-column align-items-center" id="reviewForm">
         <fieldset class="loginFieldset">Donner votre avis</fieldset>
-        <!-- PSEUDO -->
-        <label for="pseudo" class="mt-1">Votre pseudo</label>
-        <input type="text" name="pseudo" id="pseudo" class="inputForm" value="<?= 'pseudo' ?>" readonly>
+        <!-- FIRSTNAME -->
+        <label for="firstname" class="mt-1">Votre prénom</label>
+        <input type="text" name="firstname" id="firstname" class="inputForm" value="<?= 'Jean-Michmich' ?>" readonly>
         <!-- MESSAGE's TITLE -->
-        <label for="reviewTitle" class="mt-1">Titre de l'avis</label>
-        <input type="text" name="reviewTitle" id="reviewTitle" class="inputForm" placeholder="Titre de l'avis">
+        <label for="title" class="mt-1">Titre de l'avis</label>
+        <input type="text" name="title" id="title" class="inputForm" placeholder="Titre de l'avis" value="<?= $title ?? '' ?>">
+        <small class="text-center <?= ($error['title'] ?? false) ? 'text-danger' : '' ?>"><?= $error['title'] ?? '' ?></small>
         <!-- MESSAGE -->
         <label for="message" class="mt-1">Votre avis</label>
-        <textarea name="reviewMessage" id="reviewMessage" cols="30" rows="10" maxlength="500" placeholder="Donnez votre avis ici... (500 caractères maximum)"></textarea>
-        <small class="text-center <?= ($error['reviewMessage'] ?? false) ? 'text-danger' : '' ?>"><?= $error['reviewMessage'] ?? 'Message limité à 500 caractères' ?></small>
+        <textarea name="message" id="message" cols="30" rows="10" maxlength="500" placeholder="Donnez votre avis ici... (500 caractères maximum)"><?= $message ?? '' ?></textarea>
+        <small class="text-center <?= ($error['message'] ?? false) ? 'text-danger' : '' ?>"><?= $error['message'] ?? 'Message limité à 500 caractères' ?></small>
         <!-- STARS -->
         <div class="d-flex text-decoration-none text-white"">
             <button type="button" id="star1" class=""><i class="fa-regular fa-star"></i></button>
@@ -97,6 +99,10 @@
             <button type="button" id="star4" class=""><i class="fa-regular fa-star"></i></button>
             <button type="button" id="star5" class=""><i class="fa-regular fa-star"></i></button>
         </div>
+        <!-- VALUE STARS HIDDEN -->
+        <input type="number" name="star" id="starVal" hidden>
+        <small class="text-danger" id="errorMessageStars"></small>
+        <!-- SUBMIT -->
         <div class="d-flex justify-content-center">
             <input id="reviewBtn" type="submit" value="Soumettre">
         </div>

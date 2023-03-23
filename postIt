@@ -11,7 +11,11 @@ Dashboard C'EST QUOI CE BLOB ?
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 
-Intégration page avis reviews
+Intégration page avis reviews:
+    - list des 5 derniers avis
+    <!--* - nettoyage et validation des données ajouté par l'utilisateur à la soumission du formulaire -->
+    <!--* - récupérer le nombre d'étoiles sélectionnées -->
+    <!--! - envoyer les données en base de données -->
 Intégration page contact 
 Intégration page dashboard home + controller
 Finir intégration rendez vous
@@ -20,6 +24,7 @@ HOME hover styles des touches
 
 # Controllers
 Filtrer et valider les données des checkbox et de la demande de rdv
+
 # Autres
 mentions légales
 AJAX champ de recherche clients
@@ -27,6 +32,7 @@ AJAX champ de recherche rendezvous
 Balise title dans les a
 if ($id = Patient::getid == false) // Exemple pour les controle de l'ID et affectation en meme temps 
 fonction explode(separateur, string, limit optionnelle) pour séparer date et heure
+attribut autofocus pour les formulaires d'inscription et de connexion
 
 REQUETE SQL:
 - Sélectionner les 5 derniers avis postés par les utilisateurs

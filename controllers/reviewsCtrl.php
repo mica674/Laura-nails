@@ -11,18 +11,18 @@ try {
     // *PUIS REDIRECTION SI DONNEES VALIDEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyées en POST
 
-        // ?PSEUDO
+        // ?FIRSTNAME
         // Nettoyage de tout les caractères ASCII 1 à 32
-        $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS));
+        $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
 
         // Validation des données
-        if (empty($pseudo)) { //Si $pseudo est vide
-            $error['pseudo'] = 'Vous n\'avez pas renseigné votre "pseudo"'; // Message d'erreur pseudo vide
-        } elseif (!(filter_var($pseudo, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_LASTNAME . '/'))))) { //Sinon si $pseudo ne correspond pas à un format pseudo
-            $error["pseudo"] = 'Le nom ne correspond pas au format requis pour un pseudo'; //Message d'erreur pseudo format
+        if (empty($firstname)) { //Si $firstname est vide
+            $error['firstname'] = 'Vous n\'avez pas renseigné votre "Prénom"'; // Message d'erreur firstname vide
+        } elseif (!(filter_var($firstname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_FIRSTNAME . '/'))))) { //Sinon si $firstname ne correspond pas à un format de prénom
+            $error["firstname"] = 'Le prénom ne correspond pas au format requis pour un prénom'; //Message d'erreur firstname format
         }
-        if (empty($error['pseudo'])){
-            $pseudo = ucfirst(strtolower($pseudo));
+        if (empty($error['firstname'])){
+            $firstname = ucfirst(strtolower($firstname));
         }
 
         // ?REVIEW's TITLE
@@ -31,97 +31,61 @@ try {
 
         // Validation des données
         if (empty($title)) { //Si $title est vide
-            $error['title'] = 'Vous n\'avez pas renseigné le "Titre de l\'avis'; // Message d'erreur title vide
+            $error['title'] = 'Vous n\'avez pas renseigné le "Titre" de l\'avis'; // Message d'erreur title vide
         } elseif (!(filter_var($title, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_FIRSTNAME . '/'))))) { //Sinon si $title ne correspond pas à un format title
-            $error["title"] = 'Le nom ne correspond pas au format requis pour un prénom'; //Message d'erreur title format
+            $error["title"] = 'Le titre ne correspond pas au format requis pour un titre'; //Message d'erreur title format
         }
         if (empty($error['title'])){
             $title = ucfirst(strtolower($title));
         }
-
-        // ?EMAIL
-        // Double nettoyage de l'email
-        $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+        
+        // ?REVIEW's MESSAGE
+        // Nettoyage de tout les caractères ASCII 1 à 32
+        $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS));
 
         // Validation des données
-        if (empty($email)) { //Si $email est vide
-            $error["email"] = 'L\'email n\'est pas renseigné'; //Message d'erreur EMAIL
-        } elseif (!(filter_var($email, FILTER_VALIDATE_EMAIL))) { //Sinon si $email ne correspond pas à un format d'adresse email
-            $error["email"] = 'L\'email ne correspond pas au format requis pour un email'; //Message d'erreur EMAIL format
-        }
-        if (empty($error['email'])){
-            $email = strtolower($email);
+        if (empty($message)) { //Si $message est vide
+            $error['message'] = 'Vous n\'avez pas renseigné le "Message" de l\'avis'; // Message d'erreur message vide
+        } elseif (!(filter_var($message, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_MESSAGE . '/'))))) { //Sinon si $message ne correspond pas à un format message
+            $error["message"] = 'Le message ne correspond pas au format requis pour un message'; //Message d'erreur message format
         }
 
-        // ?PASSWORD
-        // Nettoyage du mot de passe
-        $password = filter_input(INPUT_POST, 'password');
-        $confirmedPassword = filter_input(INPUT_POST, 'confirmedPassword');
-
-        if (empty($password) || empty($confirmedPassword)) {
-            $error['password'] = 'Au moins un des champs de mot de passe est vide';
-        } else {
-            if ($password != $confirmedPassword) {
-                $error['password'] = 'Les mots de passe ne sont pas identiques';
-            } else {
-                if (
-                    !filter_var($password, FILTER_VALIDATE_REGEXP,  array("options" => array("regexp" => '/' . REGEXP_PASSWORD . '/')))
-                    && !filter_var($confirmedPassword, FILTER_VALIDATE_REGEXP,  array("options" => array("regexp" => '/' . REGEXP_PASSWORD . '/')))
-                ) {
-                    $error['password'] = 'Le mot de passe renseigné n\'est pas correct';
-                }
-            }
-        }
-        // Encodage du mot de passe
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-        // ?PHONE NUMBER
+        // ?REVIEW's STARS
         // Nettoyage des caractères autres que les chiffres & '+' & '-'
-        $phoneNumber = trim(filter_input(INPUT_POST, 'phoneNumber', FILTER_SANITIZE_NUMBER_INT));
+        $star = intval(filter_input(INPUT_POST, 'star', FILTER_SANITIZE_NUMBER_INT));
 
-        if (empty($phoneNumber)) { //Si $phoneNumber est vide
-            $error["phoneNumber"] = 'Le numéro de téléphone n\'est pas renseigné'; //Message d'erreur phoneNumber
-        } elseif (!filter_var($phoneNumber, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_PHONE_NUMBER . '/')))) { //Sinon si $phoneNumber ne correspond pas à un format numéro de téléphone
-            $error["phoneNumber"] = 'Le code postal ne correspond pas au format requis pour un numéro de téléphone francais'; //Message d'erreur numéro de téléphone format
+        // Validation des données
+        if (empty($star)) {
+            $error['star'] = 'Le nombre d\'étoile n\'est pas renseigné ! ';
         }
 
-        // ?BIRTHDATE
-        // Nettoyage des caractères autres que les chiffres & '+' & '-'
-        $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_NUMBER_INT));
-
-        // Validation de la date de naissance
-        if (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
-            $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur url format
-        }
-
-        // ?No error -> redirect to login page
         if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
-            // Enregistrement des données en cookies
-            setcookie('lastname', $lastname, time() + 86400 * 365 * 2);
-            setcookie('firstname', $firstname, time() + 86400 * 365 * 2);
-            setcookie('email', $email, time() + 86400 * 365 * 2);
-            setcookie('password', $password, time() + 86400 * 365 * 2);
-            setcookie('phoneNumber', $phoneNumber, time() + 86400 * 365 * 2);
 
-            if (isset($birthdate)) {
-                setcookie('birthdate', $birthdate, time() + 86400 * 365 * 2);
+            // Nouvelle instance de la class Client
+            $client = new Client();
+            // Hydratation de l'objet $client
+            $client->setLastname($lastname);
+            $client->setFirstname($firstname);
+            $client->setEmail($email);
+            $client->setPassword($password);
+            $client->setPhone($phone);
+            $client->setBirthdate($birthdate);
+
+            // Ajouter le client à la base de donnée & affecter le résultat de l'exécution de la requête à $result
+            $result = $client->add();
+            if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
+                Flash::flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
+            } else { //Si pas d'erreur retour à la page d'Accueil
+                Flash::flash('clientAdded', 'Patient ajouté avec succès', FLASH_SUCCESS);
+                header('location: /Dashboard');
+                die;
             }
-            header('location: /Connexion?regist1=' . $lastname . '&regist2=' . $firstname . '&regist3=' . $email . '&regist4=' . $password . '&regist5=' . $phoneNumber . '&regist6=' . $birthdate ?? '');
-            die;
         }
-
+        
         // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 
-    // Si au moins un des cookies en lien avec l'inscription existe alors les affectés à la variable correspondante
-    if (isset($_COOKIE['lastname']) || isset($_COOKIE['firstname']) || isset($_COOKIE['email']) || isset($_COOKIE['password']) || isset($_COOKIE['$phoneNumber']) || isset($_COOKIE['$birthdate'])) {
-        $lastname = $_COOKIE['lastname'] ?? '';
-        $firstname = $_COOKIE['firstname'] ?? '';
-        $email = $_COOKIE['email'] ?? '';
-        $password = $_COOKIE['password'] ?? '';
-        $phoneNumber = $_COOKIE['phoneNumber'] ?? '';
-        $birthdate = $_COOKIE['birthdate'] ?? '';
-    }
+    
 } catch (\Throwable $th) {
     include(__DIR__ . '/../views/templates/header.php');
     include(__DIR__ . '/../views/templates/errors.php');
