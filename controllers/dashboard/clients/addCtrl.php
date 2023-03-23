@@ -120,7 +120,7 @@ try {
             if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
                 Flash::flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
             } else { //Si pas d'erreur retour à la page d'Accueil
-                Flash::flash('clientAdded', 'Patient ajouté avec succès', FLASH_SUCCESS);
+                Flash::flash('clientAdded', 'Client ajouté avec succès', FLASH_SUCCESS);
                 header('location: /Dashboard');
                 die;
             }

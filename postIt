@@ -13,9 +13,11 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 
 Intégration page avis reviews:
     - list des 5 derniers avis
+    - Affichage du vote (étoiles) dans l'affichage des derniers avis
     <!--* - nettoyage et validation des données ajouté par l'utilisateur à la soumission du formulaire -->
     <!--* - récupérer le nombre d'étoiles sélectionnées -->
     <!--! - envoyer les données en base de données -->
+
 Intégration page contact 
 Intégration page dashboard home + controller
 Finir intégration rendez vous

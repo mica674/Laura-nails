@@ -1,6 +1,6 @@
 // Ciblage éléments HTML
 const form = document.getElementById('reviewForm');
-const stars = document.querySelectorAll('.fa-star');
+const stars = document.querySelectorAll('#reviewForm .fa-star');
 const inputValStar = document.getElementById('starVal');
 const errorMessage = document.getElementById('errorMessageStars');
 
@@ -10,6 +10,7 @@ var numberClick = 0;
 // FONCTIONS
 // Remise des étoiles vide au 'mouse leave'
 function starToEmpty() {
+
     for (let num = numberClick; num < 5; num++) {
         stars[num].classList.add('fa-regular');
         stars[num].classList.remove('fa-solid');
@@ -39,7 +40,7 @@ stars.forEach(star => {
         let numberStar = star.parentNode.id.substr(-1);
         starToFill(numberStar);
     })
-    star.addEventListener('click', (e) => {
+    star.addEventListener('click', () => {
         numberClick = star.parentNode.id.substr(-1);
         starToEmpty();
     })

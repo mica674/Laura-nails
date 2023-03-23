@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
             setcookie('email', $email, time()+86400*365*2);
             setcookie('password', $password, time()+86400*365*2);
 
-            header('location: /controllers/homeCtrl.php?login1='.$email.'&login2='.$password);
+            header('location: /Accueil?login1='.$email.'&login2='.$password);
             die;
         }
 

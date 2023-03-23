@@ -25,7 +25,9 @@ define('REGEXP_PASSWORD',       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&
 define('REGEXP_PHONE_NUMBER',   '^(0[1-9]{1})(\d{8})$');
 // Birthday
 define('REGEXP_BIRTHDATE',      '^((19\d{2}|20[01]\d|202[1-3])\-(0[1-9]|1[0-2])\-(0[1-9]|[12][0-9]|3[01]))$');
-// Message (textarea)
+// Title (REVIEW)
+define('REGEXP_TITLE', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-&#;]{1,24})$');
+// Message (REVIEW)
 define('REGEXP_MESSAGE',      '^(([\W\w]){1,500})$');
 
 // ?OTHERS
@@ -42,6 +44,18 @@ $dayMonthYearFormatStringFr = new IntlDateFormatter(
     'dd MMMM yyyy'
 );
 define('DATE_FORMAT', $dayMonthYearFormatStringFr);
+
+// Formattage de date YY-mm-dd en dd MMMM YYYY HH'h'mm
+$dayMonthYearHourMinFormatStringFr = new IntlDateFormatter(
+    'fr_FR',
+    IntlDateFormatter::FULL,
+    IntlDateFormatter::NONE,
+    'Europe/Paris',
+    IntlDateFormatter::GREGORIAN,
+    "dd MMMM yyyy HH'h'mm"
+);
+define('DATE_FORMAT_HOUR', $dayMonthYearHourMinFormatStringFr);
+
 
 
 // ?SESSION FLASH

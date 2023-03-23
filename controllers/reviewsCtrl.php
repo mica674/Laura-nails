@@ -4,8 +4,14 @@
 require_once(__DIR__ . '/../config/constants.php');
 // !FLASH
 require_once(__DIR__ . '/../helpers/flash.php');
+// !MODELS
+require_once(__DIR__ . '/../models/Comment.php');
+require_once(__DIR__ . '/../models/Client.php');
 
 try {
+
+    // Récupérer les 5 derniers commentaires postés
+    $last5Comments = Comment::get();
 
     // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
     // *PUIS REDIRECTION SI DONNEES VALIDEES
@@ -32,7 +38,7 @@ try {
         // Validation des données
         if (empty($title)) { //Si $title est vide
             $error['title'] = 'Vous n\'avez pas renseigné le "Titre" de l\'avis'; // Message d'erreur title vide
-        } elseif (!(filter_var($title, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_FIRSTNAME . '/'))))) { //Sinon si $title ne correspond pas à un format title
+        } elseif (!(filter_var($title, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_TITLE . '/'))))) { //Sinon si $title ne correspond pas à un format title
             $error["title"] = 'Le titre ne correspond pas au format requis pour un titre'; //Message d'erreur title format
         }
         if (empty($error['title'])){
@@ -52,36 +58,38 @@ try {
 
         // ?REVIEW's STARS
         // Nettoyage des caractères autres que les chiffres & '+' & '-'
-        $star = intval(filter_input(INPUT_POST, 'star', FILTER_SANITIZE_NUMBER_INT));
+        $quotations = intval(filter_input(INPUT_POST, 'star', FILTER_SANITIZE_NUMBER_INT));
 
         // Validation des données
-        if (empty($star)) {
-            $error['star'] = 'Le nombre d\'étoile n\'est pas renseigné ! ';
+        if (empty($quotations)) {
+            $error['quotations'] = 'Le nombre d\'étoile n\'est pas renseigné ! ';
         }
 
         if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
 
-            // Nouvelle instance de la class Client
-            $client = new Client();
-            // Hydratation de l'objet $client
-            $client->setLastname($lastname);
-            $client->setFirstname($firstname);
-            $client->setEmail($email);
-            $client->setPassword($password);
-            $client->setPhone($phone);
-            $client->setBirthdate($birthdate);
+            // !------------------------------
+            $id_users = 1; //!Pour les essais
+            // !------------------------------
 
-            // Ajouter le client à la base de donnée & affecter le résultat de l'exécution de la requête à $result
-            $result = $client->add();
+            // Nouvelle instance de la class Comment
+            $review = new Comment();
+            // Hydratation de l'objet $review
+            $review->setTitle($title);
+            $review->setContent($message);
+            $review->setQuotations($quotations);
+            $review->setId_users($id_users);
+
+            // Ajouter le commentaire à la base de donnée & affecter le résultat de l'exécution de la requête à $result
+            $result = $review->add();
             if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
-                Flash::flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
+                Flash::flash('commentAdded', 'Une erreur est survenue lors de l\'ajout du commentaire à la base de données');
             } else { //Si pas d'erreur retour à la page d'Accueil
-                Flash::flash('clientAdded', 'Patient ajouté avec succès', FLASH_SUCCESS);
-                header('location: /Dashboard');
+                Flash::flash('commentAdded', 'Commentaire ajouté avec succès', FLASH_SUCCESS);
+                header('location: /Accueil');
                 die;
             }
         }
-        
+
         // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 
@@ -90,6 +98,7 @@ try {
     include(__DIR__ . '/../views/templates/header.php');
     include(__DIR__ . '/../views/templates/errors.php');
     include(__DIR__ . '/../views/templates/footer.php');
+    die;
 }
 
 

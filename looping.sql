@@ -48,6 +48,7 @@ CREATE TABLE appointments(
 CREATE TABLE comments(
    id INT AUTO_INCREMENT,
    content TEXT NOT NULL,
+   title VARCHAR(30) NOT NULL,
    quotations TINYINT NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME,
