@@ -6,19 +6,23 @@
 
 # Intégration
 <!--* Dashboard homepage.php calque liste pour le carousel -->
-<!-- Dashboard homepage.php afficher la touche enregistrer lorsque toutes les images ont une source NON VIDE -->
+<!--* Dashboard homepage.php afficher la touche enregistrer lorsque toutes les images ont une source NON VIDE -->
 Dashboard C'EST QUOI CE BLOB ?
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 
 Intégration page avis reviews:
-    - list des 5 derniers avis
-    - Affichage du vote (étoiles) dans l'affichage des derniers avis
+    <!--* - list des 5 derniers avis -->
+    <!--* - Affichage du vote (étoiles) dans l'affichage des derniers avis -->
     <!--* - nettoyage et validation des données ajouté par l'utilisateur à la soumission du formulaire -->
     <!--* - récupérer le nombre d'étoiles sélectionnées -->
-    <!--! - envoyer les données en base de données -->
+    <!--* - envoyer les données en base de données -->
 
-Intégration page contact 
+Intégration page contact :
+    <!--* - Intégration HTML/CSS -->
+    - Infos Adresse/tel/email de contact en php pour la partie droite, et cliquable
+    - Nettoyage/valdiation données dans CTRL
+    - Envoi en base de données
 Intégration page dashboard home + controller
 Finir intégration rendez vous
 HOME faire une boucle pour les slides du carrousel

@@ -1,0 +1,25 @@
+
+
+fieldset{
+    font-family: Belleza; /* ZONE DE FORMULAIRE FIELDSET- Police de caractères */
+}
+
+table{
+    width: 100%;
+}
+
+tr{
+    height: 30px;
+}
+
+#formHr{
+    color: #fbbc04;
+}
+
+#contactSubmit{
+    width: 40%;
+}
+
+input.inputForm, label{
+    width: 80%;
+}

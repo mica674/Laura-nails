@@ -1,82 +1,111 @@
 /* GLOBAL */
-body{
+body {
     background-color: #242424;
+    color: #fff;/* Couleur par défaut dans tout le body */
 }
+
 /* NAVBAR */
 /* NavBar Burger button/text */
-h1{
-    font-family: Belleza; /* TITRE H1 - Police de caractères */
+h1 {
+    font-family: Belleza;
+    /* TITRE H1 - Police de caractères */
     color: #fbbc04;
     font-size: 2.1875rem;
     margin-left: 9vw;
     margin-top: 1.2rem;
 }
 
-:root{
-    --bs-border-width: 0px; /*retire les bordures du bouton burger*/
+:root {
+    --bs-border-width: 0px;
+    /*retire les bordures du bouton burger*/
     /* --bs-light-rgb:#626262;retire le background de la navbar, qui est géré aussi par opacity */
 }
 
-.container-fluid{
+.container-fluid {
     padding: 0;
 }
 
-.navbar{
+.navbar {
     padding: 0;
-    --bs-navbar-toggler-focus-width: 0; /*retire la bordure au clic sur le bouton burger*/
-    --bs-navbar-color:#fff;/*Couleur des items de la liste de la navbar*/
+    --bs-navbar-toggler-focus-width: 0;
+    /*retire la bordure au clic sur le bouton burger*/
+    --bs-navbar-color: #fff;
+    /*Couleur des items de la liste de la navbar*/
 }
 
 .navbar-toggler-icon {
-    background: url("../img/icones/nailIconeLine.png");/*icone de burger personnalisé*/
-    background-size: 100%; /*Taille de l'icone burger dans le bouton*/
+    background: url("../img/icones/nailIconeLine.png");
+    /*icone de burger personnalisé*/
+    background-size: 100%;
+    /*Taille de l'icone burger dans le bouton*/
     margin: 0;
 }
 
-.navbar-toggler{
-    --bs-navbar-toggler-font-size:150%;/*Taille de l'icone burger par rapport à la taille d'origine*/
+.navbar-toggler {
+    --bs-navbar-toggler-font-size: 150%;
+    /*Taille de l'icone burger par rapport à la taille d'origine*/
 }
 
-.navbar-brand{
+.navbar-brand {
     padding: 0;
 }
 
-.navbar-nav{ /* items list navbar*/
-    font-family: Belleza; /* Police de caractère */
-    font-size: 0.875rem; /* Taille texte  */
-    margin-left: 60vw; /* left margin in mobile */
+.navbar-nav {
+    /* items list navbar*/
+    font-family: Belleza;
+    /* Police de caractère */
+    font-size: 0.875rem;
+    /* Taille texte  */
+    margin-left: 60vw;
+    /* left margin in mobile */
     /* border: 1px solid #fbbc04; */
 }
 
-.nav-item{ /* Elements liste NAVBAR */
-    width: 40vw!important;
+.nav-item {
+    /* Elements liste NAVBAR */
+    width: 40vw !important;
     display: flex;
-    justify-content: center; /* centrer le contenu/liens */
+    justify-content: center;
+    /* centrer le contenu/liens */
 }
 
-.nav-button{ /* Boutons NAVBAR */
+.nav-button {
+    /* Boutons NAVBAR */
     border: 0.1rem solid #fbbc04;
     border-radius: 0.5rem;
     padding: 0.2rem 0.3rem;
 }
 
-.nav-link, .loginButton{
-    padding: 0; /* supprimer les padding par défaut de bootstrap de chaque liens */
+.nav-link,
+.loginButton {
+    padding: 0;
+    /* supprimer les padding par défaut de bootstrap de chaque liens */
 }
 
-.nav-link:focus, .nav-link:hover{ /* passage de la souris sur les liens de la NAVBAR*/
-    color: #fbbc04; /* changer la couleur du texte */
+.nav-link:focus,
+.nav-link:hover {
+    /* passage de la souris sur les liens de la NAVBAR*/
+    color: #fbbc04;
+    /* changer la couleur du texte */
 }
 
-.nav-button:focus, .nav-button:hover, .loginButton:hover{ /* au passage de la souris sur les boutons NAVBAR */
-    background-color: #fbbc04; /* changer la couleur du fond des boutons */
+.nav-button:focus,
+.nav-button:hover,
+.loginButton:hover {
+    /* au passage de la souris sur les boutons NAVBAR */
+    background-color: #fbbc04;
+    /* changer la couleur du fond des boutons */
 }
 
-.nav-link-button:focus, .nav-link-button:hover , .loginButton:hover{ /* au passage de la souris sur les liens des boutons NAVBAR */
-    color: #242424; /* changer la couleur des liens de boutons */
+.nav-link-button:focus,
+.nav-link-button:hover,
+.loginButton:hover {
+    /* au passage de la souris sur les liens des boutons NAVBAR */
+    color: #242424;
+    /* changer la couleur des liens de boutons */
 }
 
-.loginButton{
+.loginButton {
     text-decoration: none;
     color: white;
     border-radius: 0.5rem;

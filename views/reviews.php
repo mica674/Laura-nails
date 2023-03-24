@@ -17,13 +17,15 @@
                     <p class="mb-0 ms-2"><?= $comment->content ?>
                         <small>
                             <?php
-                            $stars = $comment->quotations;
-                            $star = 1;
+                            $stars = $comment->quotations; //Nombre d'étoiles de l'avis
+                            $star = 1; //Initialisation première étoile
                             while ($star <= $stars) { ?>
-                                <i class="fa-solid fa-star"></i>
+                            <!-- Etoile pleine -->
+                            <i class="fa-solid fa-star"></i> 
                             <?php $star++;
                             }
                             while ($star <= 5) { ?>
+                                <!-- Etoile vide -->
                                 <i class="fa-regular fa-star"></i>
                             <?php $star++;
                             }
