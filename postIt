@@ -20,10 +20,12 @@ Intégration page avis reviews:
 
 Intégration page contact :
     <!--* - Intégration HTML/CSS -->
-    - Infos Adresse/tel/email de contact en php pour la partie droite, et cliquable
-    - Nettoyage/valdiation données dans CTRL
-    - Envoi en base de données
-Intégration page dashboard home + controller
+    <!--* - Infos Adresse/tel/email de contact en php pour la partie droite, et cliquable -->
+    <!--* - Nettoyage/valdiation données dans CTRL -->
+    <!--* - Envoi en base de données -->
+    <!--* - Ajouter table contact dans la bdd -->
+    <!--* - Créer Model Contact setter/getter/crud -->
+
 Finir intégration rendez vous
 HOME faire une boucle pour les slides du carrousel
 HOME hover styles des touches

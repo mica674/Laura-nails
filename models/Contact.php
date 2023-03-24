@@ -2,18 +2,18 @@
 
 require_once(__DIR__ . '/../models/Database.php');
 
-class Comment
+class Contact
 {
     private int $id;
+    private string $firstname;
+    private string $email;
     private string $title;
     private string $content;
-    private string $quotations;
     private string $created_at;
     private string $updated_at;
     private string $deleted_at;
     private string $moderated_at;
     // foreign keys
-    private string $id_services;
     private string $id_clients;
 
     // METHODES
@@ -52,6 +52,53 @@ class Comment
         $this->id = $id;
     }
 
+
+    // ----------  FIRSTNAME  ----------
+    //getter
+    /**
+     * Cette méthode retourne la valeur de FIRSTNAME du client
+     * @return string
+     */
+    public function getFirstname(): string
+    {
+        return $this->firstname;
+    }
+
+    //setter
+    /**
+     * Cette méthode hydrate FIRSTNAME du client
+     * @param string $firstname
+     * 
+     * @return void
+     */
+    public function setFirstname(string $firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
+
+    // ----------  EMAIL  ----------
+    //getter
+    /**
+     * Cette méthode retourne la valeur de EMAIL du client
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    //setter
+    /**
+     * Cette méthode hydrate EMAIL du client
+     * @param string $email
+     * 
+     * @return void
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
 
     // ---------- TITLE ----------
     // getter
@@ -103,31 +150,6 @@ class Comment
     }
 
 
-    // ---------- QUOTATIONS ----------
-    // getter
-    /**
-     * Cette méthode retourne la valeur de quotation du commentaire
-     * @return int
-     */
-
-    public function getQuotations(): int
-    {
-        return $this->quotations;
-    }
-
-    // setter
-    /**
-     * Cette méthode hydrate quotation
-     * @param int $quotations
-     * 
-     * @return void
-     */
-    public function setQuotations(int $quotations): void
-    {
-        $this->quotations = $quotations;
-    }
-
-
     // ---------- MODERATED AT ----------
     // getter
     /**
@@ -150,31 +172,6 @@ class Comment
     public function setModerated_at(string $moderated_at): void
     {
         $this->moderated_at = $moderated_at;
-    }
-
-
-    // ---------- ID SERVICES _ FOREIGN KEY ----------
-    // getter
-    /**
-     * Cette méthode retourne la valeur de l'ID de la prestation (service) associée au commentaire
-     * @return int
-     */
-
-    public function getId_services(): int
-    {
-        return $this->id_services;
-    }
-
-    // setter
-    /**
-     * Cette méthode hydrate l'ID de la prestation (service) associée au commentaire
-     * @param int $id_services
-     * 
-     * @return void
-     */
-    public function setId_services(int $id_services): void
-    {
-        $this->id_services = $id_services;
     }
 
 
@@ -204,9 +201,9 @@ class Comment
 
 
     // ? CRUD FUNCTIONS
-    // !ADD - Ajouter un commentaire à la base de données
+    // !ADD - Ajouter un contact à la base de données
     /**
-     * Cette fonction permet d'ajouter un commentaire à la base données.
+     * Cette fonction permet d'ajouter un contact à la base données.
      * Elle attend aucun paramètre en entrée et return un booleen true si tout s'est bien passé
      * 
      * 
@@ -217,15 +214,16 @@ class Comment
         // Connexion à la base de données
         $db = Database::connect();
         // Requête SQL
-        $sql = 'INSERT INTO `comments` (`title`, `content`, `quotations`, `id_clients`) 
-                VALUES (:title, :content, :quotations, :id_clients);';
+        $sql = 'INSERT INTO `contacts` (`firstname`, `email`, `title`, `content`, `id_clients`) 
+                VALUES (:firstname, :email, :title, :content, :id_clients);';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
+        $sth->bindValue(':firstname',   $this->firstname,   PDO::PARAM_STR);
+        $sth->bindValue(':email',       $this->email,       PDO::PARAM_STR);
         $sth->bindValue(':title',       $this->title,       PDO::PARAM_STR);
         $sth->bindValue(':content',     $this->content,     PDO::PARAM_STR);
-        $sth->bindValue(':quotations',  $this->quotations,  PDO::PARAM_INT);
-        $sth->bindValue(':id_clients',    $this->id_clients,    PDO::PARAM_INT);
+        $sth->bindValue(':id_clients',  $this->id_clients,  PDO::PARAM_INT);
 
         // Exécuter la requête 
         $sth->execute();

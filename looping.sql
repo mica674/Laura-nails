@@ -1,4 +1,4 @@
-CREATE TABLE users(
+CREATE TABLE clients(
    id INT AUTO_INCREMENT,
    lastname VARCHAR(50)  NOT NULL,
    firstname VARCHAR(50)  NOT NULL,
@@ -39,26 +39,43 @@ CREATE TABLE appointments(
    updated_at DATETIME,
    deleted_at DATETIME,
    id_slots INT NOT NULL,
-   id_users INT NOT NULL,
+   id_clients INT NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_slots) REFERENCES slots(id),
-   FOREIGN KEY(id_users) REFERENCES users(id) ON DELETE CASCADE
+   FOREIGN KEY(id_clients) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE comments(
    id INT AUTO_INCREMENT,
+   title VARCHAR(30) NOT NULL,
    content TEXT NOT NULL,
    title VARCHAR(30) NOT NULL,
+   content TEXT NOT NULL,
    quotations TINYINT NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME,
    deleted_at DATETIME,
    moderated_at DATETIME,
    id_services INT,
-   id_users INT NOT NULL,
+   id_clients INT NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_services) REFERENCES services(id),
-   FOREIGN KEY(id_users) REFERENCES users(id)
+   FOREIGN KEY(id_clients) REFERENCES clients(id)
+);
+
+CREATE TABLE contacts(
+   id INT AUTO_INCREMENT,
+   firstname VARCHAR(50) NOT NULL,
+   email VARCHAR(150)  NOT NULL,
+   title VARCHAR(30) NOT NULL,
+   content TEXT NOT NULL,
+   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at DATETIME,
+   deleted_at DATETIME,
+   answered_at DATETIME,
+   id_clients INT,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_clients) REFERENCES clients(id)
 );
 
 CREATE TABLE appointments_services(

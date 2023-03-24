@@ -1,18 +1,15 @@
 <?php
 
-// CONSTANTES
+// !CONSTANTES
 require_once(__DIR__ . '/../config/constants.php');
 
-var_dump($_POST['prestaCheck']??'');
 
+// !HEADER
+$linkCss = 'rendezVous';
+include_once(__DIR__ . '/../views/templates/header.php');
 
-    // HEADER
-    $linkCss = 'rendezVous';
-    include_once(__DIR__ . '/../views/templates/header.php');
+// !VIEWS
+include_once(__DIR__ . '/../views/rendezVous.php');
 
-    include_once(__DIR__ . '/../views/rendezVous.php');
-
-
-
-// FOOTER
+// !FOOTER
 include_once(__DIR__ . '/../views/templates/footer.php');

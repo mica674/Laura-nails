@@ -64,3 +64,9 @@ define('FLASH_DANGER', 'danger');
 define('FLASH_WARNING', 'warning');
 define('FLASH_INFO', 'info');
 define('FLASH_SUCCESS', 'success');
+
+
+// ?INFOS LAURA
+define('LAURA_EMAIL', 'maurouard.laura.10@gmail.com');
+define('LAURA_ADDRESS', '122 RUE EDOUARD CANNEVEL 76510 SAINT NICOLAS D\'ALIERMONT');
+define('LAURA_PHONE', '0612345678');

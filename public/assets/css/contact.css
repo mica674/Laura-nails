@@ -20,6 +20,15 @@ tr{
     width: 40%;
 }
 
-input.inputForm, label{
+input.inputForm, label, textarea{
     width: 80%;
+}
+
+td a{
+    text-decoration: none;
+    color: #fbbc04;
+}
+
+td a:hover{
+    color: #484848;
 }
