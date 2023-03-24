@@ -235,12 +235,10 @@ class Benefit //Prestations
     public function add(): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        $db = Database::connect();
 
         // Requête SQL
-        $sql = 'INSERT INTO `prestations` (`title`, `descrition`, `duration`, `price`) 
+        $sql = 'INSERT INTO `services` (`title`, `description`, `duration`, `price`) 
                 VALUES (:title, :description, :duration, :price)
                 ;';
 
@@ -248,8 +246,8 @@ class Benefit //Prestations
         $sth = $db->prepare($sql);
         $sth->bindValue(':title',       $this->title);
         $sth->bindValue(':description', $this->description);
-        $sth->bindValue(':duration',    $this->duration);
-        $sth->bindValue(':price',       $this->price);
+        $sth->bindValue(':duration',    $this->duration, PDO::PARAM_INT);
+        $sth->bindValue(':price',       $this->price, PDO::PARAM_INT);
 
         // Exécuter la requête
         $sth->execute();
@@ -274,15 +272,13 @@ class Benefit //Prestations
     public static function get(int|null $idPresta = null): array|bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `title`, `descrition`, `duration`, `price`
-                FROM `prestations`' . //Concaténation avec '.'
-            ($idPresta) ? 'WHERE `id` = :id' : ''
-            . 'ORDER BY `created_at`';
+        $sql = 'SELECT `id`, `title`, `description`, `duration`, `price`
+                FROM `services`' . //Concaténation avec '.'
+            (($idPresta) ? 'WHERE `id` = :id' : '')
+            . ' ORDER BY `created_at`';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue s'il y en a
         $sth = $db->prepare($sql);
@@ -305,12 +301,10 @@ class Benefit //Prestations
     public function update(): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        $db = Database::connect();
 
         // Requête SQL
-        $sql = 'UPDATE `prestations`
+        $sql = 'UPDATE `services`
                 SET `title` = :title,
                     `description` = :description,
                     `duration` = :duration,
@@ -344,13 +338,11 @@ class Benefit //Prestations
     public static function delete($idPresta): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        $db = Database::connect();
 
         // Requête SQL
         $sql = 'DELETE
-                FROM `prestations`
+                FROM `services`
                 WHERE `id` = :id;
                 ;';
 
@@ -379,13 +371,11 @@ class Benefit //Prestations
     public static function isExist(int $idPresta): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        $db = Database::connect();
 
         // Requête SQL
         $sql = 'SELECT `id`
-                FROM `prestations`
+                FROM `services`
                 WHERE `id` = :id;
                 ;';
 

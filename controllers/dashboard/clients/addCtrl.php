@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// Appel des fonctions FLASH
+// !FLASH
 require_once(__DIR__ . '/../../../helpers/flash.php');
 
-// Appel des CONSTANTES
+// !CONSTANTS
 require_once(__DIR__ . '/../../../config/constants.php');
 
-// Appel du MODELE
+// !MODELS
 require_once(__DIR__ . '/../../../models/Client.php');
 
 try {
@@ -135,12 +135,12 @@ try {
     die;
 }
 
-// Appel du header
+// !HEADER
 $linkCss = 'clients/add';
 include(__DIR__ . '/../../../views/dashboard/templates/header.php');
 
-// Appel de la view
+// !VIEWS
 include(__DIR__ . '/../../../views/dashboard/clients/add.php');
 
-// Appel du footer
+// !FOOTER
 include(__DIR__ . '/../../../views/dashboard/templates/footer.php');

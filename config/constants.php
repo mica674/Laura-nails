@@ -29,6 +29,10 @@ define('REGEXP_BIRTHDATE',      '^((19\d{2}|20[01]\d|202[1-3])\-(0[1-9]|1[0-2])\
 define('REGEXP_TITLE', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-&#;]{1,24})$');
 // Message (REVIEW)
 define('REGEXP_MESSAGE',      '^(([\W\w]){1,500})$');
+// Description(PRESTATIONS)
+define('REGEXP_DESCRIPTION', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-&#;]{1,40})$');
+// Duration/Price (PRESTATIONS)
+define('REGEXP_PRICE', '^(([1-9]{1})\d{0,2})$');
 
 // ?OTHERS
 // Définir le fuseau horaire sur Paris

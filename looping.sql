@@ -21,9 +21,9 @@ CREATE TABLE slots(
 
 CREATE TABLE services(
    id INT AUTO_INCREMENT,
-   service VARCHAR(50)  NOT NULL,
-   duration TIME NOT NULL,
-   price DECIMAL(5,2)   NOT NULL,
+   title VARCHAR(50) NOT NULL,
+   duration SMALLINT NOT NULL,
+   price SMALLINT NOT NULL,
    description VARCHAR(150)  NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME,

@@ -15,7 +15,13 @@ RewriteRule ^Dashboard$ /controllers/dashboard/dashboardHomeCtrl.php [L]
 
 # Pages
 RewriteRule Dashboard/Home /controllers/dashboard/pages/homePageCrtl.php [L]
-RewriteRule Dashboard/Prestations /controllers/dashboard/pages/prestationsPageCrtl.php [L]
+# *PRESTATIONS
+RewriteRule ^Dashboard/Prestations$ /controllers/dashboard/pages/prestations/prestationsPageCrtl.php [L]
+RewriteRule Dashboard/Prestations/Add /controllers/dashboard/pages/prestations/addCtrl.php [L]
+RewriteRule Dashboard/Prestations/List /controllers/dashboard/pages/prestations/listCtrl.php [L]
+RewriteRule Dashboard/Prestations/Edit /controllers/dashboard/pages/prestations/editCtrl.php [L]
+RewriteRule Dashboard/Prestations/Delete /controllers/dashboard/pages/prestations/deleteCtrl.php [L]
+# 
 RewriteRule Dashboard/PlaceDate /controllers/dashboard/pages/placeDatePageCrtl.php [L]
 RewriteRule Dashboard/Appointments /controllers/dashboard/pages/appointmentsPageCrtl.php [L]
 RewriteRule Dashboard/Reviews /controllers/dashboard/pages/reviewsPageCrtl.php [L]

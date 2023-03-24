@@ -26,12 +26,24 @@ Intégration page contact :
     <!--* - Ajouter table contact dans la bdd -->
     <!--* - Créer Model Contact setter/getter/crud -->
 
+Intégration page dashboard prestations ADD & LIST & DETAILS:
+    <!--* - Intégration via cards formulaires ajout et à la liste -->
+    <!--* - intégration pages ADD et LIST -->
+    <!--* - description en 2 parties séparées ';' Deuxième partie optionnelle dans le formulaire -->
+    <!--* - Nettoyage/validation ADD -->
+    <!--! - Model Benefit/Prestations CRUD complet --> A tester
+    <!--* - envoi en bdd ADD -->
+    <!--* - récupérer via Get -> LIST -->
+    - Intégration details
+    - Controller du delete
+
 Finir intégration rendez vous
+    - checkbox prestations créées avec PHP via la bdd
+    - Filtrer et valider les données des checkbox et de la demande de rdv
 HOME faire une boucle pour les slides du carrousel
 HOME hover styles des touches
 
 # Controllers
-Filtrer et valider les données des checkbox et de la demande de rdv
 
 # Autres
 mentions légales
@@ -41,6 +53,3 @@ Balise title dans les a
 if ($id = Patient::getid == false) // Exemple pour les controle de l'ID et affectation en meme temps 
 fonction explode(separateur, string, limit optionnelle) pour séparer date et heure
 attribut autofocus pour les formulaires d'inscription et de connexion
-
-REQUETE SQL:
-- Sélectionner les 5 derniers avis postés par les utilisateurs

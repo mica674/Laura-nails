@@ -14,12 +14,12 @@
         foreach ($clients as $client) {
         ?>
         <tr class="my-3 trClient<?=($nbLine%2)+1?>">
-                <td><a href="/EditClient?id=<?= $client->id?>"><i class="fa-regular fa-user"></i></a><?=$client->lastname?></td>
-                <td><a href="/EditClient?id=<?= $client->id?>"><i class="fa-regular fa-user"></i></a><?=$client->firstname?></td>
+                <td><a href="/Dashboard/EditClient?id=<?= $client->id?>"><i class="fa-regular fa-user"></i></a><?=$client->lastname?></td>
+                <td><a href="/Dashboard/EditClient?id=<?= $client->id?>"><i class="fa-regular fa-user"></i></a><?=$client->firstname?></td>
                 <td class="text-center"><a href="mailto:<?=$client->email?>"><i class="fa-regular fa-envelope"></i></a></td>
                 <td class="text-center"><a href="tel:<?=$client->phone?>"><?=$client->phone?></a></td>
                 <td class="text-center d-none d-sm-table-cell"><?=datefmt_format(DATE_FORMAT, strtotime($client->birthdate))?></td>
-                <td class="text-center"><a href="/EditClient?id=<?= $client->id ?>"><i class="fa-solid fa-pen"></i></a> &emsp; <a href="/DeleteClient?id=<?= $client->id ?>"><i class="fa-solid fa-trash"></i></a></td>
+                <td class="text-center"><a href="/Dashboard/EditClient?id=<?= $client->id ?>"><i class="fa-solid fa-pen"></i></a> &emsp; <a href="/Dashboard/DeleteClient?id=<?= $client->id ?>"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
         
         <?php
