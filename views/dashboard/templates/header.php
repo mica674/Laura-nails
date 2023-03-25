@@ -70,9 +70,9 @@
                                     <span class="ms-1 d-none d-sm-inline">Appointments</span>
                                 </a>
                                 <div class="dropdown-menu text-end" id="dropdownAppointment">
-                                    <a class="dropdown-item fs-5" href="/Dashboard/AddAppointment">Ajouter</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Appointments/Add">Ajouter</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fs-5" href="/Dashboard/Appointments">Liste</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Appointments/List">Liste</a>
                                 </div>
                             </li>
                         </ul>
