@@ -1,9 +1,24 @@
 <?php
+session_start();
 // !CONSTANTS
-require_once(__DIR__ . '/../config/constants.php');
+require_once(__DIR__ . '/../../../config/constants.php');
+
+// !FLASH
+require_once(__DIR__ . '/../../../helpers/flash.php');
 
 // !MODEL
-require_once(__DIR__ . '/../../models/client.php');
+require_once(__DIR__ . '/../../../models/Client.php');
+
+// Récupérer l'id passé en GET avec le filtrage au passge
+$idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+if (empty($idClient)) {
+    Flash::flash('clientEdited', 'Ce client n\'existe pas', FLASH_DANGER);
+    header('Location: /Dashboard/Clients/List');
+    exit;
+}else {
+    // Appel de la méthode static get de la class Client pour récupérer les infos du client 
+    $client = Client::get($idClient);
+}
 
 
 // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
@@ -88,14 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
 
 
     // ?Compare with previous values and new values
-    if (($lastname != filter_input(INPUT_GET, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS)
-            ||  $firstname != filter_input(INPUT_GET, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS)
-            ||  $email != filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL)
-            ||  $birthdate != filter_input(INPUT_GET, 'birthdate', FILTER_SANITIZE_SPECIAL_CHARS)
+    if (($lastname != $client->lastname
+            ||  $firstname != $client->firstname
+            ||  $email != $client->email
+            ||  $birthdate != $client->birthdate
         )
-        && !Client::isExist($lastname, $firstname, $email, $birthdate)
+        && Client::isClientExist($lastname, $firstname, $email, $birthdate)
     ) {
         $error['exist'] = 'Un client a déjà ces informations dans la base de données ! ';
+        Flash::flash('clientEdited', 'Un client a déjà ces informations dans la base de données !', FLASH_DANGER);
     }
     // ?No error -> redirect to clientsList page
     if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
@@ -116,40 +132,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
         // Ajouter du client à la base de donnée & affecter le résultat de l'exécution de la requête à $result
         $result = $client->update();
         if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
-            echo 'message d\'erreur ! (A MODIFIER !)';
+            Flash::flash('clientEdited', 'La modification du client a échoué', FLASH_DANGER);
         } else { //Si pas d'erreur retour à la page d'Accueil
-            header('location: /clientsList?clientEdited=1');
+            Flash::flash('clientEdited', 'La modification du client a réussi, bravo', FLASH_SUCCESS);
+            header('Location: /Dashboard/Clients/List');
             die;
         }
-    } else {
-        echo 'client existe déjà ! (A MODIFIER !)';
     }
 
 
     // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
-// Récupérer l'id passé en GET avec le filtrage au passge
-$idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
-if (empty($idClient)) {
-    header('Location: /clientsList');
-    exit;
-}
-// Appel de la méthode static get de la class Client pour récupérer les infos du client 
-$client = Client::get(intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
 
 
-// Fichiers JS à appeler dans le footer
-$jsToCall = 'clientProfil';
 
 
 // !HEADER
-include(__DIR__ . '/../views/templates/header.php');
+include(__DIR__ . '/../../../views/dashboard/templates/header.php');
 
 
 // !VIEW
-include(__DIR__ . '/../views/clients/editclient.php');
+FLASH::flash();
+include(__DIR__ . '/../../../views/dashboard/clients/edit.php');
 
 
 // !FOOTER
-include(__DIR__ . '/../views/templates/footer.php');
+// Fichiers JS à appeler dans le footer
+$jsToCall = 'clientEdit';
+include(__DIR__ . '/../../../views/dashboard/templates/footer.php');

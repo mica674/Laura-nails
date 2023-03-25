@@ -1,7 +1,11 @@
 <?php
+session_start();
 
 // !CONSTANTS
 require_once(__DIR__ . '/../../../config/constants.php');
+
+// !FLASH
+require_once(__DIR__ . '/../../../helpers/flash.php');
 
 
 // !MODEL
@@ -15,8 +19,10 @@ include(__DIR__ . '/../../../views/dashboard/templates/header.php');
 
 
 // !VIEW
-include(__DIR__ . '/../../../views/dashboard/clients/clients.php');
+Flash::flash();
+include(__DIR__ . '/../../../views/dashboard/clients/list.php');
 
 
 // !FOOTER
+$jsToCall = 'clientList';
 include(__DIR__ . '/../../../views/dashboard/templates/footer.php');

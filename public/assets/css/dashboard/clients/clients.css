@@ -33,8 +33,13 @@ td>a{
     color: #fbbc04!important;
 }
 
-td>a:hover{
+td>a:hover, td>button:hover{
     color: #fbbd0486!important;
+}
+
+td>button{
+    background-color: transparent;
+    border: none;
 }
 
 .trClient1:hover, .trClient2:hover{

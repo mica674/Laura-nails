@@ -59,9 +59,9 @@
                                     <span class="ms-1 d-none d-sm-inline">Clients</span>
                                 </a>
                                 <div class="dropdown-menu ms-5 text-end" id="dropdownClient">
-                                    <a class="dropdown-item fs-5" href="/Dashboard/AddClient">Ajouter</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Clients/Add">Ajouter</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fs-5" href="/Dashboard/Clients">Liste</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Clients/List">Liste</a>
                                 </div>
                             </li>
                             <li class="nav-item dropend my-lg-3">

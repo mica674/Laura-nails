@@ -55,12 +55,9 @@ td{
     background-color: #363636;
 }
 
-td>a{
-    color: #fbbc04!important;
-}
-
-td>a:hover{
-    color: #fbbd0486!important;
+td>a, td>button{
+    background-color: transparent;
+    border: none;
 }
 
 .trPrestation1:hover, .trPrestation2:hover{

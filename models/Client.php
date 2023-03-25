@@ -283,7 +283,6 @@ class Client
         $sth->bindValue(':lastname',    $this->lastname,    PDO::PARAM_STR);
         $sth->bindValue(':firstname',   $this->firstname,   PDO::PARAM_STR);
         $sth->bindValue(':email',       $this->email,       PDO::PARAM_STR);
-        $sth->bindValue(':password',    $this->password,    PDO::PARAM_STR);
         $sth->bindValue(':phone',       $this->phone,       PDO::PARAM_STR);
         $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR);
 
@@ -369,7 +368,7 @@ class Client
 
         // Requête SQL
         $sql = "SELECT `id`
-            FROM `patients`
+            FROM `clients`
             WHERE   `id`  =   :id
             ;";
 

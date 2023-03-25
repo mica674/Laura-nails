@@ -26,16 +26,18 @@ Intégration page contact :
     <!--* - Ajouter table contact dans la bdd -->
     <!--* - Créer Model Contact setter/getter/crud -->
 
-Intégration page dashboard prestations ADD & LIST & DETAILS (& DELETE):
+Intégration page dashboard prestations ADD & LIST & EDIT (& DELETE):
     <!--* - Intégration via cards formulaires ajout et à la liste -->
     <!--* - intégration pages ADD et LIST -->
     <!--* - description en 2 parties séparées ';' Deuxième partie optionnelle dans le formulaire -->
     <!--* - Nettoyage/validation ADD -->
-    <!--! - Model Benefit/Prestations CRUD complet --> A tester
+    <!--* - Model Benefit/Prestations CRUD complet
     <!--* - envoi en bdd ADD -->
     <!--* - récupérer via Get -> LIST -->
-    - Intégration details
-    - Controller du delete
+    <!--* - Intégration edit -->
+    <!--* - JS pour EDIT couleur et affichage de la touche enregistrer -->
+    <!--* - Modale pour confirmer la suppression -->
+    <!--* - Controller du delete -->
 
 Intégration page dashboard clients
     <!--* - Intégration via cards formulaires ajout et à la liste -->
@@ -44,7 +46,10 @@ Intégration page dashboard clients
     <!--! - Model Client CRUD complet --> A tester
     <!--* - envoi en bdd ADD -->
     <!--* - récupérer via Get -> LIST -->
-    - Intégration details
+    - Intégration edit
+    - JS pour EDIT couleur et affichage de la touche enregistrer
+    - Modale pour confirmer la suppression
+    - Intégration edit
     - Controller du delete
 
 Finir intégration rendez vous
@@ -63,3 +68,4 @@ Balise title dans les a
 if ($id = Patient::getid == false) // Exemple pour les controle de l'ID et affectation en meme temps 
 fonction explode(separateur, string, limit optionnelle) pour séparer date et heure
 attribut autofocus pour les formulaires d'inscription et de connexion
+Attribut title pour les info bulle des inputs

@@ -60,7 +60,7 @@ CREATE TABLE comments(
    id_clients INT NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_services) REFERENCES services(id),
-   FOREIGN KEY(id_clients) REFERENCES clients(id)
+   FOREIGN KEY(id_clients) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE contacts(

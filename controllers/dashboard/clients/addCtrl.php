@@ -46,8 +46,11 @@ try {
 
         // ?EMAIL
         // Double nettoyage de l'email
+        
+        var_dump($_POST['email']);
         $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-
+        var_dump($email);die;
+        // Remove all characters except letters, digits and !#$%&'*+-=?^_`{|}~@.[].
         // Validation des données
         if (empty($email)) { //Si $email est vide
             $error['email'] = 'L\'email n\'est pas renseigné'; //Message d'erreur EMAIL
@@ -121,7 +124,7 @@ try {
                 Flash::flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
             } else { //Si pas d'erreur retour à la page d'Accueil
                 Flash::flash('clientAdded', 'Client ajouté avec succès', FLASH_SUCCESS);
-                header('location: /Dashboard');
+                header('location: /Dashboard/Clients/List');
                 die;
             }
         }

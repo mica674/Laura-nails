@@ -149,5 +149,5 @@ include(__DIR__ . '/../../../../views/dashboard/pages/prestations/edit.php');
 
 
 // !FOOTER
-$jsToCall = 'prestations';
+$jsToCall = 'prestationEdit';
 include(__DIR__ . '/../../../../views/dashboard/templates/footer.php');

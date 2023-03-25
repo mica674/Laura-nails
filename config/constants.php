@@ -20,7 +20,7 @@ define('REGEXP_LASTNAME',       '^([a-zA-Zàáâäãåčćèéêëėìíîïńò
 // Firstname
 define('REGEXP_FIRSTNAME',      '^([a-zA-ZàáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-]{1,24})$');
 // Password
-define('REGEXP_PASSWORD',       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,15}$');
+define('REGEXP_PASSWORD',       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$€%^&*_=+-]).{6,15}$');
 // Phone number
 define('REGEXP_PHONE_NUMBER',   '^(0[1-9]{1})(\d{8})$');
 // Birthday

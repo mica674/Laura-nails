@@ -39,6 +39,7 @@ prestationInput.forEach(input => {
         input.addEventListener('change', () => {
             if (!inputsValuesStillSame(input)) {
                 modifyBtn.classList.remove('d-none');
+                input.classList.add('bg-success');
             } else {
                 modifyBtn.classList.add('d-none');
             }
