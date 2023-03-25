@@ -28,9 +28,9 @@ RewriteRule Dashboard/Reviews /controllers/dashboard/pages/reviewsPageCrtl.php [
 RewriteRule Dashboard/Contact /controllers/dashboard/pages/contactPageCrtl.php [L]
 
 # Clients
-RewriteRule Dashboard/AddClient /controllers/dashboard/clients/addCtrl.php [L]
-RewriteRule Dashboard/EditClient /controllers/dashboard/clients/clientsCtrl.php [L]
-RewriteRule Dashboard/Clients /controllers/dashboard/clients/clientsCtrl.php [L]
+RewriteRule Dashboard/Clients/Add /controllers/dashboard/clients/addCtrl.php [L]
+RewriteRule Dashboard/Clients/List /controllers/dashboard/clients/clientsCtrl.php [L]
+RewriteRule Dashboard/Clients/List /controllers/dashboard/clients/clientsCtrl.php [L]
 
 # RewriteRule Dashboard/Client /controllers/dashboard/clientCtrl.php
 

@@ -267,9 +267,9 @@ class Benefit //Prestations
      * Elle attend un paramètre en entrée (format int) FACULTATIF, qui est l'id de la prestation ciblée et retourne un tableau (array) avec ses informations
      * @param int|bool $idPresta
      * 
-     * @return array|bool
+     * @return object|array|bool
      */
-    public static function get(int|null $idPresta = null): array|bool
+    public static function get(int|null $idPresta = null): object|array|bool
     {
         // Connexion à la base de données
         $db = Database::connect();
@@ -285,7 +285,7 @@ class Benefit //Prestations
         ($idPresta) ? $sth->bindValue(':id', $idPresta, PDO::PARAM_INT) : '';
         // Exécuter la requête
         $sth->execute();
-        $results = $sth->fetchAll();
+        ($results = ($idPresta)? $sth->fetch() : $sth->fetchAll());
         // retourner l'objet $result contenant les informations du client
         return $results;
     }

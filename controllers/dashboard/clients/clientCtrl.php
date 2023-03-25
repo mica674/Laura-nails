@@ -135,8 +135,8 @@ if (empty($idClient)) {
     header('Location: /clientsList');
     exit;
 }
-// Appel de la méthode static getOne de la class Client pour récupérer les infos du client 
-$client = Client::getOne(intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
+// Appel de la méthode static get de la class Client pour récupérer les infos du client 
+$client = Client::get(intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
 
 
 // Fichiers JS à appeler dans le footer

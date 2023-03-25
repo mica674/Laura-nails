@@ -7,21 +7,23 @@ a{
     text-decoration: none;
 }
 
-#prestaAddForm input{
+#prestaAddForm input, #prestaEditForm input{
     width: 40%;
     height: 2rem;
 }
 
-#prestaAddBtn{
+#prestaAddBtn, #prestaEditBtn{
     background-color: transparent;
     font-size: 1.25rem;
     color: #fff;
     border-color: #fbbc04;
     border-radius: 0.5rem;
     padding: 0.2rem 1rem;
+    width: auto!important;
+    height: auto!important;
 }
 
-#prestaAddBtn:hover{
+#prestaAddBtn:hover, #prestaEditBtn:hover{
     background-color: #484848;
     color: #fbbc04;
 }
@@ -49,7 +51,7 @@ td{
     justify-content: start;
 }
 
-.trClient2{
+.trPrestation2{
     background-color: #363636;
 }
 
@@ -61,7 +63,7 @@ td>a:hover{
     color: #fbbd0486!important;
 }
 
-.trClient1:hover, .trClient2:hover{
+.trPrestation1:hover, .trPrestation2:hover{
     background-color: #646464;
     color: #fbbc04!important;
 }

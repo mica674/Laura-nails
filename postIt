@@ -26,12 +26,22 @@ Intégration page contact :
     <!--* - Ajouter table contact dans la bdd -->
     <!--* - Créer Model Contact setter/getter/crud -->
 
-Intégration page dashboard prestations ADD & LIST & DETAILS:
+Intégration page dashboard prestations ADD & LIST & DETAILS (& DELETE):
     <!--* - Intégration via cards formulaires ajout et à la liste -->
     <!--* - intégration pages ADD et LIST -->
     <!--* - description en 2 parties séparées ';' Deuxième partie optionnelle dans le formulaire -->
     <!--* - Nettoyage/validation ADD -->
     <!--! - Model Benefit/Prestations CRUD complet --> A tester
+    <!--* - envoi en bdd ADD -->
+    <!--* - récupérer via Get -> LIST -->
+    - Intégration details
+    - Controller du delete
+
+Intégration page dashboard clients
+    <!--* - Intégration via cards formulaires ajout et à la liste -->
+    <!--* - intégration pages ADD et LIST -->
+    <!--* - Nettoyage/validation ADD -->
+    <!--! - Model Client CRUD complet --> A tester
     <!--* - envoi en bdd ADD -->
     <!--* - récupérer via Get -> LIST -->
     - Intégration details

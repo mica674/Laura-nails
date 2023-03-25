@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-between">
         <div class="col-lg-5 col-12 homeCard text-center my-2 mx-lg-2">
             <a href="/Dashboard/Prestations/Add">
                 <div class="card text-white bg-dark mb-3">

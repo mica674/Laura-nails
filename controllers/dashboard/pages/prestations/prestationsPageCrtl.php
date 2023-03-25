@@ -8,7 +8,7 @@ $linkCss = 'pages/prestations';
 include_once(__DIR__ . '/../../../../views/dashboard/templates/header.php');
 
 // !VIEW
-include_once(__DIR__ . '/../../../../views/dashboard/pages/prestations/prestations.php');
+include_once(__DIR__ . '/../../../../views/dashboard/pages/prestations/prestationsHome.php');
 
 // !FOOTER
 $jsToCall = 'prestations';

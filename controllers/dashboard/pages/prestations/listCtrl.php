@@ -18,6 +18,7 @@ include(__DIR__ . '/../../../../views/dashboard/templates/header.php');
 
 
 // !VIEW
+Flash::flash();
 include(__DIR__ . '/../../../../views/dashboard/pages/prestations/list.php');
 
 
