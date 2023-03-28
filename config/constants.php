@@ -8,7 +8,7 @@
 define('DB_NAME', 'maurouardnails');
 // Hote de la base de données
 define('DB_HOST', '127.0.0.1');
-define('DB_DSN', 'mysql:dbname='.DB_NAME.';host='.DB_HOST);
+define('DB_DSN', 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST);
 // Nom de l'utilisateur ayant les droits administrateur sur la base de données
 define('DB_USER', 'ouioui');
 // Mot de passe de cet utilisateur
@@ -33,6 +33,11 @@ define('REGEXP_MESSAGE',      '^(([\W\w]){1,500})$');
 define('REGEXP_DESCRIPTION', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-&#;]{1,40})$');
 // Duration/Price (PRESTATIONS)
 define('REGEXP_PRICE', '^(([1-9]{1})\d{0,2})$');
+// Appointment  
+define('REGEXP_APPOINTMENT',    '^((202[3-9])\-(0[1-9]|1[0-2])\-(0[1-9]|[12][0-9]|3[01])T(09|1[0-8]):(00|15|30|45))$');
+// Slots
+define('REGEXP_SLOT', '^(([01][0-9]{1})|([2][0-3]{1})):([0-5]{1}[0-9]{1})$');
+
 
 // ?OTHERS
 // Définir le fuseau horaire sur Paris

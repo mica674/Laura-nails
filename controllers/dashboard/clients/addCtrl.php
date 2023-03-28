@@ -47,9 +47,7 @@ try {
         // ?EMAIL
         // Double nettoyage de l'email
         
-        var_dump($_POST['email']);
         $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-        var_dump($email);die;
         // Remove all characters except letters, digits and !#$%&'*+-=?^_`{|}~@.[].
         // Validation des données
         if (empty($email)) { //Si $email est vide

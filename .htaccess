@@ -23,7 +23,6 @@ RewriteRule Dashboard/Prestations/Edit /controllers/dashboard/pages/prestations/
 RewriteRule Dashboard/Prestations/Delete /controllers/dashboard/pages/prestations/deleteCtrl.php [L]
 # 
 RewriteRule Dashboard/PlaceDate /controllers/dashboard/pages/placeDatePageCrtl.php [L]
-RewriteRule Dashboard/Appointments /controllers/dashboard/pages/appointmentsPageCrtl.php [L]
 RewriteRule Dashboard/Reviews /controllers/dashboard/pages/reviewsPageCrtl.php [L]
 RewriteRule Dashboard/Contact /controllers/dashboard/pages/contactPageCrtl.php [L]
 
@@ -38,6 +37,12 @@ RewriteRule Dashboard/Appointments/Add /controllers/dashboard/appointments/addCt
 RewriteRule Dashboard/Appointments/List /controllers/dashboard/appointments/listCtrl.php [L]
 RewriteRule Dashboard/Appointments/Edit /controllers/dashboard/appointments/editCtrl.php [L]
 RewriteRule Dashboard/Appointments/Delete /controllers/dashboard/appointments/deleteCtrl.php [L]
+    # SLOTS
+    RewriteRule ^Dashboard/Appointments/Slots$ /controllers/dashboard/appointments/slots/slotsHomeCtrl.php [L]
+    RewriteRule Dashboard/Appointments/Slots/Add /controllers/dashboard/appointments/slots/addCtrl.php [L]
+    RewriteRule Dashboard/Appointments/Slots/List /controllers/dashboard/appointments/slots/listCtrl.php [L]
+    RewriteRule Dashboard/Appointments/Slots/Edit /controllers/dashboard/appointments/slots/editCtrl.php [L]
+    RewriteRule Dashboard/Appointments/Slots/Delete /controllers/dashboard/appointments/slots/deleteCtrl.php [L]
 
 
 ErrorDocument 404 /404page.html

@@ -15,7 +15,9 @@ CREATE TABLE clients(
 
 CREATE TABLE slots(
    id INT AUTO_INCREMENT,
-   slot TIME NOT NULL,
+   slotStart CHAR(5) NOT NULL,
+   slotEnd CHAR(5) NOT NULL,
+   slotStep TINYINT NOT NULL,
    PRIMARY KEY(id)
 );
 

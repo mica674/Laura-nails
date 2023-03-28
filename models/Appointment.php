@@ -67,7 +67,7 @@ class Appointment
      * 
      * @return void
      */
-    public function setdateHour(string $dateHour): void
+    public function setDateHour(string $dateHour): void
     {
         $this->dateHour = $dateHour;
     }
@@ -143,9 +143,8 @@ class Appointment
     public static function get(int|null $idAppointment = null): array|bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        // Connexion à la base de donnée
+        $db = Database::connect();
 
         // Requête SQL
         $sql = 'SELECT `id`, `dateHour`, `idClients`
@@ -174,9 +173,8 @@ class Appointment
      */
     public function update(): bool
     {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        // Connexion à la base de donnée
+        $db = Database::connect();
         $sql = 'UPDATE `appointments`
                 SET `dateHour` = :dateHour,
                     `idClients` = :idClients
@@ -205,9 +203,8 @@ class Appointment
      */
     public static function delete($idAppointment): bool
     {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        // Connexion à la base de donnée
+        $db = Database::connect();
         $sql = 'DELETE
                 FROM `appointments`
                 WHERE `id` = :id;
@@ -223,9 +220,8 @@ class Appointment
     // IS NOT EXIST
     public static function isExist($dateHour): bool
     {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        // Connexion à la base de donnée
+        $db = Database::connect();
         $sql = "SELECT `dateHour`, `idClients`
                 FROM `appointments`
                 WHERE   `dateHour`  =   '$dateHour'
@@ -239,9 +235,8 @@ class Appointment
     // IS ID EXIST
     public static function isIdExist($idAppointment): bool
     {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        // Connexion à la base de donnée
+        $db = Database::connect();
         $sql = "SELECT `dateHour`, `idClients`
                 FROM `appointments`
                 WHERE   `id`  =   :idAppointment
@@ -256,9 +251,8 @@ class Appointment
     // IS APPOINTMENT EXIST
     public static function isAptExist($idPatient): bool
     {
-        if (!isset($db)) {
-            $db = dbConnect();
-        }
+        // Connexion à la base de donnée
+        $db = Database::connect();
         $sql = "SELECT `idClients`
                 FROM `appointments`
                 WHERE   `idClients`  =   :idPatient

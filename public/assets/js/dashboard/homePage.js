@@ -59,8 +59,10 @@ function displaySaveBtn() { //Affiche la touche enregistrer si toute les images 
 
 btnAddImage.addEventListener('click', (e) => {
     e.preventDefault();
-
-    let newId = parseInt(images[images.length - 1].id.substring(5,)) + 1;
+    let newId = 1;
+    if (images.length != 0) {
+        newId = parseInt(images[images.length - 1].id.substring(5,)) + 1;
+    }
     let newImage = document.createElement("div");
     newImage.classList.add('col-3', 'carouselImage')
     newImage.innerHTML +=
