@@ -3,7 +3,7 @@ const slotInput = document.querySelectorAll("input");
 const modifyBtn = document.getElementById('slotEditBtn');
 let slotInputStart = slotInput[0].value;
 let slotInputEnd = slotInput[1].value;
-let stotInputStep = slotStep.value;
+let slotInputStep = slotStep.value;
 // Fonctions
 // Comparer les valeurs des inputs avant et après les modifications
 function inputsValuesStillSame(slot) {
@@ -16,7 +16,7 @@ function inputsValuesStillSame(slot) {
     return same;
 }
 
-slotInput.forEach(input => {
+function eventListener(input) {
     if (input.type != 'submit') {
 
         input.addEventListener("focus", () => {
@@ -40,7 +40,12 @@ slotInput.forEach(input => {
             }
         })
     }
-});
+}
 
+
+slotInput.forEach(input => {
+    eventListener(input)
+});
+eventListener(slotStep);
 
 console.log(1);

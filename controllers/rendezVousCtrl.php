@@ -3,6 +3,11 @@
 // !CONSTANTES
 require_once(__DIR__ . '/../config/constants.php');
 
+// !MODELS
+require_once(__DIR__ . '/../models/Slot.php');
+
+// GET ALL SLOTS
+$slots = Slot::get();
 
 // !HEADER
 $linkCss = 'rendezVous';

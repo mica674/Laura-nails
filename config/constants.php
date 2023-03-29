@@ -35,7 +35,9 @@ define('REGEXP_DESCRIPTION', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńò
 define('REGEXP_PRICE', '^(([1-9]{1})\d{0,2})$');
 // Appointment  
 define('REGEXP_APPOINTMENT',    '^((202[3-9])\-(0[1-9]|1[0-2])\-(0[1-9]|[12][0-9]|3[01])T(09|1[0-8]):(00|15|30|45))$');
-// Slots
+// Appointment Day
+define('REGEXP_APPOINTMENT_DAY', '^(202[3-9])\-(0[1-9]|1[0-2])\-(0[1-9]|[12][0-9]|3[01])$');
+// Appointment Slot/Hour-Minutes
 define('REGEXP_SLOT', '^(([01][0-9]{1})|([2][0-3]{1})):([0-5]{1}[0-9]{1})$');
 
 

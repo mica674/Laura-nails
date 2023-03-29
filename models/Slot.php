@@ -283,7 +283,7 @@ class Slot
         $sql = 'UPDATE `slots`
                 SET `slotStart` = :slotStart,
                     `slotEnd` = :slotEnd,
-                    `slotStep` = :slotStep,
+                    `slotStep` = :slotStep
                 WHERE `id` = :id
                 ;';
 
@@ -338,24 +338,31 @@ class Slot
      * Cette méthode vérifie si l'id du créneau existe
      * Si l'id existe la méthode renvoie true, sinon false
      * 
-     * @param int $idSlot
+     * @param string $method ('id'|'slotStart'|'slotEnd')
+     * @param int $value
      * 
      * @return bool
      */
-    public static function isExist(int $idSlot): bool
+    public static function isExist(string $method, int $value): bool
     {
         // Connexion à la base de données
         $db = Database::connect();
 
         // Requête SQL
+        if ($method == '') {
+            # code...
+        } else {
+            # code...
+        }
+        
         $sql = 'SELECT `id`
                 FROM `slots`
-                WHERE `id` = :id;
+                WHERE `' . $method . '` = :value;
                 ;';
 
         // Préparer, affecter les valeurs avec bind value et executer la requête
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $idSlot, PDO::PARAM_INT);
+        $sth->bindValue(':value', $value, PDO::PARAM_INT);
         $sth->execute();
 
         // Compter le nombre d'enregistrements affecter par la requête

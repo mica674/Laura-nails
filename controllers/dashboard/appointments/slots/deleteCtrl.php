@@ -1,22 +1,22 @@
 <?php
 
 // !CONSTANTS
-require_once(__DIR__ . '/../../../config/constants.php');
+require_once(__DIR__ . '/../../../../config/constants.php');
 
 // !FLASH
-require_once(__DIR__ . '/../../../helpers/flash.php');
+require_once(__DIR__ . '/../../../../helpers/flash.php');
 
 // !MODELS
-require_once(__DIR__ . '/../../../models/Client.php');
+require_once(__DIR__ . '/../../../../models/Slot.php');
 
-$idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+$idSlot = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 
-if (!Client::isIdExist($idClient)) {
-    Flash::flash('clientDeleted', 'Le client que vous essayez de supprimer n\'existe pas', FLASH_WARNING);
-    header('Location: /Dashboard/Clients/List');die;
+if (!Slot::isExist('id', $idSlot)) {
+    Flash::flash('slotDeleted', 'Le créneau que vous essayez de supprimer n\'existe pas', FLASH_WARNING);
+    header('Location: /Dashboard/Appointments/Slots/List');die;
 }else {
-    if(Client::delete($idClient)){
-        Flash::flash('clientDeleted', 'Le client a bien été supprimé', FLASH_SUCCESS);
-        header('Location: /Dashboard/Clients/List');die;
+    if(Slot::delete($idSlot)){
+        Flash::flash('slotDeleted', 'Le créneau a bien été supprimé', FLASH_SUCCESS);
+        header('Location: /Dashboard/Appointments/Slots/List');die;
     };
 }

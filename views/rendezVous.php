@@ -116,24 +116,28 @@
                                 <select class="pe-2" name="hour" id="hour">
                                     <option value="">Choisissez une heure</option>
                                     <?php
-                                    $hour = 9;
-                                    $endHour = 18;
-                                    while ($hour < $endHour) { ?>
-                                        <option value="<?= strval($hour) ?>"> <?= $hour ?>h</option>
-                                        <?php
-                                            $hour++;
+                                    foreach ($slots as $slot) {
+                                        // Transform slotStart & slotEnd to int values
+                                        $start = intval(substr($slot->slotStart, 0, 2));
+                                        $end = intval(substr($slot->slotEnd, 0, 2));
+
+                                        while ($start < $end) { ?>
+                                            <option value="<?= strval($start) ?>"> <?= $start ?>h</option>
+                                    <?php
+                                            $start++;
+                                        }
                                     }
                                     ?>
                                 </select>
                                 <select name="minutes" id="minutes">
-                                <option value="">Choisissez un créneau</option>
-                                <?php
+                                    <option value="">Choisissez un créneau</option>
+                                    <?php
                                     $min = 0;
-                                    $stepMin = 5;
+                                    $step = $slots[0]->slotStep;
                                     while ($min < 60) { ?>
-                                        <option value="<?= ($min == 0) ? '00' : (($min == 5)? '05' :strval($min)) ?>"><?= ($min == 0) ? '00' : (($min == 5)? '05' :strval($min)) ?></option>
-                                        <?php
-                                        $min += $stepMin;
+                                        <option value="<?= ($min == 0) ? '00' : (($min == 5) ? '05' : strval($min)) ?>"><?= ($min == 0) ? '00' : (($min == 5) ? '05' : strval($min)) ?></option>
+                                    <?php
+                                        $min += $step;
                                     }
                                     ?>
                                 </select>

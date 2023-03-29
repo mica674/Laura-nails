@@ -7,7 +7,7 @@ CREATE TABLE clients(
    phone CHAR(10)  NOT NULL,
    birthdate DATE,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   updated_at DATETIME,
+   updated_at DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    deleted_at DATETIME,
    validated_at DATETIME,
    PRIMARY KEY(id)
@@ -28,22 +28,20 @@ CREATE TABLE services(
    price SMALLINT NOT NULL,
    description VARCHAR(150)  NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   updated_at DATETIME,
+   updated_at DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    deleted_at DATETIME,
    PRIMARY KEY(id)
 );
 
 CREATE TABLE appointments(
    id INT AUTO_INCREMENT,
-   appointment DATE NOT NULL,
+   appointment DATETIME NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    validated_at DATETIME,
-   updated_at DATETIME,
+   updated_at DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    deleted_at DATETIME,
-   id_slots INT NOT NULL,
    id_clients INT NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_slots) REFERENCES slots(id),
    FOREIGN KEY(id_clients) REFERENCES clients(id) ON DELETE CASCADE
 );
 
@@ -55,7 +53,7 @@ CREATE TABLE comments(
    content TEXT NOT NULL,
    quotations TINYINT NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   updated_at DATETIME,
+   updated_at DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    deleted_at DATETIME,
    moderated_at DATETIME,
    id_services INT,
@@ -72,7 +70,7 @@ CREATE TABLE contacts(
    title VARCHAR(30) NOT NULL,
    content TEXT NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   updated_at DATETIME,
+   updated_at DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    deleted_at DATETIME,
    answered_at DATETIME,
    id_clients INT,

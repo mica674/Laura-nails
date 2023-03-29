@@ -16,7 +16,13 @@
             <small <?= ($error['slotEnd'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['slot'] ?? '' ?></small>
             <!-- Intervalle en minutes -->
             <label for="slotStep" class="mt-2">Intervalle (en minutes) <span class="registrationRequired">*</span></label>
-            <input type="number" name="slotStep" id="slotStep" class="inputForm" required value="<?=$slotStep??''?>">
+            <select name="slotStep" id="slotStep" class="inputForm" required>
+                <option value="5" <?=($slotStep ?? false == 5)?'selected':''?>>5</option>
+                <option value="10" <?=($slotStep ?? false == 10)?'selected':''?>>10</option>
+                <option value="15" <?=($slotStep ?? false == 15)?'selected':''?>>15</option>
+                <option value="20" <?=($slotStep ?? false == 20)?'selected':''?>>20</option>
+                <option value="30" <?=($slotStep ?? false == 30)?'selected':''?>>30</option>
+            </select>
 
             <!-- Required fields informations -->
             <small class="registrationSmall mt-3">* Champs obligatoires pour ajouter un créneau de rendez-vous</small>

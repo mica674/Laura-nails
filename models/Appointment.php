@@ -5,8 +5,8 @@ require_once(__DIR__ . '/Database.php');
 class Appointment
 {
     private int $id;
-    private string $dateHour;
-    private int $idClients;
+    private string $appointment;
+    private int $id_clients;
     private string $created_at;
     private string $updated_at;
     private string $deleted_at;
@@ -49,50 +49,50 @@ class Appointment
         $this->id = $id;
     }
 
-    // DATEHOUR
+    // APPOINTMENT
     //getter
     /**
-     * Cette méthode retourne la valeur de le dateHour du rendez-vous
+     * Cette méthode retourne la valeur de le appointment du rendez-vous
      * @return string
      */
-    public function getDateHour(): string
+    public function getAppointment(): string
     {
-        return $this->dateHour;
+        return $this->appointment;
     }
 
     //setter
     /**
-     * Cette méthode hydrate le dateHour du rendez-vous
-     * @param string $dateHour
+     * Cette méthode hydrate le appointment du rendez-vous
+     * @param string $appointment
      * 
      * @return void
      */
-    public function setDateHour(string $dateHour): void
+    public function setAppointment(string $appointment): void
     {
-        $this->dateHour = $dateHour;
+        $this->appointment = $appointment;
     }
 
     // ID Clients
     //getter
     /**
-     * Cette méthode retourne la valeur de le idClients du rendez-vous
+     * Cette méthode retourne la valeur de le id_clients du rendez-vous
      * @return string
      */
-    public function getIdClients(): string
+    public function getId_clients(): string
     {
-        return $this->idClients;
+        return $this->id_clients;
     }
 
     //setter
     /**
-     * Cette méthode hydrate le idClients du rendez-vous
-     * @param string $idClients
+     * Cette méthode hydrate le id_clients du rendez-vous
+     * @param string $id_clients
      * 
      * @return void
      */
-    public function setIdClients(string $idClients): void
+    public function setId_clients(string $id_clients): void
     {
-        $this->idClients = $idClients;
+        $this->id_clients = $id_clients;
     }
 
 
@@ -108,17 +108,17 @@ class Appointment
     public function add(): bool
     {
         // Connexion à la base de données
-        if (!isset($db)) {$db = dbConnect();}
+        $db = Database::connect();
 
         // Requête SQL
-        $sql = 'INSERT INTO `appointments` (`dateHour`, `idClients`) 
-                VALUES (:dateHour, :idClients)
+        $sql = 'INSERT INTO `appointments` (`appointment`, `id_clients`) 
+                VALUES (:appointment, :id_clients)
                 ;';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
-        $sth->bindValue(':dateHour',    $this->dateHour);
-        $sth->bindValue(':idClients',   $this->idClients);
+        $sth->bindValue(':appointment',    $this->appointment);
+        $sth->bindValue(':id_clients',   $this->id_clients);
 
         // Exécuter la requête
         $sth->execute();
@@ -142,15 +142,16 @@ class Appointment
      */
     public static function get(int|null $idAppointment = null): array|bool
     {
-        // Connexion à la base de données
         // Connexion à la base de donnée
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `id`, `dateHour`, `idClients`
-                FROM `appointments`'.
-                ($idAppointment) ? 'WHERE `id` = :id': ''
-                . 'ORDER BY lastname';
+        $sql = 'SELECT `appointments`.`id`, `appointment`, `lastname`, `firstname`, `email`, `phone`, `clients`.`id` AS idClients
+                FROM `appointments`
+                JOIN `clients`
+                ON `clients`.`id` = `appointments`.`id_clients`'.
+                (($idAppointment) ? ' WHERE `id` = :id': '')
+                . ' ORDER BY lastname;';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue s'il y en a
         $sth = $db->prepare($sql);
@@ -176,14 +177,14 @@ class Appointment
         // Connexion à la base de donnée
         $db = Database::connect();
         $sql = 'UPDATE `appointments`
-                SET `dateHour` = :dateHour,
-                    `idClients` = :idClients
+                SET `appointment` = :appointment,
+                    `id_clients` = :id_clients
                 WHERE `id` = :id
                 ;';
 
         $sth = $db->prepare($sql);
-        $sth->bindValue(':dateHour',    $this->dateHour,    PDO::PARAM_STR);
-        $sth->bindValue(':idClients',   $this->idClients,   PDO::PARAM_STR);
+        $sth->bindValue(':appointment',    $this->appointment,    PDO::PARAM_STR);
+        $sth->bindValue(':id_clients',   $this->id_clients,   PDO::PARAM_STR);
         $sth->bindValue(':id',          $this->id,          PDO::PARAM_INT);
         $sth->execute();
 
@@ -218,13 +219,14 @@ class Appointment
     }
 
     // IS NOT EXIST
-    public static function isExist($dateHour): bool
+    public static function isExist($appointment): bool
     {
         // Connexion à la base de donnée
         $db = Database::connect();
-        $sql = "SELECT `dateHour`, `idClients`
+        
+        $sql = "SELECT `appointment`, `id_clients`
                 FROM `appointments`
-                WHERE   `dateHour`  =   '$dateHour'
+                WHERE   `appointment`  =   '$appointment'
                     ;";
         $sth = $db->prepare($sql);
         $sth->execute();
@@ -237,7 +239,7 @@ class Appointment
     {
         // Connexion à la base de donnée
         $db = Database::connect();
-        $sql = "SELECT `dateHour`, `idClients`
+        $sql = "SELECT `appointment`, `id_clients`
                 FROM `appointments`
                 WHERE   `id`  =   :idAppointment
                 ;";
@@ -253,9 +255,9 @@ class Appointment
     {
         // Connexion à la base de donnée
         $db = Database::connect();
-        $sql = "SELECT `idClients`
+        $sql = "SELECT `id_clients`
                 FROM `appointments`
-                WHERE   `idClients`  =   :idPatient
+                WHERE   `id_clients`  =   :idPatient
                 ;";
         $sth = $db->prepare($sql);
         $sth->bindValue(':idPatient', $idPatient, PDO::PARAM_INT);
