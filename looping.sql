@@ -10,6 +10,7 @@ CREATE TABLE clients(
    updated_at DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    deleted_at DATETIME,
    validated_at DATETIME,
+   adminADMIN BOOLEAN NOT NULL,
    PRIMARY KEY(id)
 );
 

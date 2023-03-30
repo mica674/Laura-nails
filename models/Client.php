@@ -14,6 +14,8 @@ class Client
     private string $created_at;
     private string $updated_at;
     private string $deleted_at;
+    private string $validated_at;
+    private bool $adminADMIN;
 
     // METHODES
     // ?MAGIQUES
@@ -186,6 +188,72 @@ class Client
     }
 
 
+
+    // ---------- CREATED AT ----------
+    // getter
+    public function getCreated_at(): string
+    {
+        return $this->created_at;
+    }
+
+    // setter
+    public function setCreated_at(string $created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    // ---------- UPDATED AT ----------
+    // getter
+    public function getUpdated_at(): string
+    {
+        return $this->updated_at;
+    }
+
+    // setter
+    public function setUpdated_at(string $updated_at): void
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    // ---------- DELETED AT ----------
+    // getter
+    public function getDeleted_at(): string
+    {
+        return $this->deleted_at;
+    }
+
+    // setter
+    public function setDeleted_at(string $deleted_at): void
+    {
+        $this->deleted_at = $deleted_at;
+    }
+
+    // ---------- VALIDATED AT ----------
+    // getter
+    public function getValidated_at(): string
+    {
+        return $this->validated_at;
+    }
+
+    // setter
+    public function setValidated_at(string $validated_at): void
+    {
+        $this->validated_at = $validated_at;
+    }
+
+    // ---------- adminADMIN ----------
+    // getter
+    public function getAdminADMIN(): string
+    {
+        return $this->adminADMIN;
+    }
+
+    // setter
+    public function setAdminADMIN(string $adminADMIN): void
+    {
+        $this->adminADMIN = $adminADMIN;
+    }
+
     // ? CRUD FUNCTIONS
     // !ADD - Ajouter un client à la base de données
     /**
@@ -198,10 +266,15 @@ class Client
     public function add(): bool
     {
         // Connexion à la base de données
-            $db = Database::connect();
+        $db = Database::connect();
         // Requête SQL
-        $sql = 'INSERT INTO `clients` (`lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`) 
+        if ($this->birthdate == '') {
+            $sql = 'INSERT INTO `clients` (`lastname`, `firstname`, `email`, `password`, `phone`) 
+                VALUES (:lastname, :firstname, :email, :password, :phone);';
+        } else {
+            $sql = 'INSERT INTO `clients` (`lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`) 
                 VALUES (:lastname, :firstname, :email, :password, :phone, :birthdate);';
+        }
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
@@ -210,7 +283,8 @@ class Client
         $sth->bindValue(':email',       $this->email,       PDO::PARAM_STR);
         $sth->bindValue(':password',    $this->password,    PDO::PARAM_STR);
         $sth->bindValue(':phone',       $this->phone,       PDO::PARAM_STR);
-        $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR);
+
+        ($this->birthdate) ? $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR) : '';
 
         // Exécuter la requête 
         $sth->execute();
@@ -237,19 +311,47 @@ class Client
     public static function get(int|null $id = null): array|object|bool
     {
         // Connexion à la base de données
-            $db = Database::connect();
+        $db = Database::connect();
 
         // Requête SQL
         $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
                 FROM `clients`' .
             (($id) ? 'WHERE `id` = :id' : '')
             . ' ORDER BY `lastname`;';
-            // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
-            $sth = $db->prepare($sql);
-            (($id) ? ($sth->bindValue(':id', $id, PDO::PARAM_INT)) : '');
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
+        $sth = $db->prepare($sql);
+        (($id) ? ($sth->bindValue(':id', $id, PDO::PARAM_INT)) : '');
         // Exécuter la requête
         $sth->execute();
         $result = ($id) ? ($sth->fetch()) : ($sth->fetchAll());
+        // retourner l'objet $result contenant les informations du client
+        return $result;
+    }
+
+    // *GETByMail _ Récupère toutes les informations d'un client avec son email
+    /**
+     * Cette fonction permet de récupérer toutes les informations d'un client grace à son email
+     * Elle attend un paramètre en entrée (format string) OBLIGATOIRE, qui est l'email du client ciblé et retourne un tableau (array) avec ses informations
+     * 
+     * @param string $email
+     * 
+     * @return object|bool
+     */
+    public static function getByEmail($email): object|bool
+    {
+        // Connexion à la base de données
+        $db = Database::connect();
+
+        // Requête SQL
+        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`, `validated_at`, `adminADMIN`
+                FROM `clients`
+                WHERE `email` = :email;';
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':email', $email);
+        // Exécuter la requête
+        $sth->execute();
+        $result = $sth->fetch();
         // retourner l'objet $result contenant les informations du client
         return $result;
     }
@@ -265,7 +367,7 @@ class Client
     public function update(): bool
     {
         // Connexion à la base de données
-            $db = Database::connect();
+        $db = Database::connect();
 
         // Requête SQL
         $sql =  'UPDATE `clients`
@@ -300,7 +402,7 @@ class Client
      */
     public static function delete($idClient): bool
     {
-            $db = Database::connect();
+        $db = Database::connect();
         $sql = 'DELETE
                 FROM `clients`
                 WHERE `id` = :id;
@@ -328,25 +430,23 @@ class Client
      * 
      * @return bool
      */
-    public static function isClientExist($lastname, $firstname, $email, $birthdate): bool
+    public static function isClientExist($lastname, $firstname, $email): bool
     {
         // Connexion à la base de données
-            $db = Database::connect();
+        $db = Database::connect();
 
         // Requête SQL
-        $sql = "SELECT `lastname`, `firstname`, `email`, `birthdate`
+        $sql = "SELECT `lastname`, `firstname`, `email`
                 FROM `clients`
                 WHERE   `lastname`  =   :lastname
                     AND `firstname` =   :firstname
                     AND `email`     =   :email
-                    AND `birthdate` =   :birthdate
                 ;";
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
         $sth->bindValue(':lastname', $lastname);
         $sth->bindValue(':firstname', $firstname);
         $sth->bindValue(':email', $email);
-        $sth->bindValue(':birthdate', $birthdate);
 
         // Executer la requête et retourner l'état de l'opération (true si un client avec ces 4 informations existe déjà, sinon false)
         $sth->execute();
@@ -354,6 +454,7 @@ class Client
         return !empty($result);
     }
 
+    // IS ID EXIST - Controler si un ID existe dans la table clients
     /**
      * Cette fonction permet de contrôler si un id de client existe
      * Elle attend un paramètre d'entrée (format int), l'id a tester, et retourne un booleen true si l'id existe sinon false
@@ -364,7 +465,7 @@ class Client
     public static function isIdExist(int $id): bool
     {
         // Connexion à la base de données
-            $db = Database::connect();
+        $db = Database::connect();
 
         // Requête SQL
         $sql = "SELECT `id`
@@ -381,4 +482,26 @@ class Client
         $result = $sth->rowCount();
         return !empty($result);
     }
+
+    public static function validateMail(string $email): bool
+    {
+        // Connexion à la base de données
+        $db = Database::connect();
+
+        // Requête SQL
+        $sql = "UPDATE `clients`
+                    SET `validated_at` = NOW()
+                    WHERE   `email`  =   :email
+                    ;";
+
+        // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':email', $email);
+
+        // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
+    }
+
 }

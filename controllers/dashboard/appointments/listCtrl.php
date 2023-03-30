@@ -1,11 +1,6 @@
 <?php
-session_start();
-
-// !CONSTANTS
-require_once(__DIR__ . '/../../../config/constants.php');
-
-// !FLASH
-require_once(__DIR__ . '/../../../helpers/flash.php');
+// !INIT
+require_once(__DIR__ . '/../../../config/initDashboard.php');
 
 
 // !MODEL
@@ -24,5 +19,5 @@ include(__DIR__ . '/../../../views/dashboard/appointments/list.php');
 
 
 // !FOOTER
-$jsToCall = 'clientList';
+$jsToCall = 'appointmentsList';
 include(__DIR__ . '/../../../views/dashboard/templates/footer.php');

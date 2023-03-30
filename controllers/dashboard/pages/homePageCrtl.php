@@ -1,7 +1,8 @@
 <?php
 
-// CONSTANTES
-require_once(__DIR__ . '/../../../config/constants.php');
+// !INIT
+require_once(__DIR__ . '/../../../config/initDashboard.php');
+
 
 var_dump($_FILES['carouselImage']??'');
 

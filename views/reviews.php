@@ -6,7 +6,7 @@
         <div class="reviewCard mb-2">
             <div class="row reviewRow align-items-center">
                 <div class="reviewNickname ms-3 col-5">
-                    <p class="mb-0 ms-2"><?= Client::get($comment->id_users)->firstname ?></p>
+                    <p class="mb-0 ms-2"><?= Client::get($comment->id_clients)->firstname ?></p>
                 </div>
                 <div class="reviewDate col-5 offset-1">
                     <p class="mb-0 ms-2"><?=$comment->title?><small class="d-none d-md-inline ms-5"><?= datefmt_format(DATE_FORMAT_HOUR, strtotime($comment->created_at)) ?></small></p>

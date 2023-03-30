@@ -18,7 +18,7 @@
                 <td><a href="/Dashboard/EditClient?id=<?= $client->id ?>"><i class="fa-regular fa-user"></i></a><?= $client->firstname ?></td>
                 <td class="text-center"><a href="mailto:<?= $client->email ?>"><i class="fa-regular fa-envelope"></i></a></td>
                 <td class="text-center"><a class="text-decoration-none" href="tel:<?= $client->phone ?>"><?= $client->phone ?></a></td>
-                <td class="text-center d-none d-sm-table-cell"><?= datefmt_format(DATE_FORMAT, strtotime($client->birthdate)) ?></td>
+                <td class="text-center d-none d-sm-table-cell"><?= datefmt_format(DATE_FORMAT, strtotime($client->birthdate??'')) ?></td>
                 <td class="text-center"><a href="/Dashboard/Clients/Edit?id=<?= $client->id ?>"><i class="fa-solid fa-pen"></i></a> &emsp;
                     <button type="button" class="text-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $client->id ?>" data-lastname="<?= $client->lastname ?>" data-firstname="<?= $client->firstname ?>" data-email="<?=$client->email?>"> 
                         <i class="fa-solid fa-trash"></i>

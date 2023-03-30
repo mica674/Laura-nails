@@ -1,13 +1,10 @@
 <?php
-session_start();
+// !INIT
+require_once(__DIR__ . '/../../config/initDashboard.php');
 
-// !CONSTANTS
-require_once(__DIR__ . '/../../config/constants.php');
-// !FLASH
-require_once(__DIR__ . '/../../helpers/flash.php');
 
-$linkCss = 'client';
 // !HEADER
+$linkCss = 'client';
 include(__DIR__ . '/../../views/dashboard/templates/header.php');
 
 FLASH::flash();

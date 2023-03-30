@@ -11,9 +11,9 @@
             <select name="idClients" id="client" required>
                 <?php
                 foreach ($clients as $client) { ?>
-                    <option value="<?= $client->id ?>"><?= $client->lastname . '--' . $client->firstname . '--' . $client->email ?></option>
+                    <option value="<?= $client->id ?>" <?=($idClients ?? false == $client->id)?'selected':''?>><?= $client->lastname . '--' . $client->firstname . '--' . $client->email ?></option>
                 <?php } ?>
-                <option value="0" selected>--Choisir un client--</option>
+                <option value="0" <?=($idClients??false)?'':'selected'?>>--Choisir un client--</option>
             </select>
             <small <?= ($error['idClients'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['idClients'] ?? '' ?></small>
             <fieldset class="appointmentFieldset">

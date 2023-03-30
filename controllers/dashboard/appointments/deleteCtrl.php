@@ -1,22 +1,19 @@
 <?php
 
-// !CONSTANTS
-require_once(__DIR__ . '/../../../config/constants.php');
-
-// !FLASH
-require_once(__DIR__ . '/../../../helpers/flash.php');
+// !INIT
+require_once(__DIR__ . '/../../../config/initDashboard.php');
 
 // !MODELS
-require_once(__DIR__ . '/../../../models/Client.php');
+require_once(__DIR__ . '/../../../models/Appointment.php');
 
-$idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+$idAppointment = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 
-if (!Client::isIdExist($idClient)) {
-    Flash::flash('clientDeleted', 'Le client que vous essayez de supprimer n\'existe pas', FLASH_WARNING);
-    header('Location: /Dashboard/Clients/List');die;
+if (!Appointment::isIdExist($idAppointment)) {
+    Flash::flash('appointmentDeleted', 'Le rendez-vous que vous essayez de supprimer n\'existe pas', FLASH_WARNING);
+    header('Location: /Dashboard/Appointments/List');die;
 }else {
-    if(Client::delete($idClient)){
-        Flash::flash('clientDeleted', 'Le client a bien été supprimé', FLASH_SUCCESS);
-        header('Location: /Dashboard/Clients/List');die;
+    if(Appointment::delete($idAppointment)){
+        Flash::flash('appointmentDeleted', 'Le rendez-vous a bien été supprimé', FLASH_SUCCESS);
+        header('Location: /Dashboard/Appointments/List');die;
     };
 }

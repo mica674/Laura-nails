@@ -136,11 +136,11 @@ class Appointment
      * Cette fonction permet de récupérer toutes les informations d'un rendez-vous si $id est renseigné
      * OU toutes les informations de tous les rendez-vous si AUCUN $id n'est renseigné.
      * Elle attend un paramètre en entrée (format int) FACULTATIF, qui est l'id du rendez-vous ciblé et retourne un tableau (array) avec ses informations
-     * @param int|bool $idAppointment
+     * @param int|null $idAppointment
      * 
-     * @return array|bool
+     * @return object|array|bool
      */
-    public static function get(int|null $idAppointment = null): array|bool
+    public static function get(int|null $idAppointment = null): object|array|bool
     {
         // Connexion à la base de donnée
         $db = Database::connect();
@@ -150,7 +150,7 @@ class Appointment
                 FROM `appointments`
                 JOIN `clients`
                 ON `clients`.`id` = `appointments`.`id_clients`'.
-                (($idAppointment) ? ' WHERE `id` = :id': '')
+                (($idAppointment) ? ' WHERE `appointments`.`id` = :id': '')
                 . ' ORDER BY lastname;';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue s'il y en a
@@ -158,7 +158,8 @@ class Appointment
         ($idAppointment) ? $sth->bindValue(':id', $idAppointment, PDO::PARAM_INT) : '';
         // Exécuter la requête
         $sth->execute();
-        $results = $sth->fetchAll();
+        // var_dump($sth->fetch());die;
+        ($results = ($idAppointment)?$sth->fetch():$sth->fetchAll());
         // retourner l'objet $result contenant les informations du client
         return $results;
     }
@@ -223,7 +224,7 @@ class Appointment
     {
         // Connexion à la base de donnée
         $db = Database::connect();
-        
+
         $sql = "SELECT `appointment`, `id_clients`
                 FROM `appointments`
                 WHERE   `appointment`  =   '$appointment'

@@ -49,15 +49,29 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/Contact">Contact</a>
                         </li>
-                        <li class="d-flex justify-content-center mx-lg-2">
-                            <a class="loginButton d-flex align-items-center" href="/Inscription">Inscription</a>
-                        </li>
-                        <li class="d-flex justify-content-center me-lg-2">
-                            <a class="loginButton d-flex align-items-center" href="/Connexion">Connexion</a>
-                        </li>
-                        <li class="d-flex justify-content-center me-lg-2">
-                            <a class="loginButton d-flex align-items-center" href="/Dashboard">Dashboard</a>
-                        </li>
+                        <?php
+                        if ($clientConnected && !$adminConnected) {
+                        ?>
+                                <li class="d-flex justify-content-center mx-lg-2">
+                                    <a class="loginButton d-flex align-items-center" href="/Deconnexion">Déconnexion</a>
+                                </li>
+                                <?php
+                            } elseif($clientConnected && $adminConnected) { ?>
+                                <li class="d-flex justify-content-center me-lg-2">
+                                    <a class="loginButton d-flex align-items-center" href="/Dashboard">Dashboard</a>
+                                </li>
+                                <li class="d-flex justify-content-center mx-lg-2">
+                                    <a class="loginButton d-flex align-items-center" href="/Deconnexion">Déconnexion</a>
+                                </li>
+                            <?php 
+                        } else { ?>
+                            <li class="d-flex justify-content-center mx-lg-2">
+                                <a class="loginButton d-flex align-items-center" href="/Inscription">Inscription</a>
+                            </li>
+                            <li class="d-flex justify-content-center me-lg-2">
+                                <a class="loginButton d-flex align-items-center" href="/Connexion">Connexion</a>
+                            </li>
+                        <?php  } ?>
                     </ul>
                 </div>
             </div>

@@ -15,12 +15,12 @@
         ?>
             <tr class="my-3 trClient<?= ($nbLine % 2) + 1 ?>">
             <td class="tdAppointment text-center"><?=datefmt_format(DATE_FORMAT_HOUR, strtotime($appointment->appointment))?></td>
-                <td class="tdAppointment tdName"><a href="/EditPatient?id=<?=$appointment->idClients?>"><i class="fa-regular fa-user"></i></a> <?=$appointment->lastname?></td>
-                <td class="tdAppointment tdName"><a href="/EditPatient?id=<?=$appointment->idClients?>"><i class="fa-regular fa-user"></i></a> <?=$appointment->firstname?></td>
+                <td class="tdAppointment tdName"><a href="/Dashboard/Clients/Edit?id=<?=$appointment->idClients?>"><i class="fa-regular fa-user"></i></a> <?=$appointment->lastname?></td>
+                <td class="tdAppointment tdName"><a href="/Dashboard/Clients/Edit?id=<?=$appointment->idClients?>"><i class="fa-regular fa-user"></i></a> <?=$appointment->firstname?></td>
                 <td class="tdAppointment text-center"><a href="mailto:<?=$appointment->email?>"><i class="fa-regular fa-envelope"></i></a></td>
                 <td class="tdAppointment text-center"><a href="tel:<?=$appointment->phone?>"><?=$appointment->phone?></a></td>
-                <td class="text-center"><a href="/Dashboard/Appointments/Edit?id=<?= $appointment->idClients ?>"><i class="fa-solid fa-pen"></i></a> &emsp;
-                    <button type="button" class="text-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $appointment->id ?>" data-lastname="<?= $appointment->lastname ?>" data-firstname="<?= $appointment->firstname ?>" data-email="<?=$appointment->email?>"> 
+                <td class="text-center"><a href="/Dashboard/Appointments/Edit?id=<?= $appointment->id ?>"><i class="fa-solid fa-pen"></i></a> &emsp;
+                    <button type="button" class="text-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $appointment->id ?>" data-lastname="<?= $appointment->lastname ?>" data-firstname="<?= $appointment->firstname ?>" data-date="<?=$appointment->appointment?>"> 
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>

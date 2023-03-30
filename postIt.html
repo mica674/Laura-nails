@@ -53,28 +53,39 @@ Intégration page dashboard clients
 <!--* - Controller du delete -->
 
 Intégration page dashboard appointments
-    <!--* - intégration pages ADD et LIST -->
-    - Nettoyage/validation ADD
-    - Model Client CRUD complet A tester
-    - envoi en bdd ADD
-    - récupérer via Get -> LIST
-    - Intégration edit
-    - JS pour EDIT couleur et affichage de la touche enregistrer
-    - Modale pour confirmer la suppression
-    - Intégration edit
-    - Controller du delete
+<!--* - intégration pages ADD et LIST -->
+<!--* - Nettoyage/validation ADD -->
+<!--* - Model Client CRUD complet A tester -->
+<!--* - envoi en bdd ADD -->
+<!--* - récupérer via Get -> LIST -->
+<!--* - Intégration edit -->
+<!--* - JS pour EDIT couleur et affichage de la touche enregistrer -->
+<!--* - Modale pour confirmer la suppression -->
+<!--* - Intégration edit -->
+<!--* - Controller du delete -->
 
 Intégration page dashboard slots
-    <!-- - intégration pages ADD et LIST -->
-    <!-- - Nettoyage/validation ADD -->
-    <!-- - Model Client CRUD complet A tester -->
-    <!-- - envoi en bdd ADD -->
-    <!-- - récupérer via Get -> LIST -->
-    <!-- - Intégration edit -->
-    <!-- - JS pour EDIT couleur et affichage de la touche enregistrer -->
-    <!-- - Modale pour confirmer la suppression -->
-    <!-- - Intégration edit -->
-    <!-- - Controller du delete -->
+<!--* - intégration pages ADD et LIST -->
+<!--* - Nettoyage/validation ADD -->
+<!--* - Model Client CRUD complet A tester -->
+<!--* - envoi en bdd ADD -->
+<!--* - récupérer via Get -> LIST -->
+<!--* - Intégration edit -->
+<!--* - JS pour EDIT couleur et affichage de la touche enregistrer -->
+<!--* - Modale pour confirmer la suppression -->
+<!--* - Intégration edit -->
+<!--* - Controller du delete -->
+
+
+inscription/connexion
+<!--* - nettoyer/valider données ADD -->
+<!--* - hashage password -->
+<!--* - mise en session -->
+- 
+- case pour rester connecté
+- mise en session ou en cookies selon la case coché ou non
+
+
 
 Finir intégration rendez vous
 - checkbox prestations créées avec PHP via la bdd
@@ -82,6 +93,18 @@ Finir intégration rendez vous
 <!--* - Heure/minutes sélectionnables avec ce qui est mis en base de données -->
 HOME faire une boucle pour les slides du carrousel
 HOME hover styles des touches
+<!--* fichier INIT pour les controllers de dashboard (constants, flash, session start) -->
+
+Intégration page mot de passe oublié
+- envoi de email
+- input email
+- controler si l email exist avant
+- > intégration modification du mot de passe
+    - nouveau mot de passe
+    - confirmation
+    - nettoyage validation comparaison
+    - update bdd
+    - renvoi page connexion
 
 <!-- ? Controllers -->
 
@@ -94,7 +117,8 @@ if ($id = Patient::getid == false) // Exemple pour les controle de l'ID et affec
 fonction explode(separateur, string, limit optionnelle) pour séparer date et heure
 attribut autofocus pour les formulaires d'inscription et de connexion
 Attribut title pour les info bulle des inputs
-bdd -> on update timestamp pour le updated_at
+<!--* bdd -> on update timestamp pour le updated_at -->
 password_verify
 phpmailer
 jwt
+php doc model USER dernières méthodes

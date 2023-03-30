@@ -113,3 +113,7 @@ small{
     background-color: #484848;
     color: #fbbc04;
 }
+
+#stayConnected{
+    width: 1rem!important;
+}

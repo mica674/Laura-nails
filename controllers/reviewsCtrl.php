@@ -1,9 +1,8 @@
 <?php
 
-// !CONSTANTES
-require_once(__DIR__ . '/../config/constants.php');
-// !FLASH
-require_once(__DIR__ . '/../helpers/flash.php');
+// !INIT
+require_once(__DIR__ . '/../config/init.php');
+
 // !MODELS
 require_once(__DIR__ . '/../models/Comment.php');
 require_once(__DIR__ . '/../models/Client.php');
@@ -68,7 +67,7 @@ try {
         if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
 
             // !------------------------------
-            $id_users = 1; //!Pour les essais
+            $id_clients = 1; //!Pour les essais à modifier quand la connexion fonctionne
             // !------------------------------
 
             // Nouvelle instance de la class Comment
@@ -77,7 +76,7 @@ try {
             $review->setTitle($title);
             $review->setContent($message);
             $review->setQuotations($quotations);
-            $review->setId_users($id_users);
+            $review->setId_clients($id_clients);
 
             // Ajouter le commentaire à la base de donnée & affecter le résultat de l'exécution de la requête à $result
             $result = $review->add();

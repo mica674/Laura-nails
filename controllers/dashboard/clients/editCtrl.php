@@ -1,10 +1,6 @@
 <?php
-session_start();
-// !CONSTANTS
-require_once(__DIR__ . '/../../../config/constants.php');
-
-// !FLASH
-require_once(__DIR__ . '/../../../helpers/flash.php');
+// !INIT
+require_once(__DIR__ . '/../../../config/initDashboard.php');
 
 // !MODEL
 require_once(__DIR__ . '/../../../models/Client.php');

@@ -1,23 +1,32 @@
 <?php
-session_start();
-// !CONSTANTS
-require_once(__DIR__ . '/../../../config/constants.php');
+// !INIT
+require_once(__DIR__ . '/../../../config/initDashboard.php');
 
-// !FLASH
-require_once(__DIR__ . '/../../../helpers/flash.php');
-
-// !MODEL
+// !MODELS
 require_once(__DIR__ . '/../../../models/Client.php');
+require_once(__DIR__ . '/../../../models/Appointment.php');
+require_once(__DIR__ . '/../../../models/Slot.php');
 
 // Récupérer l'id passé en GET avec le filtrage au passge
-$idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
-if (empty($idClient)) {
-    Flash::flash('clientEdited', 'Ce client n\'existe pas', FLASH_DANGER);
-    header('Location: /Dashboard/Clients/List');
+$idAppointment = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+if (empty($idAppointment)) {
+    Flash::flash('appointmentEdited', 'Ce rendez-vous n\'existe pas', FLASH_DANGER);
+    header('Location: /Dashboard/Appointments/List');
     exit;
-}else {
+} else {
     // Appel de la méthode static get de la class Client pour récupérer les infos du client 
-    $client = Client::get($idClient);
+    $appointmentToEdit = Appointment::get($idAppointment);
+    // Explode le rendez-vous pour séparer le jour, l'heure et les minutes
+    $appointmentExplode = explode(' ', $appointmentToEdit->appointment);
+    $appointmentDay = $appointmentExplode[0];
+    $appointmentHour = explode(':', $appointmentExplode[1])[0];
+    $appointmentMinutes = explode(':', $appointmentExplode[1])[1];
+
+    // GET ALL CLIENTS
+    $clients = Client::get();
+
+    // GET ALL SLOTS
+    $slots = Slot::get();
 }
 
 
@@ -26,126 +35,104 @@ if (empty($idClient)) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyées en POST
 
 
-    // ?LASTNAME
+    // ?idClients
     // Nettoyage de tout les caractères ASCII 1 à 32
-    $lastname = trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS));
-
+    $idClients = intval(filter_input(INPUT_POST, 'idClients', FILTER_SANITIZE_NUMBER_INT));
 
     // Validation des données
-    if (empty($lastname)) { //Si $lastname est vide
-        $error['lastname'] = 'Vous n\'avez pas renseigné le "Nom"'; // Message d'erreur lastname vide
-    } elseif (!filter_var($lastname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_LASTNAME . '/')))) { //Sinon si $lastname ne correspond pas à un format lastname
-        $error['lastname'] = 'Le nom ne correspond pas au format requis pour un nom'; //Message d'erreur lastname format
-    }
-    // Mettre en minuscule tous les caractères et en majuscule le premier caractère
-    if (empty($error['lastname'])) {
-        $lastname = ucfirst(strtolower($lastname));
+    if (empty($idClients)) { //Si $idClients est vide
+        $error['idClients'] = 'Vous n\'avez pas renseigné de "Patient"'; // Message d'erreur $idClients vide
+    } elseif (!filter_var($idClients, FILTER_VALIDATE_INT)) { //Sinon si $idClients ne correspond pas à un format int
+        $error['idClients'] = 'le nom du patient ne correspond pas au format requis pour un patient'; //Message d'erreur idClients format
     }
 
-
-    // ?FIRSTNAME
+    // ?day
     // Nettoyage de tout les caractères ASCII 1 à 32
-    $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
-
-
-    // Validation des données
-    if (empty($firstname)) { //Si $firstname est vide
-        $error['firstname'] = 'Vous n\'avez pas renseigné le "Prénom"'; // Message d'erreur firstname vide
-    } elseif (!filter_var($firstname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_FIRSTNAME . '/')))) { //Sinon si $firstname ne correspond pas à un format firstname
-        $error['firstname'] = 'Le prénom ne correspond pas au format requis pour un prénom'; //Message d'erreur firstname format
-    }
-    // Mettre en minuscule tous les caractères et en majuscule le premier caractère
-    if (empty($error['firstname'])) {
-        $firstname = ucfirst(strtolower($firstname));
-    }
-
-
-    // ?EMAIL
-    // Double nettoyage de l'email
-    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-
+    $day = trim(filter_input(INPUT_POST, 'day', FILTER_SANITIZE_SPECIAL_CHARS));
 
     // Validation des données
-    if (empty($email)) { //Si $email est vide
-        $error['email'] = 'L\'email n\'est pas renseigné'; //Message d'erreur EMAIL
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { //Sinon si $email ne correspond pas à un format d'adresse email
-        $error['email'] = 'L\'email ne correspond pas au format requis pour un email'; //Message d'erreur EMAIL format
-    }
-    // Mettre en minuscule tous les caractères
-    if (empty($error['email'])) {
-        $email = strtolower($email);
+    if (empty($day)) { //Si $day est vide
+        $error['day'] = 'Vous n\'avez pas renseigné de "jour" pour le rendez-vous !'; // Message d'erreur $day vide
+    } elseif (!filter_var($day, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_APPOINTMENT_DAY . '/')))) { //Sinon si $day ne correspond pas à un format YYYY-MM-DD
+        $error['day'] = 'Le jour du rendez-vous ne correspond pas au format requis pour un rendez-vous !'; //Message d'erreur day format
     }
 
-
-    // ?PHONE NUMBER
-    // Nettoyage des caractères autres que les chiffres & '+' & '-'
-    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT);
-
+    // ?hour
+    // Nettoyage de tout les caractères ASCII 1 à 32
+    $hour = trim(filter_input(INPUT_POST, 'hour', FILTER_SANITIZE_NUMBER_INT));
+    $minutes = trim(filter_input(INPUT_POST, 'minutes', FILTER_SANITIZE_NUMBER_INT));
 
     // Validation des données
-    if (!empty($phone)) {
-        if (!filter_var($phone, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_PHONE_NUMBER . '/')))) { //Sinon si $phone ne correspond pas à un format numéro de téléphone
-            $error["phone"] = 'Le téléphone ne correspond pas au format requis pour un numéro de téléphone francais'; //Message d'erreur numéro de téléphone format
+    if (empty($hour)) { //Si $hour est vide
+        $error['hour'] = 'Vous n\'avez pas renseigné d\'"heure" pour le rendez-vous !'; // Message d'erreur $hour vide
+    }
+    if (empty($minutes)) {
+        $error['minutes'] = 'Vous n\avez pas renseigné les "minutes" pour le rendez-vous'; // Message d'erreur $minutes vide
+    }
+    if (!isset($error['hour']) && !isset($error['minutes'])) { // Si pas d'erreur pour $hour et $minutes 
+
+        // Concaténer heure et minutes
+        $hourMinutes = $hour . ':' . $minutes;
+        if (!filter_var($hourMinutes, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_SLOT . '/')))) { //Sinon si $hourMinutes ne correspond pas à un format HH:ii
+            $error['minutes'] = 'Les heures et minutes du rendez-vous ne correspondent pas au format requis pour un rendez-vous !'; //Message d'erreur hourMinutes format
         }
     }
 
+    if (!isset($error['day']) && !isset($error['hour']) && !isset($error['minutes'])) {
+        // Concaténer day & hourMinutes to day.T.hourMinutes
+        $appointmentDate = $day . 'T' . $hourMinutes;
 
-    // ?BIRTHDATE
-    // Nettoyage des caractères autres que les chiffres & '+' & '-'
-    $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_NUMBER_INT));
-
-
-    if (empty($birthdate)) { //Si $birthdate est vide
-        $error["birthdate"] = 'La date de naissance n\'est pas renseigné'; //Message d'erreur birthdate
-    } elseif (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
-        $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur birthdate
+        if (strtotime($appointmentDate) < strtotime('now')) {
+            $error['minutes'] = 'La date du rendez-vous ne doit pas être antérieure à aujourd\'hui et à l\'instant présent !';
+        }
     }
 
+    // Vérification que le rendez-vous n'existe pas déja avec la méthode isExist()
+    if (Appointment::isExist($appointmentDate)) { //Si le rendez-vous existe déjà en base de données
+        Flash::flash('appointmentAdded', 'Ce rendez-vous est déjà pris !', FLASH_DANGER); //Création d'un flash avec le message à afficher 
+        $error['minutes'] = 'Ce rendez-vous est déjà pris !';
+    }
+
+    if (!empty($error)) {
+        var_dump($error);
+        die;
+    }
 
     // ?Compare with previous values and new values
-    if (($lastname != $client->lastname
-            ||  $firstname != $client->firstname
-            ||  $email != $client->email
-            ||  $birthdate != $client->birthdate
+    if (($idClients != $appointmentToEdit->idClients
+            ||  $appointmentDate != $appointmentToEdit->appointment
         )
-        && Client::isClientExist($lastname, $firstname, $email, $birthdate)
+        && Appointment::isExist($appointmentDate)
     ) {
-        $error['exist'] = 'Un client a déjà ces informations dans la base de données ! ';
-        Flash::flash('clientEdited', 'Un client a déjà ces informations dans la base de données !', FLASH_DANGER);
+        $error['exist'] = 'Un rendez-vous a déjà ces informations dans la base de données ! ';
+        Flash::flash('appointmentEdited', 'Un rendez-vous a déjà ces informations dans la base de données !', FLASH_DANGER);
     }
+
     // ?No error -> redirect to clientsList page
     if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
 
 
-        $client = new client();
-        $client->setId(intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
-        $client->setLastname($lastname);
-        $client->setFirstname($firstname);
-        $client->setEmail($email);
-        if (isset($phone)) {
-            $client->setPhone($phone);
-        } else {
-            $client->setPhone('');
-        }
-        $client->setBirthdate($birthdate);
+        // Nouvelle instance de la class Appointment
+        $appointment = new Appointment();
+        // Hydratation de l'objet $appointment
+        $appointment->setId($idAppointment);
+        $appointment->setAppointment($appointmentDate);
+        $appointment->setId_clients($idClients);
+
         // Vérification que le client existe pas déja avec la méthode notAlreadyExist()
         // Ajouter du client à la base de donnée & affecter le résultat de l'exécution de la requête à $result
-        $result = $client->update();
+        $result = $appointment->update();
         if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
-            Flash::flash('clientEdited', 'La modification du client a échoué', FLASH_DANGER);
+            Flash::flash('appointmentEdited', 'La modification du rendez-vous a échoué', FLASH_DANGER);
         } else { //Si pas d'erreur retour à la page d'Accueil
-            Flash::flash('clientEdited', 'La modification du client a réussi, bravo', FLASH_SUCCESS);
-            header('Location: /Dashboard/Clients/List');
+            Flash::flash('appointmentEdited', 'La modification du rendez-vous a réussi, bravo', FLASH_SUCCESS);
+            header('Location: /Dashboard/Appointments/List');
             die;
         }
     }
 
-
     // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
-
-
-
 
 
 // !HEADER
@@ -154,10 +141,10 @@ include(__DIR__ . '/../../../views/dashboard/templates/header.php');
 
 // !VIEW
 FLASH::flash();
-include(__DIR__ . '/../../../views/dashboard/clients/edit.php');
+include(__DIR__ . '/../../../views/dashboard/appointments/edit.php');
 
 
 // !FOOTER
 // Fichiers JS à appeler dans le footer
-$jsToCall = 'clientEdit';
+$jsToCall = 'appointmentEdit';
 include(__DIR__ . '/../../../views/dashboard/templates/footer.php');

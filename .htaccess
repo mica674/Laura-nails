@@ -3,7 +3,8 @@ RewriteEngine on
 # Main pages
 RewriteRule ^Accueil$ /controllers/homeCtrl.php [L]
 RewriteRule ^Inscription$ /controllers/registrerCtrl.php [L]
-RewriteRule ^Connexion$ /controllers/loginCtrl.php [L]
+RewriteRule ^Connexion$ /controllers/logInCtrl.php [L]
+RewriteRule ^Deconnexion$ /controllers/logOutCtrl.php [L]
 RewriteRule ^Lieux_et_horaires$ /controllers/placeDateCtrl.php [L]
 RewriteRule ^Prestations$ /controllers/prestationsCtrl.php [L]
 RewriteRule ^Rendez_vous$ /controllers/rendezVousCtrl.php [L]

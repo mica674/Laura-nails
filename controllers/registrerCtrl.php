@@ -1,13 +1,14 @@
 <?php
 
-// !CONSTANTS
-require_once(__DIR__ . '/../config/constants.php');
+// !INIT
+require_once(__DIR__ . '/../config/init.php');
 
 // !MODELS
 require_once(__DIR__ . '/../models/Client.php');
 
-try {
 
+try {
+    
     // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
     // *PUIS REDIRECTION SI DONNEES VALIDEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyées en POST
@@ -22,7 +23,7 @@ try {
         } elseif (!(filter_var($lastname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_LASTNAME . '/'))))) { //Sinon si $lastname ne correspond pas à un format lastname
             $error["lastname"] = 'Le nom ne correspond pas au format requis pour un nom'; //Message d'erreur lastname format
         }
-        if (empty($error['lastname'])){
+        if (empty($error['lastname'])) {
             $lastname = ucfirst(strtolower($lastname));
         }
 
@@ -36,7 +37,7 @@ try {
         } elseif (!(filter_var($firstname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_FIRSTNAME . '/'))))) { //Sinon si $firstname ne correspond pas à un format firstname
             $error["firstname"] = 'Le nom ne correspond pas au format requis pour un prénom'; //Message d'erreur firstname format
         }
-        if (empty($error['firstname'])){
+        if (empty($error['firstname'])) {
             $firstname = ucfirst(strtolower($firstname));
         }
 
@@ -50,7 +51,7 @@ try {
         } elseif (!(filter_var($email, FILTER_VALIDATE_EMAIL))) { //Sinon si $email ne correspond pas à un format d'adresse email
             $error["email"] = 'L\'email ne correspond pas au format requis pour un email'; //Message d'erreur EMAIL format
         }
-        if (empty($error['email'])){
+        if (empty($error['email'])) {
             $email = strtolower($email);
         }
 
@@ -89,44 +90,76 @@ try {
         // ?BIRTHDATE
         // Nettoyage des caractères autres que les chiffres & '+' & '-'
         $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_NUMBER_INT));
-
+        
         // Validation de la date de naissance
-        if (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
-            $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur url format
+        if (!empty($birthdate)) {
+            if (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
+                $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur url format
+            }
         }
+    
+        // ?IS EXIST
+        if (Client::isClientExist($lastname, $firstname, $email)) { //Si le client existe déjà en base de données
+            Flash::flash('clientAdded', 'Ce client existe déjà !', FLASH_DANGER); //Création d'un flash avec le message à afficher 
+            $error['global'] = 'Ce client existe déjà !';
+        }
+        
 
         // ?No error -> redirect to login page
         if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
-            // Enregistrement des données en cookies
-            setcookie('lastname', $lastname, time() + 86400 * 365 * 2);
-            setcookie('firstname', $firstname, time() + 86400 * 365 * 2);
-            setcookie('email', $email, time() + 86400 * 365 * 2);
-            setcookie('password', $password, time() + 86400 * 365 * 2);
-            setcookie('phoneNumber', $phoneNumber, time() + 86400 * 365 * 2);
+            // // Enregistrement des données en cookies
+            // setcookie('lastname', $lastname, time() + 86400 * 365 * 2);
+            // setcookie('firstname', $firstname, time() + 86400 * 365 * 2);
+            // setcookie('email', $email, time() + 86400 * 365 * 2);
+            // setcookie('password', $password, time() + 86400 * 365 * 2);
+            // setcookie('phoneNumber', $phoneNumber, time() + 86400 * 365 * 2);
 
-            if (isset($birthdate)) {
-                setcookie('birthdate', $birthdate, time() + 86400 * 365 * 2);
+            // if (isset($birthdate)) {
+            //     setcookie('birthdate', $birthdate, time() + 86400 * 365 * 2);
+            // }
+
+
+            $client = new Client();
+            $client->setFirstname($firstname);
+            $client->setLastname($lastname);
+            $client->setEmail($email);
+            $client->setPassword($passwordHash);
+            $client->setPhone($phoneNumber);
+
+            $client->setBirthdate($birthdate);
+
+            
+            if($client->add()){
+                $to = $email;
+                $subject = 'Email de validation';
+                $link = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/controllers/validateMailCtrl.php?email=' . $email;
+                $mailBody = 'Bonjour<br>Merci de valider votre compte en cliquant sur ce <a href="' . $link . '">lien</a>!';
+                mail($to, $subject, $mailBody);
+
+                Flash::flash('emailValidated', 'Un email vous a été envoyé à l\'adresse indiquée, merci de confirmer votre inscription en cliquant sur le lien fourni', FLASH_INFO);
+                // Flash::flash('clientAdded', 'Le client a été ajouté avec succès', FLASH_SUCCESS);
+                header('Location: /Connexion');
+                die;
             }
-            header('location: /Connexion?regist1=' . $lastname . '&regist2=' . $firstname . '&regist3=' . $email . '&regist4=' . $password . '&regist5=' . $phoneNumber . '&regist6=' . $birthdate ?? '');
-            die;
         }
 
         // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 
     // Si au moins un des cookies en lien avec l'inscription existe alors les affectés à la variable correspondante
-    if (isset($_COOKIE['lastname']) || isset($_COOKIE['firstname']) || isset($_COOKIE['email']) || isset($_COOKIE['password']) || isset($_COOKIE['$phoneNumber']) || isset($_COOKIE['$birthdate'])) {
-        $lastname = $_COOKIE['lastname'] ?? '';
-        $firstname = $_COOKIE['firstname'] ?? '';
-        $email = $_COOKIE['email'] ?? '';
-        $password = $_COOKIE['password'] ?? '';
-        $phoneNumber = $_COOKIE['phoneNumber'] ?? '';
-        $birthdate = $_COOKIE['birthdate'] ?? '';
-    }
+    // if (isset($_COOKIE['lastname']) || isset($_COOKIE['firstname']) || isset($_COOKIE['email']) || isset($_COOKIE['password']) || isset($_COOKIE['$phoneNumber']) || isset($_COOKIE['$birthdate'])) {
+    //     $lastname = $_COOKIE['lastname'] ?? '';
+    //     $firstname = $_COOKIE['firstname'] ?? '';
+    //     $email = $_COOKIE['email'] ?? '';
+    //     $password = $_COOKIE['password'] ?? '';
+    //     $phoneNumber = $_COOKIE['phoneNumber'] ?? '';
+    //     $birthdate = $_COOKIE['birthdate'] ?? '';
+    // }
 } catch (\Throwable $th) {
     include(__DIR__ . '/../views/templates/header.php');
     include(__DIR__ . '/../views/templates/errors.php');
     include(__DIR__ . '/../views/templates/footer.php');
+    die;
 }
 
 // !HEADER
@@ -134,9 +167,8 @@ $linkCss = 'registration';
 include_once(__DIR__ . '/../views/templates/header.php');
 
 // !VIEW
+Flash::flash();
 include_once(__DIR__ . '/../views/registrer.php');
-
-
 
 // !FOOTER
 include_once(__DIR__ . '/../views/templates/footer.php');
