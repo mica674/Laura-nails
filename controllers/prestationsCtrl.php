@@ -3,7 +3,11 @@
 // !INIT
 require_once(__DIR__ . '/../config/init.php');
 
+// !MODELS
+require_once(__DIR__ . '/../models/Benefit.php');
 
+// Récupérer toutes les prestations
+$prestations = Benefit::get();
 
 // !HEADER
 $linkCss = 'prestations';

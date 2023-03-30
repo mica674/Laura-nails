@@ -30,7 +30,7 @@ define('REGEXP_TITLE', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôö
 // Message (REVIEW)
 define('REGEXP_MESSAGE',      '^(([\W\w]){1,500})$');
 // Description(PRESTATIONS)
-define('REGEXP_DESCRIPTION', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-&#;]{1,40})$');
+define('REGEXP_DESCRIPTION', '^([a-zA-Z0-9àáâäãåčćèéêëėìíîïńòóôöõøùúûüūÿýżźñçčšžÀÁÂÄÃÅĆČĖÈÉÊËÌÍÎÏŃÒÓÔÖÕØÙÚÛÜŪŸÝŻŹÑÇŒÆČŠŽ\' \-&#;]{1,60})$');
 // Duration/Price (PRESTATIONS)
 define('REGEXP_PRICE', '^(([1-9]{1})\d{0,2})$');
 // Appointment  

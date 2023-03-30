@@ -1,4 +1,4 @@
-/* GLOBAL */
+    /* GLOBAL */
 /* Appel d'une nouvelle police de caractères qui s'appelera 'Belleza' */
 @font-face {
     font-family: Belleza;
@@ -216,7 +216,7 @@ h1{
 .contentCard{
     background-color: #484848;
     border-radius: 0.3rem;
-    width: 60vw;
+    width: 70%;
     margin: 1rem;
     padding: 0.5rem;
 }

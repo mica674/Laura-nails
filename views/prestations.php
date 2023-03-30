@@ -2,10 +2,8 @@
     <main>
         <!-- Section 1 - Photos de prestations en tête -->
         <section class="prestationsImgPres">
-            <img class="imgPrestaPres" id="imgPrestaPres1" src="/public/assets/img/photos/pexels-photo-1373748.jpeg"
-                alt="image vernis">
-            <img class="imgPrestaPres rounded-circle" id="imgPrestaPres2" src="/public/assets/img/photos/pexels-photo-3557600.jpeg"
-                alt="image ongle">
+            <img class="imgPrestaPres" id="imgPrestaPres1" src="/public/assets/img/photos/pexels-photo-1373748.jpeg" alt="image vernis">
+            <img class="imgPrestaPres rounded-circle" id="imgPrestaPres2" src="/public/assets/img/photos/pexels-photo-3557600.jpeg" alt="image ongle">
         </section>
         <!-- Section 1 end -->
 
@@ -47,106 +45,38 @@
         </div>
 
         <section id="section3">
+            <div class="container-fluid">
+                <div class="row justify-content-evenly">
 
-            <!-- Nouvelle card de prestation -->
-            <div class="cardPresta cardPresta1">
-                <div class="titleCard mb-5">
-                    <h3 class="fw-bold">Pose vernis couleur</h3>
-                </div>
-                <div class="contentCard py-3">
-                    <p>Pour des ongles parfaitement vernis en moins de 15 min !</p>
-                    <p>Une pose de vernis parfaite</p>
-                    <div class="d-flex justify-content-between">
-                        <span>15min</span>
-                        <span>10€</span>
-                    </div>
-                </div>
-            </div>
+                    <?php
+                    foreach ($prestations as $prestation) { ?>
 
-            <!-- Séparation de prestation -->
-            <div class="hr my-1">
-                <hr>
-            </div>
+                        <!-- Nouvelle card de prestation -->
+                        <div class="col-12 col-md-5 my-2 cardPresta cardPresta<?= $prestation->id ?>">
+                            <div class="titleCard mb-5">
+                                <h3 class="fw-bold"><?= $prestation->title ?></h3>
+                            </div>
+                            <div class="contentCard py-3">
+                                <p><?= explode(';', $prestation->description)[0] ?></p>
+                                <p><?= explode(';', $prestation->description)[1] ?></p>
+                                <div class="d-flex justify-content-between">
+                                    <span><?= $prestation->duration ?>min</span>
+                                    <span><?= $prestation->price ?>€</span>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Nouvelle card de prestation -->
-            <div class="cardPresta cardPresta2">
-                <div class="titleCard mb-5">
-                    <h3 class="fw-bold">Pose vernis soak-off</h3>
-                </div>
-                <div class="contentCard py-3">
-                    <p>Des ongles impeccables pendant 15 jours !</p>
-                    <p>Catalyse rapidement sous lampe UV</p>
-                    <div class="d-flex justify-content-between">
-                        <span>35min</span>
-                        <span>29€</span>
-                    </div>
+                        <!-- Séparation de prestation -->
+                        <div class="d-md-none hr my-1">
+                            <hr>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
 
-            <!-- Séparation de prestation -->
-            <div class="hr my-1">
-                <hr>
-            </div>
-
-            <!-- Nouvelle card de prestation -->
-            <div class="cardPresta cardPresta3">
-                <div class="titleCard mb-5">
-                    <h3 class="fw-bold">Soin des ongles</h3>
-                </div>
-                <div class="contentCard py-3">
-                    <p>5 min et vos cuticules seront nourris et vos ongles blanchis.</p>
-                    <p>Pour avoir de jolies mains</p>
-                    <div class="d-flex justify-content-between">
-                        <span>5min</span>
-                        <span>10€</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Séparation de prestation -->
-            <div class="hr my-1">
-                <hr>
-            </div>
-
-            <!-- Nouvelle card de prestation -->
-            <div class="cardPresta cardPresta4">
-                <div class="titleCard mb-5">
-                    <h3 class="fw-bold">Pose french peel-off</h3>
-                </div>
-                <div class="contentCard py-3">
-                    <p>Pour des ongles parfaitement vernis en moins de 15 min !</p>
-                    <p>Une pose de vernis parfaite</p>
-                    <div class="d-flex justify-content-between">
-                        <span>15min</span>
-                        <span>10€</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Séparation de prestation -->
-            <div class="hr my-1">
-                <hr>
-            </div>
-
-            <!-- Nouvelle card de prestation -->
-            <div class="cardPresta cardPresta5">
-                <div class="titleCard mb-5">
-                    <h3 class="fw-bold">Pose vernis french</h3>
-                </div>
-                <div class="contentCard py-3">
-                    <p>Pour des ongles parfaitement vernis en moins de 15 min !</p>
-                    <p>Une pose de vernis parfaite</p>
-                    <div class="d-flex justify-content-between">
-                        <span>15min</span>
-                        <span>10€</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Séparation de prestation -->
-            <div class="hr my-1">
-                <hr>
-            </div>
 
         </section>
         <!-- Fin de section des prestations -->
