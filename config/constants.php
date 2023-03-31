@@ -81,3 +81,9 @@ define('FLASH_SUCCESS', 'success');
 define('LAURA_EMAIL', 'maurouard.laura.10@gmail.com');
 define('LAURA_ADDRESS', '122 RUE EDOUARD CANNEVEL 76510 SAINT NICOLAS D\'ALIERMONT');
 define('LAURA_PHONE', '0612345678');
+
+
+// ?IMAGES
+define('MAX_SIZE_FILE', 5*1024*2014);
+define('IMAGE_EXTENSIONS', ['image/jpeg', 'image/png']);
+define('LOCATION_CAROUSEL', $_SERVER['DOCUMENT_ROOT'].'/public/assets/img/carousel/');

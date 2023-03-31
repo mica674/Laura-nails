@@ -42,7 +42,7 @@ try {
             $error['day'] = 'Le jour du rendez-vous ne correspond pas au format requis pour un rendez-vous !'; //Message d'erreur day format
         }
 
-        // ?hour
+        // ?hour/minutes
         // Nettoyage de tout les caractères ASCII 1 à 32
         $hour = trim(filter_input(INPUT_POST, 'hour', FILTER_SANITIZE_NUMBER_INT));
         $minutes = trim(filter_input(INPUT_POST, 'minutes', FILTER_SANITIZE_NUMBER_INT));
@@ -65,7 +65,7 @@ try {
         
         if (!isset($error['day']) && !isset($error['hour']) && !isset($error['minutes'])) {
             // Concaténer day & hourMinutes to day.T.hourMinutes
-            $appointmentDate = $day.'T'.$hourMinutes;
+            $appointmentDate = $day.' '.$hourMinutes;
             
             if (strtotime($appointmentDate) < strtotime('now')) {
                 $error['minutes'] = 'La date du rendez-vous ne doit pas être antérieure à aujourd\'hui et à l\'instant présent !';

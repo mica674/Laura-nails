@@ -7,11 +7,11 @@
     <!-- Section 1 end -->
 
     <div class="container-fluid">
-        <div class="row justify-content-around">
-            <div class="col-12 col-lg-5">
+        <div class="row flex-column">
+            <div class="col-12 col-lg-5 mx-auto">
                 <!-- Section 2 - Informations d'utilisation -->
                 <section id="section2">
-                    <div class="place m-2 py-3 text-center">
+                    <div class="place m-2 py-3 text-center rounded">
                         <p class="mb-0">Pour prendre rendez-vous :</p>
                         <ol>
                             <li>Sélectionner le(s) prestations souhaitée(s) <br> Attention aux temps des prestations !</li>
@@ -28,92 +28,38 @@
                     <hr>
                 </div>
             </div>
-            <div class="col-12 col-lg-5 p-0">
+            <div class="col-12 col-lg-5 p-0 mx-auto">
                 <!-- Section 3 - Liste des prestations à cocher -->
-                <form class="d-flex flex-column justify-content-center" method="post">
-                    <fieldset class="d-flex justify-content-center">
-                        <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
-                            <div class="labels">
-                                <div class="ms-2"><label for="colorPolish">Pose vernis couleur</label></div>
-                                <div class="d-flex justify-content-between ms-2">
-                                    <div class="">15min</div>
-                                    <div class="ms-5">10€</div>
+                <form class="d-flex flex-column justify-content-center w-auto" method="post">
+                    <?php foreach ($prestations as $prestation) {?>
+
+                        <fieldset class="d-flex justify-content-center">
+                            <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
+                                <div class="labels">
+                                    <div class="ms-2"><label for="colorPolish"><?=$prestation->title?></label></div>
+                                    <div class="d-flex justify-content-between ms-2">
+                                        <div class=""><?=$prestation->duration?>min</div>
+                                        <div class="ms-5"><?=$prestation->price?>€</div>
+                                    </div>
+                                </div>
+                                <div class="my-auto me-3">
+                                    <input type="checkbox" name="prestaCheck[]" class="form-check-input" value="<?=$prestation->id?>" id="presta<?=$prestation->id?>">
                                 </div>
                             </div>
-                            <div class="my-auto me-3">
-                                <input type="checkbox" name="prestaCheck[]" class="form-check-input" value="colorPolish" id="colorPolish">
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="d-flex justify-content-center">
-                        <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
-                            <div class="labels">
-                                <div class="ms-2"><label for="colorPolish">Pose french soak-off</label></div>
-                                <div class="d-flex justify-content-between ms-2">
-                                    <div class="">35min</div>
-                                    <div class="ms-5">29€</div>
-                                </div>
-                            </div>
-                            <div class="my-auto me-3">
-                                <input type="checkbox" name="prestaCheck[]" class="form-check-input" value="frenchSoakOff" id="frenchSoakOff">
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="d-flex justify-content-center">
-                        <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
-                            <div class="labels">
-                                <div class="ms-2"><label for="colorPolish">Soin des ongles</label></div>
-                                <div class="d-flex justify-content-between ms-2">
-                                    <div class="">5min</div>
-                                    <div class="ms-5">4€</div>
-                                </div>
-                            </div>
-                            <div class="my-auto me-3">
-                                <input type="checkbox" name="prestaCheck[]" class="form-check-input" value="nailCare" id="nailCare">
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="d-flex justify-content-center">
-                        <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
-                            <div class="labels">
-                                <div class="ms-2"><label for="colorPolish">French peel-off</label></div>
-                                <div class="d-flex justify-content-between ms-2">
-                                    <div class="">35min</div>
-                                    <div class="ms-5">29€</div>
-                                </div>
-                            </div>
-                            <div class="my-auto me-3">
-                                <input type="checkbox" name="prestaCheck[]" class="form-check-input" value="frenchPeelOff" id="frenchPeelOff">
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="d-flex justify-content-center">
-                        <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
-                            <div class="labels">
-                                <div class="ms-2"><label for="colorPolish">Pose vernis french</label></div>
-                                <div class="d-flex justify-content-between ms-2">
-                                    <div class="">25min</div>
-                                    <div class="ms-5">13€</div>
-                                </div>
-                            </div>
-                            <div class="my-auto me-3">
-                                <input type="checkbox" name="prestaCheck[]" class="form-check-input" value="frenchPolish" id="frenchPolish">
-                            </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                        <?php }?>
 
                     <!-- Section 3 - END -->
                     <!-- Section 4 - Choix de la date et heure du rdv -->
 
-                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center mt-3 ">
                                 <!-- Jour/mois/année -->
-                                <input type="date" name="appointment" id="appointment" class="inputForm" required value="<?= date('Y-m-d') ?>" min="<?= date('Y-m-d') ?>">
+                                <input type="date" name="appointment" id="appointment" class="inputForm rounded" required value="<?= date('Y-m-d') ?>" min="<?= date('Y-m-d') ?>">
                             </div>
-                            <div class="col-12 d-flex justify-content-evenly my-3">
+                            <div class="col-12 d-flex flex-column w-50 mx-auto my-3">
                                 <!-- 2 select (Heure et minutes(step 5min)) -->
-                                <select class="pe-2" name="hour" id="hour">
+                                <select class="pe-2 my-2 rounded" name="hour" id="hour">
                                     <option value="">Choisissez une heure</option>
                                     <?php
                                     foreach ($slots as $slot) {
@@ -129,7 +75,7 @@
                                     }
                                     ?>
                                 </select>
-                                <select name="minutes" id="minutes">
+                                <select class="my-2 rounded" name="minutes" id="minutes">
                                     <option value="">Choisissez un créneau</option>
                                     <?php
                                     $min = 0;
@@ -143,8 +89,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <input type="submit" value="Demande un rendez-vous" class="btnRdvSubmit">
+                    <input type="submit" value="Demander un rendez-vous" class="btnRdvSubmit mx-auto rounded" id="btnRdvSubmit">
                 </form>
             </div>
         </div>
