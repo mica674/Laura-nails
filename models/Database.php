@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../config/constants.php');
 class Database
 {
 
-    private static object $pdo;
+    private static $pdo;
     
 
     public static function connect()

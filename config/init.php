@@ -8,20 +8,22 @@ require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../config/constants.php');
 
 if (isset($_SESSION['client'])) {
-    $clientConnected=true;
+    $methodToConnect = 'session';
+    $clientConnected = true;
     if (!$_SESSION['client']->adminADMIN) {
         $adminConnected = false;
-    }else{
+    } else {
         $adminConnected = true;
     }
 } elseif (isset($_COOKIE['client'])) {
-    $clientConnected=true;
+    $methodToConnect = 'cookie';
+    $clientConnected = true;
     if (!unserialize($_COOKIE['client'])->adminADMIN) {
         $adminConnected = false;
-    }else{
-        $adminConnected =true;
+    } else {
+        $adminConnected = true;
     }
 } else {
-    $clientConnected=false;
+    $clientConnected = false;
     $adminConnected = false;
 }

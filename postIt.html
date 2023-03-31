@@ -26,7 +26,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Ajouter table contact dans la bdd -->
 <!--* - Créer Model Contact setter/getter/crud -->
 
-<!-- !Intégration page dashboard prestations ADD & LIST & EDIT (& DELETE): -->
+<!-- !Intégration page dashboard prestations : -->
 <!--* - Intégration via cards formulaires ajout et à la liste -->
 <!--* - intégration pages ADD et LIST -->
 <!--* - description en 2 parties séparées ';' Deuxième partie optionnelle dans le formulaire -->
@@ -38,6 +38,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - JS pour EDIT couleur et affichage de la touche enregistrer -->
 <!--* - Modale pour confirmer la suppression -->
 <!--* - Controller du delete -->
+- (Optionnel) Ajouter une prestation Autre avec un input -> Filtrer/valider pour faire une proposition, qui n'est pas présente dans la liste  des prestations, lors de la demande du rdv
 
 <!-- !Intégration page dashboard clients -->
 <!--* - Intégration via cards formulaires ajout et à la liste -->
@@ -65,8 +66,10 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Modale pour confirmer la suppression -->
 <!--* - Intégration edit -->
 <!--* - Controller du delete -->
-- Ajouter une liste de rendez-vous à valider
+- Ajouter une liste de rendez-vous à valider (ligne rouge = attente de validation et trié par cette condition puis par date desc)
 - A la validation envoyer un email de confirmation avec le récap complet du rendez-vous
+- Ajouter une colonne avec les prestations sélectionnées 
+- Edit ajouter modification des prestations (limité à 3) 1 minimum obligatoire
 
 <!-- !Intégration page dashboard slots -->
 <!--* - intégration pages ADD et LIST -->
@@ -104,7 +107,9 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - checkbox prestations créées avec PHP via la bdd -->
 <!--* - Revoir la mise en page FRONT -->
 <!--* - Heure/minutes sélectionnables avec ce qui est mis en base de données -->
-- Filtrer et valider les données des checkbox et de la demande de rdv (date, heure, minutes)
+<!--* - Filtrer et valider les données des checkbox et de la demande de rdv (date, heure, minutes) -->
+<!--* - Créer le model AppointmentBenefit -->
+<!--* - Model -> construct fait le ADD et renvoi la réponse = 1 ligne dans le controller -->
 - Limiter à 3 prestations sélectionnées max
 
 <!-- !Intégration page Home -->
@@ -139,3 +144,11 @@ phpmailer
 jwt
 php doc model USER dernières méthodes
 <!--* fichier INIT pour les controllers de dashboard (constants, flash, session start) -->
+redirection vers la page connexion lorsqu'un utilisateur pas connecté tente de venir sur la page de rendez-vous/contact/avis
+Empecher l'admin de prendre rdv ????
+
+
+
+<!-- ? Fonctions ou idées à conserver -->
+break 2 : pour sortir de 2 niveaux de for/foreach/while/do-while/switch, le 2 est optionnel et vaut 1 par défaut
+explode($séparateur, $value) : créé un tableau avec les différentes parties de $value qui était séparées par le $séparateur 
