@@ -58,3 +58,33 @@ td>button{
     width: 3rem;
     
 }
+
+/* Couleur de l'enveloppe de l'email en fonction si l'inscription a été validé ou pas */
+.fa-envelope.noValidate{
+    color: red;
+}
+
+.fa-envelope.validate{
+    color: greenyellow;
+}
+
+.fa-envelope:hover{
+    color: #fbbc04;
+}
+
+#addClientBtn:hover{
+    color: #fbbc04!important;
+    background-color: #646464;
+}
+
+/* Champs de recherche */
+#live_search{
+    border-color: #fbbc04;
+}
+
+/* Nombre d'éléments à afficher */
+#itemsPerPage, #itemsPerPage:valid{
+    border-color: #fbbc04!important;
+    background-color: #242424;
+    color: white;
+}

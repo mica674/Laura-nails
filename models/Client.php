@@ -314,7 +314,7 @@ class Client
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`
+        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`, `validated_at`, `adminADMIN`
                 FROM `clients`' .
             (($id) ? 'WHERE `id` = :id' : '')
             . ' ORDER BY `lastname`;';
