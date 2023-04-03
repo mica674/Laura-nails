@@ -28,7 +28,6 @@
                 <button class="modifyBtn d-none" id="clientEditBtn">Enregistrer</button>
             </div>
 
-
         </form>
     </div>
 </main>

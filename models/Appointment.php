@@ -146,12 +146,12 @@ class Appointment
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `appointments`.`id`, `appointment`, `lastname`, `firstname`, `email`, `phone`, `clients`.`id` AS idClients
+        $sql = 'SELECT `appointments`.`id`, `appointment`, `appointments`.`validated_at`, `lastname`, `firstname`, `email`, `phone`, `clients`.`id` AS idClients
                 FROM `appointments`
                 JOIN `clients`
-                ON `clients`.`id` = `appointments`.`id_clients`'.
-                (($idAppointment) ? ' WHERE `appointments`.`id` = :id': '')
-                . ' ORDER BY lastname;';
+                ON `clients`.`id` = `appointments`.`id_clients`' .
+            (($idAppointment) ? ' WHERE `appointments`.`id` = :id' : '')
+            . ' ORDER BY `validated_at`, `appointment` DESC;';
 
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue s'il y en a
         $sth = $db->prepare($sql);
@@ -159,7 +159,34 @@ class Appointment
         // Exécuter la requête
         $sth->execute();
         // var_dump($sth->fetch());die;
-        ($results = ($idAppointment)?$sth->fetch():$sth->fetchAll());
+        ($results = ($idAppointment) ? $sth->fetch() : $sth->fetchAll());
+        // retourner l'objet $result contenant les informations du client
+        return $results;
+    }
+    // *GET _ Récupérer les prestations liées à un rendez-vous lié à l'id passé en paramètre
+
+    public static function getAppointmentsServices(int $idAppointment): array|bool
+    {
+        // Connexion à la base de donnée
+        $db = Database::connect();
+
+        // Requête SQL
+        $sql = 'SELECT `appointments`.`id`, `appointment`, `appointments`.`validated_at`, `appointments_services`.`id_services`, `services`.`title`
+                FROM `appointments`
+                JOIN `appointments_services`
+                ON `appointments`.`id` = `appointments_services`.`id_appointments`
+                JOIN `services`
+                ON `appointments_services`.`id_services` = `services`.`id`
+                WHERE `appointments`.`id` = :id
+                ORDER BY `services`.`title`;';
+
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue s'il y en a
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':id', $idAppointment, PDO::PARAM_INT);
+        // Exécuter la requête
+        $sth->execute();
+        // var_dump($sth->fetch());die;
+        $results = $sth->fetchAll();
         // retourner l'objet $result contenant les informations du client
         return $results;
     }
@@ -193,6 +220,23 @@ class Appointment
         $nbResults = $sth->rowCount();
         // Retourner l'état de l'opération (true si tout s'est bien passé, sinon false)
         return !empty($nbResults);
+    }
+
+    // VALIDATE
+    public static function validate($idAppointment): bool
+    {
+        // Connexion à la base de donnée
+        $db = Database::connect();
+        $sql = 'UPDATE `appointments` 
+                SET `validated_at` = NOW()
+                WHERE `id` = :id;
+                ;';
+
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':id', $idAppointment, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
     }
 
     // !DELETE

@@ -21,7 +21,7 @@
 
             <!-- Checkbox stay connected -->
             <div class="stayConnected d-flex align-items-center">
-                <input type="checkbox" class="mx-2" name="stayConnected" id="stayConnected" value="true"> Restés connecté
+                <input type="checkbox" class="mx-2" name="stayConnected" id="stayConnected" value="true">Se souvenir de moi
             </div>
 
 

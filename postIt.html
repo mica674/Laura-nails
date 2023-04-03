@@ -17,6 +17,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - nettoyage et validation des données ajouté par l'utilisateur à la soumission du formulaire -->
 <!--* - récupérer le nombre d'étoiles sélectionnées -->
 <!--* - envoyer les données en base de données -->
+- Prénom venant de la connexion
 
 <!-- !Intégration page contact : -->
 <!--* - Intégration HTML/CSS -->
@@ -54,7 +55,9 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Controller du delete -->
 <!--* - List-> background ligne verte quand email validé sinon rouge ou jaune en gardant une alternance de couleur entre 2 lignes proches + gestion du hover -->
 <!--* - Intégrer barre de recherche/pagination/Nombre d'éléments à afficher pour l'AJAX -->
-- AJAX champ de recherche clients !important
+<!--* - clique sur l'enveloppe -> ouvre modale = 2 choix envoyer un email ou valider l'adresse email -->
+- A l'ajout du client via le dashboard -> envoyer un email de confirmation
+- AJAX champ de recherche clients !important EN COURS Recherche OK/ Elements par page -> mettre sur event
 
 <!-- !Intégration page dashboard appointments -->
 <!--* - intégration pages ADD et LIST -->
@@ -67,10 +70,17 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Modale pour confirmer la suppression -->
 <!--* - Intégration edit -->
 <!--* - Controller du delete -->
-- Ajouter une liste de rendez-vous à valider (ligne rouge = attente de validation et trié par cette condition puis par date desc)
+<!--* - Ajouter une liste de rendez-vous à valider (ligne rouge = attente de validation et trié par cette condition puis par date desc) -->
+<!--* - Ajouter une colonne avec les prestations sélectionnées  -->
+- Edit ajouter modification des prestations (limité à 3) 1 minimum obligatoire (toutes les infos liées au rendez-vous dans l'edit)
+<!--* - Validation du rendez-vous en cliquant sur le bouton en forme de croix rouge à gauche -> modale de confirmation  -->
+<!--* - CTRL pour gérer la validation  -->
 - A la validation envoyer un email de confirmation avec le récap complet du rendez-vous
-- Ajouter une colonne avec les prestations sélectionnées 
-- Edit ajouter modification des prestations (limité à 3) 1 minimum obligatoire
+- Touche ajouter un rendez-vous modifier style
+- EDIT CSS checkbox prestation
+- ADD CSS COMPLET !
+- ADD JS limiter a 3 checkbox cochées
+- JS ajouter la gestion des checkbox
 
 <!-- !Intégration page dashboard slots -->
 <!--* - intégration pages ADD et LIST -->
@@ -89,7 +99,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - nettoyer/valider données ADD -->
 <!--* - hashage password -->
 <!--* - mise en session -->
-- 
+- Controler en JS que mots de passe et confirmation de mot de passe sont identiques
 <!--* - case pour rester connecté -->
 <!--* - mise en session ou en cookies selon la case coché ou non -->
 
@@ -111,7 +121,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Filtrer et valider les données des checkbox et de la demande de rdv (date, heure, minutes) -->
 <!--* - Créer le model AppointmentBenefit -->
 <!--* - Model -> construct fait le ADD et renvoi la réponse = 1 ligne dans le controller -->
-- Limiter à 3 prestations sélectionnées max
+- Limiter à 3 prestations sélectionnées max /PHP OK/ Le verrouiller en JS
 
 <!-- !Intégration page Home -->
 - Faire une boucle pour les slides du carrousel

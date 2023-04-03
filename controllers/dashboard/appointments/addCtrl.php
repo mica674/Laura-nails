@@ -7,6 +7,8 @@ require_once(__DIR__ . '/../../../config/initDashboard.php');
 require_once(__DIR__ . '/../../../models/Appointment.php');
 require_once(__DIR__ . '/../../../models/Client.php');
 require_once(__DIR__ . '/../../../models/Slot.php');
+require_once(__DIR__ . '/../../../models/Benefit.php');
+require_once(__DIR__ . '/../../../models/AppointmentBenefit.php');
 
 // GET ALL CLIENTS
 $clients = Client::get();
@@ -14,11 +16,29 @@ $clients = Client::get();
 // GET ALL SLOTS
 $slots = Slot::get();
 
+// GET ALL PRESTATIONS
+$prestations = Benefit::get();
+
 try {
 
     // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
     // *PUIS REDIRECTION SI DONNEES VALIDEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyées en POST
+
+        // ?prestations
+        $prestaChecked = filter_input(INPUT_POST, 'prestaCheck', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY);
+
+        if (is_null($prestaChecked) || empty($prestaChecked)) {
+            $error['presta'] = 'Veuillez sélectionner au moins 1 prestation';
+        } elseif (count($prestaChecked) > 3) {
+            $error['presta'] = 'Veuillez ne pas sélectionner plus de 3 prestations';
+        } elseif (count($prestaChecked) > 0) {
+            foreach ($prestaChecked as $presta) {
+                if (!Benefit::get($presta)) {
+                    $error['presta'] = 'Une prestation sélectionnée n\'a pas de correspondance dans la base de données';
+                }
+            }
+        }
 
         // ?idClients
         // Nettoyage de tout les caractères ASCII 1 à 32
@@ -60,13 +80,13 @@ try {
             $hourMinutes = $hour . ':' . $minutes;
             if (!filter_var($hourMinutes, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_SLOT . '/')))) { //Sinon si $hourMinutes ne correspond pas à un format HH:ii
                 $error['minutes'] = 'Les heures et minutes du rendez-vous ne correspondent pas au format requis pour un rendez-vous !'; //Message d'erreur hourMinutes format
-            } 
+            }
         }
-        
+
         if (!isset($error['day']) && !isset($error['hour']) && !isset($error['minutes'])) {
             // Concaténer day & hourMinutes to day.T.hourMinutes
-            $appointmentDate = $day.' '.$hourMinutes;
-            
+            $appointmentDate = $day . ' ' . $hourMinutes;
+
             if (strtotime($appointmentDate) < strtotime('now')) {
                 $error['minutes'] = 'La date du rendez-vous ne doit pas être antérieure à aujourd\'hui et à l\'instant présent !';
             }
@@ -77,9 +97,10 @@ try {
             Flash::flash('appointmentAdded', 'Ce rendez-vous est déjà pris !', FLASH_DANGER); //Création d'un flash avec le message à afficher 
             $error['minutes'] = 'Ce rendez-vous est déjà pris !';
         }
-        
+
         if (!empty($error)) {
-            var_dump($error);die;
+            var_dump($error);
+            die;
         }
 
         // ?No error -> redirect to list page

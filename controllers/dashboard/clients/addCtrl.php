@@ -85,12 +85,12 @@ try {
         // ?BIRTHDATE
         // Nettoyage des caractères autres que les chiffres & '+' & '-'
         $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_NUMBER_INT));
-
-        // Validation des données
-        if (empty($birthdate)) { //Si $birthdate est vide
-            $error["birthdate"] = 'La date de naissance n\'est pas renseigné'; //Message d'erreur birthdate
-        } elseif (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
-            $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur birthdate
+        
+        // Validation de la date de naissance
+        if (!empty($birthdate)) {
+            if (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
+                $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur url format
+            }
         }
 
         // Vérification que le client existe pas déja avec la méthode isExist()
@@ -113,6 +113,20 @@ try {
 
             // Ajouter le client à la base de donnée & affecter le résultat de l'exécution de la requête à $result
             $result = $client->add();
+
+            if($result){
+                $to = $email;
+                $subject = 'Email de validation';
+                $link = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/controllers/validateMailCtrl.php?email=' . $email;
+                $mailBody = 'Bonjour<br>Merci de valider votre compte en cliquant sur ce <a href="' . $link . '">lien</a>!';
+                mail($to, $subject, $mailBody);
+
+                Flash::flash('emailValidated', 'Un email a été envoyé à l\'adresse indiquée, le client doit confirmer lui-même son email', FLASH_INFO);
+                // Flash::flash('clientAdded', 'Le client a été ajouté avec succès', FLASH_SUCCESS);
+                header('Location: /Connexion');
+                die;
+            }
+
             if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
                 Flash::flash('clientAdded', 'Une erreur est survenue lors de l\'ajout du client à la base de données');
             } else { //Si pas d'erreur retour à la page d'Accueil

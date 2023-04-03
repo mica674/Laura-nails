@@ -67,11 +67,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
             // Mise en session de la connexion du client
             $_SESSION['client'] = $client;
         }
-    
+        
         // Message flash
         Flash::flash('clientConnected', 'Vous êtes connecté', FLASH_INFO);
-        header('Location: /Accueil');
-        die;
+        
+        if ($client->adminADMIN == 1) {
+            header('Location: /Dashboard');die;
+        } else {    
+            header('Location: /Accueil');
+            die;
+        }
     }
 
     // End if ($_SERVER['REQUEST_METHOD'] == 'POST')

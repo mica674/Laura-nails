@@ -3,9 +3,15 @@
 require_once(__DIR__ . '/../../../config/initDashboard.php');
 
 // !MODELS
-require_once(__DIR__ . '/../../../models/Client.php');
-require_once(__DIR__ . '/../../../models/Appointment.php');
 require_once(__DIR__ . '/../../../models/Slot.php');
+require_once(__DIR__ . '/../../../models/Client.php');
+require_once(__DIR__ . '/../../../models/Benefit.php');
+require_once(__DIR__ . '/../../../models/Appointment.php');
+require_once(__DIR__ . '/../../../models/AppointmentBenefit.php');
+
+// GET ALL PRESTATIONS
+$prestations = Benefit::get();
+
 
 // Récupérer l'id passé en GET avec le filtrage au passge
 $idAppointment = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
@@ -21,7 +27,12 @@ if (empty($idAppointment)) {
     $appointmentDay = $appointmentExplode[0];
     $appointmentHour = explode(':', $appointmentExplode[1])[0];
     $appointmentMinutes = explode(':', $appointmentExplode[1])[1];
-
+    
+    // GET ALL PRESTA CHECKED
+    $appointmentsServices = Appointment::getAppointmentsServices($idAppointment);
+    foreach ($appointmentsServices as $service) {
+        $prestaChecked[] = $service->id_services;
+    }
     // GET ALL CLIENTS
     $clients = Client::get();
 

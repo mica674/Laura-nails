@@ -67,7 +67,7 @@
                             <li class="nav-item dropend my-lg-3">
                                 <a class="nav-link dropdown-toggle fs-5" data-bs-target="dropdownAppointment" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-regular fa-calendar-check"></i>
-                                    <span class="ms-1 d-none d-sm-inline">Appointments</span>
+                                    <span class="ms-1 d-none d-sm-inline">Rendez-vous</span>
                                 </a>
                                 <div class="dropdown-menu text-end" id="dropdownAppointment">
                                     <a class="dropdown-item fs-5" href="/Dashboard/Appointments/Add">Ajouter</a>

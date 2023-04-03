@@ -328,7 +328,7 @@ class Client
         return $result;
     }
 
-    // *GETByMail _ Récupère toutes les informations d'un client avec son email
+    // *GET BY MAIL _ Récupère toutes les informations d'un client avec son email
     /**
      * Cette fonction permet de récupérer toutes les informations d'un client grace à son email
      * Elle attend un paramètre en entrée (format string) OBLIGATOIRE, qui est l'email du client ciblé et retourne un tableau (array) avec ses informations
@@ -337,7 +337,7 @@ class Client
      * 
      * @return object|bool
      */
-    public static function getByEmail($email): object|bool
+    public static function getByEmail(string $email): object|bool
     {
         // Connexion à la base de données
         $db = Database::connect();
@@ -355,6 +355,59 @@ class Client
         // retourner l'objet $result contenant les informations du client
         return $result;
     }
+
+    // *GET BY SEARCH
+    /**
+     * Cette fonction permet de récupérer tous les informations de tous les client ayant une correspondance avec la recherche
+     * Elle attend un paramètre en entrée (format string) OBLIGATOIRE, qui est la valeur du champ de recherche et retourne un tableau (array) avec les informations
+     * 
+     * @param string $search
+     * 
+     * @return array|bool
+     */
+    public static function getBySearch(string $search, int $limit = 0, int $offset = 0): array|bool
+    {
+        // Connexion à la base de données
+        $db = Database::connect();
+
+        // Requête SQL
+        if ($limit == 0) {
+            $sql = 'SELECT count(id) AS nbResultsSearch 
+            FROM `clients`
+            WHERE `lastname`      LIKE :search
+            OR `firstname`        LIKE :search
+            OR `email`            LIKE :search
+            OR `phone`            LIKE :search
+            OR `birthdate`        LIKE :search
+            ORDER BY `lastname`, `firstname`;';
+        } else {
+            
+            $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`, `validated_at`, `adminADMIN`
+                FROM `clients`
+                WHERE `lastname`      LIKE :search
+                OR `firstname`        LIKE :search
+                OR `email`            LIKE :search
+                OR `phone`            LIKE :search
+                OR `birthdate`        LIKE :search
+                ORDER BY `lastname`
+                LIMIT :limit OFFSET :offset
+                ;';
+        }
+
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':search', '%'.$search.'%');
+        if ($limit != 0) {
+            $sth->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
+        }
+        // Exécuter la requête
+        $sth->execute();
+        $result = $sth->fetchAll();
+        // retourner l'objet $result contenant les informations des clients correspondants à la recherche
+        return $result;
+    }
+
 
     // !UPDATE - Modifier un client dans la base de données
     /**
@@ -503,5 +556,4 @@ class Client
         $result = $sth->rowCount();
         return !empty($result);
     }
-
 }

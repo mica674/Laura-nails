@@ -28,8 +28,8 @@
             <input type="text" name="phone" id="phone" class="inputForm" placeholder="Numéro de téléphone (ex: 0612345678)" autocomplete="tel-local" maxlength="10" value="<?= $phone ?? '' ?>" pattern="<?= REGEXP_PHONE_NUMBER ?>">
             <small <?= ($error['phone'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['phone'] ?? '' ?></small>
             <!-- Birthday -->
-            <label for="birthdate" class="mt-2">Date de naissance <span class="registrationRequired">*</span></label>
-            <input type="date" name="birthdate" id="birthdate" class="inputForm" required autocomplete="bday" value="<?= $birthdate ?? '' ?>" min="<?= date('Y-m-d', time() - (86400 * 365 * 150)) ?>" max="<?= date('Y-m-d') ?>">
+            <label for="birthdate" class="mt-2">Date de naissance</label>
+            <input type="date" name="birthdate" id="birthdate" class="inputForm" autocomplete="bday" value="<?= $birthdate ?? '' ?>" min="<?= date('Y-m-d', time() - (86400 * 365 * 150)) ?>" max="<?= date('Y-m-d') ?>">
             <small <?= ($error['birthdate'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['birthdate'] ?? '' ?></small>
 
             <!-- Required fields informations -->

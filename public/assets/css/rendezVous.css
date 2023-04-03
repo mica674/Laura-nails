@@ -63,7 +63,6 @@ body{
     width: 80%;
 }
 
-
 /* Date heure demande de rendez vous */
 input#appointment{
     width: 50%;
@@ -78,10 +77,14 @@ input#appointment{
 
 select#hour, select#minutes{
     height: 2rem;
-    color: #fbbc04;
+    color: white;
     background-color: #484848;
     border: 1px solid #484848;
     /* box-shadow: rgba(255, 255, 255, 0.3) 0px 3px 10px 2px; */
+}
+#hour>option:hover{
+    color: #fbbc04;
+    background-color: #484848;
 }
 
 #btnRdvSubmit{

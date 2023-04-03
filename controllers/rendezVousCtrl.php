@@ -18,7 +18,7 @@ $slots = Slot::get();
 // Redirect if client is not connected
 if (!$clientConnected && !$adminConnected) {
     Flash::flash('forbiddenAccess', 'Il faut être connecté pour accéder à cette partie du site', FLASH_WARNING);
-    Flash::flash('accesInfo', 'Si n\'avez pas encore de compte, cliquez sur "Pas encore inscrit ?" et procédé à l\'inscription', FLASH_INFO);
+    Flash::flash('accesInfo', 'Si n\'avez pas encore de compte, cliquez sur "Pas encore inscrit ?" pour procéder à l\'inscription', FLASH_INFO);
     header('Location: /Connexion');
     die;
 } elseif ($adminConnected) {
@@ -41,9 +41,15 @@ try {
         // ?prestations
         $prestaChecked = filter_input(INPUT_POST, 'prestaCheck', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY);
 
-        foreach ($prestaChecked as $presta) {
-            if (!Benefit::get($presta)) {
-                $error['presta'] = 'Une prestation sélectionnée n\'a pas de correspondance dans la base de données';
+        if (is_null($prestaChecked) || empty($prestaChecked)) {
+            $error['presta'] = 'Veuillez sélectionner au moins 1 prestation';
+        } elseif (count($prestaChecked) > 3) {
+            $error['presta'] = 'Veuillez ne pas sélectionner plus de 3 prestations';
+        } elseif (count($prestaChecked) > 0) {
+            foreach ($prestaChecked as $presta) {
+                if (!Benefit::get($presta)) {
+                    $error['presta'] = 'Une prestation sélectionnée n\'a pas de correspondance dans la base de données';
+                }
             }
         }
 
@@ -65,7 +71,7 @@ try {
 
         // Validation des données
         if (empty($hour)) { //Si $hour est vide
-            $error['hour'] = 'Vous n\'avez pas renseigné d\'"heure" pour le rendez-vous !'; // Message d'erreur $hour vide
+            $error['hour'] = 'Vous n\'avez pas renseigné d"heure" pour le rendez-vous !'; // Message d'erreur $hour vide
         }
         if (empty($minutes)) {
             $error['minutes'] = 'Vous n\avez pas renseigné les "minutes" pour le rendez-vous'; // Message d'erreur $minutes vide
@@ -88,10 +94,10 @@ try {
             }
         }
 
-        if (!empty($error)) {
-            var_dump($error);
-            die;
-        }
+        // if (!empty($error)) {
+        //     var_dump($error);
+        //     die;
+        // }
 
         // ?No error -> redirect to list page
         if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
@@ -111,10 +117,10 @@ try {
             if (!$resultAppointment) { //Si une erreur est survenu pendant l'ajout à la base de données
                 Flash::flash('appointmentAdded', 'Une erreur est survenue lors de l\'ajout du rendez-vous à la base de données');
             } else { //Si pas d'erreur retour à la page liste des rendez-vous
-                
+
                 // Récupérer l'ID du rendez-vous qui vient d'être ajouté
                 $idAppointment = $dbh->lastInsertId();
-                
+
                 // Ajouter le rendez-vous avec ses prestations associées à la table appointments_services
                 foreach ($prestaChecked as $idPresta) {
                     $result = new AppointmentBenefit($idAppointment, $idPresta);
@@ -122,14 +128,14 @@ try {
                         break 1; //Sort du foreach dès qu'il y a une erreur sur le ADD
                     }
                 }
-                    if ($result && $resultAppointment) {
-                        $dbh->commit(); //Validation de la transaction
-                        Flash::flash('requestAppointment', 'Votre demande de rendez-vous a été transmise', FLASH_SUCCESS);
-                        header('Location: /Accueil');
-                        die;
-                    } else {
-                        throw new Exception("Une erreur est survenu lors de l'ajout des prestations sélectionnées au rendez-vous");
-                    }
+                if ($result && $resultAppointment) {
+                    $dbh->commit(); //Validation de la transaction
+                    Flash::flash('requestAppointment', 'Votre demande de rendez-vous a été transmise', FLASH_SUCCESS);
+                    header('Location: /Accueil');
+                    die;
+                } else {
+                    throw new Exception("Une erreur est survenu lors de l'ajout des prestations sélectionnées au rendez-vous");
+                }
             }
         }
         // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -139,7 +145,9 @@ try {
         // 1 id appmt sur plusieurs lignes, idem pour id services
     }
 } catch (\Throwable $th) {
-    $dbh->rollBack();
+    if (isset($dbh)) {
+        $dbh->rollBack();
+    }
     include(__DIR__ . '/../views/templates/header.php');
     include(__DIR__ . '/../views/templates/errors.php');
     include(__DIR__ . '/../views/templates/footer.php');
@@ -156,4 +164,5 @@ Flash::flash();
 include_once(__DIR__ . '/../views/rendezVous.php');
 
 // !FOOTER
+$jsToCall = 'rendezVous';
 include_once(__DIR__ . '/../views/templates/footer.php');
