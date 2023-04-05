@@ -2,40 +2,30 @@
         <section>
             <div id="carouselHomePage" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="3"
-                        aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="3" aria-label="Slide 4"></button>
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item carouselItem active">
-                        <img src="/public/assets/img/photos/pexels-photo-1373748.jpeg" class="d-block"
-                            alt="photo vernis à ongle violet">
+                        <img src="/public/assets/img/photos/pexels-photo-1373748.jpeg" class="d-block" alt="photo vernis à ongle violet">
                     </div>
                     <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/pexels-photo-963757.webp" class="d-block"
-                            alt="photo bougie tenue en main manucurée">
+                        <img src="/public/assets/img/photos/pexels-photo-963757.webp" class="d-block" alt="photo bougie tenue en main manucurée">
                     </div>
                     <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block"
-                            alt="mains manucurées en forme de cercle">
+                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block" alt="mains manucurées en forme de cercle">
                     </div>
                     <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block"
-                            alt="mains manucurées en forme de cercle">
+                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block" alt="mains manucurées en forme de cercle">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselHomePage"
-                    data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHomePage" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -63,10 +53,7 @@
                 </p>
             </div>
             <div class="maps">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d91551.4055165548!2d2.2744685879083786!3d48.88620652728419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1670922529724!5m2!1sfr!2sfr"
-                    style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d91551.4055165548!2d2.2744685879083786!3d48.88620652728419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1670922529724!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
         <!-- PLACE & DATE end -->
@@ -107,86 +94,44 @@
             </div>
             <!-- Affichage de commentaires déjà postés -->
             <div class="container">
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
+                <?php
+                foreach ($last5Comments as $comment) { ?>
+
+                    <div class="reviewCard mb-2">
+                        <div class="row reviewRow align-items-center">
+                            <div class="reviewNickname ms-3 col-5">
+                                <p class="mb-0 ms-2"><?= Client::get($comment->id_clients)->firstname ?></p>
+                            </div>
+                            <div class="reviewDate col-5 offset-1">
+                                <p class="mb-0 ms-2"><?= $comment->title ?><small class="d-none d-md-inline ms-5"><?= datefmt_format(DATE_FORMAT_HOUR, strtotime($comment->created_at)) ?></small></p>
+                            </div>
                         </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
+                        <div class="row reviewRow align-items-center">
+                            <div class="reviewComment col-11 ms-3 mb-3">
+                                <p class="mb-0 ms-2"><?= $comment->content ?>
+                                    <small>
+                                        <?php
+                                        $stars = $comment->quotations; //Nombre d'étoiles de l'avis
+                                        $star = 1; //Initialisation première étoile
+                                        while ($star <= $stars) { ?>
+                                            <!-- Etoile pleine -->
+                                            <i class="fa-solid fa-star"></i>
+                                        <?php $star++;
+                                        }
+                                        while ($star <= 5) { ?>
+                                            <!-- Etoile vide -->
+                                            <i class="fa-regular fa-star"></i>
+                                        <?php $star++;
+                                        }
+                                        ?></small>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="/Avis" id="reviewBtn" class="text-center">
-                    Soumettre un avis
-                </a>
+
+                <?php
+                }
+                ?>
             </div>
         </section>
         <!-- REVIEW end -->
@@ -206,6 +151,5 @@
             </div>
         </section>
         <!-- CONTACT end -->
-    </main>
-    <!-- MAIN end -->
-
+        </main>
+        <!-- MAIN end -->

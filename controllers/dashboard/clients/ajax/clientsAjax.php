@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
     $clientsSearch = Client::getBySearch($input, $limit, $offset);
     $nbResults = Client::getBySearch($input);
-    
+
     if (count($clientsSearch)>0) {
         $results = [$clientsSearch, $nbResults];
         echo json_encode($results);

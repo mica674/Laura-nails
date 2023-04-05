@@ -9,7 +9,10 @@ let emailBtns = document.querySelectorAll('.emailBtn');
 
 // ---------- MODALS
 
-function eventBtns() {
+function updateBtns() {
+    // UPDATE BTNS
+    deleteBtns = document.querySelectorAll('.deleteBtn');
+    emailBtns = document.querySelectorAll('.emailBtn');
     // DELETE
     deleteBtns.forEach(deleteBtn => {
         deleteBtn.addEventListener('click', () => {
@@ -50,9 +53,11 @@ function liveSearch() {
             return (response.json());
         })
         .then(data => {
-            console.log(data);
             if (data == 'false') {
                 nbResults.innerHTML = 'Pas de correspondance';
+                clientsListResult.innerHTML = '';
+                numeroPage.value = 1;
+                numeroPageMax.value = 1;
             } else {
                 nbResults.innerHTML = (data[1][0].nbResultsSearch <= 1) ? data[1][0].nbResultsSearch + ' client' : data[1][0].nbResultsSearch + ' clients';
 
@@ -61,7 +66,6 @@ function liveSearch() {
 
                 clientsListResult.innerHTML = '';
                 data[0].forEach(client => {
-                    console.log(client.birthdate);
 
                     // Formattage de la date du rendez-vous
                     if (client.birthdate != null) {
@@ -70,16 +74,16 @@ function liveSearch() {
                         day = day < 10 ? '0' + day : day; //Si jour inférieur à 10 on ajoute le 0 avant le chiffre
                         let month = new Intl.DateTimeFormat("fr-FR", options).format(dateBirthdate);//Get le mois
                         let year = dateBirthdate.getFullYear(); //Get l'année
-                        var appointment = `${day} ${month} ${year}`; //Concaténer la date complète
+                        var birthdate = `${day} ${month} ${year}`; //Concaténer la date complète
                     }
 
                     clientsListResult.innerHTML += `
                     <tr class="my-3 trClient(${nbLine} % 2) + 1">
-                        <td><a href="/Dashboard/EditClient?id=${client.id}"><i class="fa-regular fa-user"></i></a>${client.lastname}</td>
-                        <td><a href="/Dashboard/EditClient?id=${client.id}"><i class="fa-regular fa-user"></i></a>${client.firstname}</td>
+                        <td><a href="/Dashboard/Clients/Edit?id=${client.id}"><i class="fa-regular fa-user"></i></a>${client.lastname}</td>
+                        <td><a href="/Dashboard/Clients/Edit?id=${client.id}"><i class="fa-regular fa-user"></i></a>${client.firstname}</td>
                         <td class="text-center"><button type="button" class="emailBtn" data-bs-toggle="modal" data-bs-target="#validateEmailModal" data-id="${client.id}" data-lastname="${client.lastname}" data-firstname="${client.firstname}" data-email="${client.email}" data-validate="${(client.validated_at == null) ? '0' : '1'}"><i class="fa-regular fa-envelope ${(client.validated_at == null) ? 'noValidate' : 'validate'} "></i></button></td>
                         <td class="text-center"><a class="text-decoration-none" href="tel:${client.phone}">${client.phone}</a></td>
-                        <td class="text-center d-none d-sm-table-cell">${appointment ?? ''}</td>
+                        <td class="text-center d-none d-sm-table-cell">${birthdate ?? ''}</td>
                         <td class="text-center"><a href="/Dashboard/Clients/Edit?id=${client.id}"><i class="fa-solid fa-pen"></i></a> &emsp;
                             <button type="button" class="text-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${client.id}" data-lastname="${client.lastname}" data-firstname="${client.firstname}" data-email="${client.email}">
                                 <i class="fa-solid fa-trash"></i>
@@ -90,18 +94,64 @@ function liveSearch() {
                     nbLine++;
                 });
 
-
-                // MAJ des touches
-                deleteBtns = document.querySelectorAll('.deleteBtn');
-                emailBtns = document.querySelectorAll('.emailBtn');
-                eventBtns();
-
-                console.log(deleteBtns);
+                // Nombre de pages 
+                numeroPageMax.value = Math.ceil(data[1][0].nbResultsSearch / parseInt(itemsPerPage.value));
+                // MAJ des boutons
+                updateBtns();
             }
 
 
         })
 }
 
-liveSearch(); eventBtns();
-live_search.addEventListener('keyup', liveSearch)
+liveSearch(); updateBtns();
+// Input field SEARCH
+live_search.addEventListener('keyup', () => {
+    numeroPage.value = 1;
+    liveSearch();
+});
+live_search.addEventListener('mousein', () => {
+    liveSearch();
+});
+live_search.addEventListener('mouseleave', () => {
+    liveSearch();
+});
+
+// Items per page
+itemsPerPage.addEventListener('change', () => {
+    numeroPage.value = 1;
+    liveSearch();
+
+});
+
+// Pagination
+paginationNext.addEventListener('click', () => {
+    if (numeroPage.value < numeroPageMax.value) {
+        numeroPage.value++;//Incrémente le numéro de page
+        liveSearch();
+    }
+})
+paginationPrevious.addEventListener('click', () => {
+    if (numeroPage.value > 1) {
+        numeroPage.value--;//Décrémente le numéro de page
+        liveSearch();
+    }
+})
+numeroPage.addEventListener('keyup', () => {
+    if (numeroPage.value <= numeroPageMax.value && numeroPage.value >= 1) {
+        liveSearch();
+    }
+})
+numeroPage.addEventListener('change', () => {
+    if (numeroPage.value <= numeroPageMax.value && numeroPage.value >= 1) {
+        liveSearch();
+    }
+})
+numeroPage.addEventListener('blur', () => {
+    if (numeroPage.value > numeroPageMax.value) {
+        numeroPage.value = numeroPageMax.value
+    } else if (numeroPage.value < 1) {
+        numeroPage.value = 1;
+    }
+    liveSearch();
+})

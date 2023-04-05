@@ -62,7 +62,7 @@
         <fieldset class="loginFieldset">Donner votre avis</fieldset>
         <!-- FIRSTNAME -->
         <label for="firstname" class="mt-1">Votre prénom</label>
-        <input type="text" name="firstname" id="firstname" class="inputForm" value="<?= 'Jean-Michmich' ?>" readonly>
+        <input type="text" name="firstname" id="firstname" class="inputForm" value="<?= ($methodToConnect == 'session')?$_SESSION['client']->firstname:unserialize($_COOKIE['client'])->firstname ?>" readonly>
         <!-- MESSAGE's TITLE -->
         <label for="title" class="mt-1">Titre de l'avis</label>
         <input type="text" name="title" id="title" class="inputForm" placeholder="Titre de l'avis" value="<?= $title ?? '' ?>">

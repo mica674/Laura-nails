@@ -8,7 +8,7 @@
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
-            <option value="50">50</option>
+            <option selected value="50">50</option>
             <option value="100">100</option>
         </select>
         <!-- Champ de recherche -->
@@ -33,8 +33,8 @@
             ?>
                 <!-- Ligne avec les infos d'un client -->
                 <tr class="my-3 trClient<?= ($nbLine % 2) + 1 ?>">
-                    <td><a href="/Dashboard/EditClient?id=<?= $client->id ?>"><i class="fa-regular fa-user"></i></a><?= $client->lastname ?></td>
-                    <td><a href="/Dashboard/EditClient?id=<?= $client->id ?>"><i class="fa-regular fa-user"></i></a><?= $client->firstname ?></td>
+                    <td><a href="/Dashboard/Clients/Edit?id=<?= $client->id ?>"><i class="fa-regular fa-user"></i></a><?= $client->lastname ?></td>
+                    <td><a href="/Dashboard/Clients/Edit?id=<?= $client->id ?>"><i class="fa-regular fa-user"></i></a><?= $client->firstname ?></td>
                     <td class="text-center"><button type="button" class="emailBtn" data-bs-toggle="modal" data-bs-target="#validateEmailModal" data-id="<?= $client->id ?>" data-lastname="<?= $client->lastname ?>" data-firstname="<?= $client->firstname ?>" data-email="<?= $client->email ?>"><i class="fa-regular fa-envelope <?= is_null($client->validated_at) ? 'noValidate' : 'validate' ?>"></i></button></td>
                     <td class="text-center"><a class="text-decoration-none" href="tel:<?= $client->phone ?>"><?= $client->phone ?></a></td>
                     <td class="text-center d-none d-sm-table-cell"><?= datefmt_format(DATE_FORMAT, strtotime($client->birthdate ?? '')) ?></td>

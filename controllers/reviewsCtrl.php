@@ -8,7 +8,10 @@ require_once(__DIR__ . '/../models/Comment.php');
 require_once(__DIR__ . '/../models/Client.php');
 
 try {
-
+    if (!$clientConnected) {
+        Flash::flash('forbiddenAccess', 'Veuillez vous connecter pour pouvoir poster un commentaire', FLASH_WARNING);
+        header('Location: /Connexion');die;
+    }
     // Récupérer les 5 derniers commentaires postés
     $last5Comments = Comment::get();
 
@@ -66,9 +69,7 @@ try {
 
         if (empty($error)) { // Si aucune erreur après tous les nettoyages et les validations
 
-            // !------------------------------
-            $id_clients = 1; //!Pour les essais à modifier quand la connexion fonctionne
-            // !------------------------------
+            $id_clients = ($methodToConnect == 'session')?$_SESSION['client']->id:unserialize($_COOKIE['client'])->id;
 
             // Nouvelle instance de la class Comment
             $review = new Comment();
@@ -82,9 +83,9 @@ try {
             $result = $review->add();
             if (!$result) { //Si une erreur est survenu pendant l'ajout à la base de données
                 Flash::flash('commentAdded', 'Une erreur est survenue lors de l\'ajout du commentaire à la base de données');
-            } else { //Si pas d'erreur retour à la page d'Accueil
+            } else { //Si pas d'erreur retour à la page des avis
                 Flash::flash('commentAdded', 'Commentaire ajouté avec succès', FLASH_SUCCESS);
-                header('location: /Accueil');
+                header('location: /Avis');
                 die;
             }
         }

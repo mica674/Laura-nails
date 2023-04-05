@@ -82,11 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
     // End if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
-if (isset($_COOKIE['email']) || isset($_COOKIE['password'])) {
-    $email = $_COOKIE['email'] ?? '';
-    $password = $_COOKIE['password'] ?? '';
-}
-
 
 // !HEADER
 $linkCss = 'login';
