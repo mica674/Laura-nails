@@ -1,6 +1,6 @@
         <!-- CAROUSEL -->
         <section>
-            <div id="carouselHomePage" class="carousel slide" data-bs-ride="true">
+            <div id="carouselHomePage" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -9,16 +9,16 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item carouselItem active">
-                        <img src="/public/assets/img/photos/pexels-photo-1373748.jpeg" class="d-block" alt="photo vernis à ongle violet">
+                        <img src="/public/assets/img/photos/carousel1.jpg" alt="photo vernis à ongle violet">
                     </div>
                     <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/pexels-photo-963757.webp" class="d-block" alt="photo bougie tenue en main manucurée">
+                        <img src="/public/assets/img/photos/carousel2.jpg" alt="photo bougie tenue en main manucurée">
                     </div>
                     <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block" alt="mains manucurées en forme de cercle">
+                        <img src="/public/assets/img/photos/carousel3.jpg" alt="mains manucurées en forme de cercle">
                     </div>
                     <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" class="d-block" alt="mains manucurées en forme de cercle">
+                        <img src="/public/assets/img/photos/carousel4.jpg" alt="mains manucurées en forme de cercle">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
@@ -46,14 +46,14 @@
         <section>
             <div class="placeDate text-center" id="place">
                 <p class="placeDate-placeText my-5">
-                    28, rue derrière l'allée 75000 Paris 25
+                <?= explode(',',LAURA_ADDRESS)[0] . '<br>' . explode(',', LAURA_ADDRESS)[1]?>
                 </p>
                 <p class="placeDate-dateText mb-5">
                     lundi au vendredi : 9h - 17h
                 </p>
             </div>
             <div class="maps">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d91551.4055165548!2d2.2744685879083786!3d48.88620652728419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1670922529724!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1478.5408232480625!2d1.2180906018184967!3d49.879748316059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e0a504daba9153%3A0x8a0025e32becf366!2s122%20Rue%20Edouard%20Cannevel%2C%2076510%20Saint-Nicolas-d&#39;Aliermont!5e1!3m2!1sfr!2sfr!4v1680852260827!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
         <!-- PLACE & DATE end -->
@@ -70,7 +70,7 @@
                 <h3>Rendez-vous</h3>
             </div>
             <div class="calendarRendezVous">
-                <img src="/public/assets/img/rdv1.jpg" alt="Calendrier des rendez-vous">
+                <img src="/public/assets/img/calendar.jpg" alt="Calendrier des rendez-vous">
             </div>
             <div class="buttonRendezVous d-flex justify-content-center my-3">
                 <a href="/Rendez_vous" class="text-center buttonPrendreRDV">
@@ -94,44 +94,86 @@
             </div>
             <!-- Affichage de commentaires déjà postés -->
             <div class="container">
-                <?php
-                foreach ($last5Comments as $comment) { ?>
-
-                    <div class="reviewCard mb-2">
-                        <div class="row reviewRow align-items-center">
-                            <div class="reviewNickname ms-3 col-5">
-                                <p class="mb-0 ms-2"><?= Client::get($comment->id_clients)->firstname ?></p>
-                            </div>
-                            <div class="reviewDate col-5 offset-1">
-                                <p class="mb-0 ms-2"><?= $comment->title ?><small class="d-none d-md-inline ms-5"><?= datefmt_format(DATE_FORMAT_HOUR, strtotime($comment->created_at)) ?></small></p>
-                            </div>
+                <div class="reviewCard mb-2">
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewNickname ms-3 col-5">
+                            <p class="mb-0">Pseudo</p>
                         </div>
-                        <div class="row reviewRow align-items-center">
-                            <div class="reviewComment col-11 ms-3 mb-3">
-                                <p class="mb-0 ms-2"><?= $comment->content ?>
-                                    <small>
-                                        <?php
-                                        $stars = $comment->quotations; //Nombre d'étoiles de l'avis
-                                        $star = 1; //Initialisation première étoile
-                                        while ($star <= $stars) { ?>
-                                            <!-- Etoile pleine -->
-                                            <i class="fa-solid fa-star"></i>
-                                        <?php $star++;
-                                        }
-                                        while ($star <= 5) { ?>
-                                            <!-- Etoile vide -->
-                                            <i class="fa-regular fa-star"></i>
-                                        <?php $star++;
-                                        }
-                                        ?></small>
-                                </p>
-                            </div>
+                        <div class="reviewDate col-5 offset-1">
+                            <p class="mb-0">Date</p>
                         </div>
                     </div>
-
-                <?php
-                }
-                ?>
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewComment col-11 ms-3 mb-3">
+                            <p class="mb-0">Excellent, je recommande !</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewCard mb-2">
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewNickname ms-3 col-5">
+                            <p class="mb-0">Pseudo</p>
+                        </div>
+                        <div class="reviewDate col-5 offset-1">
+                            <p class="mb-0">Date</p>
+                        </div>
+                    </div>
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewComment col-11 ms-3 mb-3">
+                            <p class="mb-0">Excellent, je recommande !</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewCard mb-2">
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewNickname ms-3 col-5">
+                            <p class="mb-0">Pseudo</p>
+                        </div>
+                        <div class="reviewDate col-5 offset-1">
+                            <p class="mb-0">Date</p>
+                        </div>
+                    </div>
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewComment col-11 ms-3 mb-3">
+                            <p class="mb-0">Excellent, je recommande !</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewCard mb-2">
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewNickname ms-3 col-5">
+                            <p class="mb-0">Pseudo</p>
+                        </div>
+                        <div class="reviewDate col-5 offset-1">
+                            <p class="mb-0">Date</p>
+                        </div>
+                    </div>
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewComment col-11 ms-3 mb-3">
+                            <p class="mb-0">Excellent, je recommande !</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewCard mb-2">
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewNickname ms-3 col-5">
+                            <p class="mb-0">Pseudo</p>
+                        </div>
+                        <div class="reviewDate col-5 offset-1">
+                            <p class="mb-0">Date</p>
+                        </div>
+                    </div>
+                    <div class="row reviewRow align-items-center">
+                        <div class="reviewComment col-11 ms-3 mb-3">
+                            <p class="mb-0">Excellent, je recommande !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/Avis" id="reviewBtn" class="text-center">
+                    Soumettre un avis
+                </a>
             </div>
         </section>
         <!-- REVIEW end -->

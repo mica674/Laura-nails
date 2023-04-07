@@ -3,12 +3,12 @@
         <fieldset class="m-0"><h1 class="text-center mx-0">Contactez-nous</h1></fieldset>
         <hr id="formHr">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <div class="d-flex flex-column align-items-center">
                     <label class="ms-4" for="firstname">Prénom</label>
-                    <input type="text" name="firstname" id="firstname" class="inputForm rounded" placeholder="Prénom" required value="<?=$firstname??''?>" pattern="<?= REGEXP_FIRSTNAME ?>" <?=isset($firstname)?'readonly':''?>>
+                    <input type="text" name="firstname" id="firstname" class="inputForm rounded" placeholder="Votre prénom" required value="<?=$clientConnected? ($methodToConnect=='session'?$_SESSION['client']->firstname:unserialize($_COOKIE['client'])->firstname):$firstname??''?>" pattern="<?= REGEXP_FIRSTNAME ?>" <?=($clientConnected)?'readonly':''?>>
                     <label class="ms-4" for="email">Email</label>
-                    <input type="email" name="email" id="email" class="inputForm rounded" placeholder="email" required value="<?=$email??''?>" <?=isset($email)?'readonly':''?>>
+                    <input type="email" name="email" id="email" class="inputForm rounded" placeholder="Email" required value="<?=$clientConnected? ($methodToConnect=='session'?$_SESSION['client']->email:unserialize($_COOKIE['client'])->email):$email??''?>" <?=($clientConnected)?'readonly':''?>>
                     <label class="ms-4" for="title">Objet du message</label>
                     <input type="text" name="title" id="title" class="inputForm rounded" placeholder="&Eacute;crire l'objet du message ici..." required value="<?=$title??''?>" pattern="<?= REGEXP_TITLE ?>">
                     <label class="ms-4" for="message">Message</label>

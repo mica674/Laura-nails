@@ -10,7 +10,7 @@ $prestation = Benefit::get($idPresta);
 
 try {
     if (empty($idPresta)) {
-        header('Location: /clientsList');
+        header('Location: /Dashboard/Prestations/List');
         exit;
     }
 

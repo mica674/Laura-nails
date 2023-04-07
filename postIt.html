@@ -17,7 +17,14 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - nettoyage et validation des données ajouté par l'utilisateur à la soumission du formulaire -->
 <!--* - récupérer le nombre d'étoiles sélectionnées -->
 <!--* - envoyer les données en base de données -->
-- Prénom venant de la connexion
+<!--* - Prénom venant de la connexion -->
+<!--* - Interdire l'accès si l'utilisateur n'est pas connecté -->
+<!--* - CSS complet -->
+- Méthodes Update/ Delete à revoir dans model Comment
+<!-- - Liste des commentaires supprimés dans l'edit du client --> 
+- View edit 1 commentaire
+- Dans la liste des commentaires permettre la validation/suppression et la récup s'il est supprimés
+- Lite des commentaires supprimés
 
 <!-- !Intégration page contact : -->
 <!--* - Intégration HTML/CSS -->
@@ -26,6 +33,9 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Envoi en base de données -->
 <!--* - Ajouter table contact dans la bdd -->
 <!--* - Créer Model Contact setter/getter/crud -->
+<!--* - Gérer la connexion ou non lors de la prise de contact -->
+* - Envoi de l'email à l'admin
+<!-- * - Css sur la touche 'envoyer le message' -->
 
 <!-- !Intégration page dashboard prestations : -->
 <!--* - Intégration via cards formulaires ajout et à la liste -->
@@ -56,8 +66,19 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - List-> background ligne verte quand email validé sinon rouge ou jaune en gardant une alternance de couleur entre 2 lignes proches + gestion du hover -->
 <!--* - Intégrer barre de recherche/pagination/Nombre d'éléments à afficher pour l'AJAX -->
 <!--* - clique sur l'enveloppe -> ouvre modale = 2 choix envoyer un email ou valider l'adresse email -->
-- A l'ajout du client via le dashboard -> envoyer un email de confirmation
-- AJAX champ de recherche clients !important EN COURS Recherche OK/ Elements par page -> mettre sur event OK/ pagination 
+- A l'ajout du client via le dashboard -> envoyer un email de confirmation à ce client
+<!--* - AJAX champ de recherche clients !important EN COURS Recherche OK/ Elements par page -> mettre sur event OK/ pagination  -->
+<!-- ?Commentaires dans EDIT CLIENT -->
+<!--* - Edit -> afficher un tableau avec tous les commentaires du client -->
+<!--* - Possibilité de les valider/supprimer via modales -->
+<!--* - Controller pour gérer la validation  -->
+    + envoi d'email
+- Controller pour gérer la suppression 
+    + envoi d'email
+<!-- - List des com' supprimés modifier icone à gauche par un '!' -->
+<!-- ?END -->
+<!-- - Liste des clients supprimés sous la liste des clients (pas encore supprimés) -->
+
 
 <!-- !Intégration page dashboard appointments -->
 <!--* - intégration pages ADD et LIST -->
@@ -94,7 +115,6 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Intégration edit -->
 <!--* - Controller du delete -->
 
-
 <!-- !inscription/connexion -->
 <!--* - nettoyer/valider données ADD -->
 <!--* - hashage password -->
@@ -129,8 +149,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - hover styles des touches -->
 
 <!-- !Intégration page mot de passe oublié -->
-- envoi de email
-- input email
+<!--* - input email -->
 - controler si l email exist avant
 - > intégration modification du mot de passe
 - nouveau mot de passe
@@ -146,6 +165,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!-- ? Controllers -->
 
 <!-- ? Autres/Astuces -->
+MODIFIER LES SUPPRESSION EN UPDATE DE DELETED_AT
 mentions légales
 AJAX champ de recherche rendezvous
 Balise title dans les a

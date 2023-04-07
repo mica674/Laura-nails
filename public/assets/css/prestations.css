@@ -151,16 +151,14 @@ h1{
 
 #imgPrestaPres1{
     position: absolute;
-    width: 100vw;
-    height: 25.5vh;
+    width: 100%;
     opacity: 0.5;
 }
 
 #imgPrestaPres2{
     position: relative;
-    top: 8vw;
-    left: 60vw;
-    width: 30vw;
+    left: 70%;
+    height: 50%;
     border: 1px solid #fbbc04;
 }
 
@@ -225,5 +223,3 @@ h1{
     display:inline-flex;
     justify-self: center;
 }
-========
->>>>>>>> 2588f253119ac44a5aec500a766d95e0865fb6e0:public/assets/css/style.css

@@ -314,7 +314,7 @@ class Client
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`, `validated_at`, `adminADMIN`
+        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `phone`, `birthdate`, `validated_at`, `deleted_at`, `adminADMIN`
                 FROM `clients`' .
             (($id) ? 'WHERE `id` = :id' : '')
             . ' ORDER BY `lastname`;';
@@ -343,7 +343,7 @@ class Client
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`, `validated_at`, `adminADMIN`
+        $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`, `validated_at`, `deleted_at`, `adminADMIN`
                 FROM `clients`
                 WHERE `email` = :email;';
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
@@ -374,21 +374,22 @@ class Client
         if ($limit == 0) {
             $sql = 'SELECT count(id) AS nbResultsSearch 
             FROM `clients`
-            WHERE `lastname`      LIKE :search
+            WHERE (`lastname`      LIKE :search
             OR `firstname`        LIKE :search
             OR `email`            LIKE :search
             OR `phone`            LIKE :search
-            OR `birthdate`        LIKE :search
+            OR `birthdate`        LIKE :search)
+            AND `deleted_at`      IS NULL
             ORDER BY `lastname`, `firstname`;';
         } else {
-            
-            $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`, `validated_at`, `adminADMIN`
+            $sql = 'SELECT `id`, `lastname`, `firstname`, `email`, `password`, `phone`, `birthdate`, `validated_at`, `deleted_at`, `adminADMIN`
                 FROM `clients`
-                WHERE `lastname`      LIKE :search
+                WHERE (`lastname`      LIKE :search
                 OR `firstname`        LIKE :search
                 OR `email`            LIKE :search
                 OR `phone`            LIKE :search
-                OR `birthdate`        LIKE :search
+                OR `birthdate`        LIKE :search)
+                AND `deleted_at` IS NULL
                 ORDER BY `lastname`
                 LIMIT :limit OFFSET :offset
                 ;';
@@ -456,13 +457,13 @@ class Client
     public static function delete($idClient): bool
     {
         $db = Database::connect();
-        $sql = 'DELETE
-                FROM `clients`
-                WHERE `id` = :id;
+        $sql = 'UPDATE `clients`
+                SET `deleted_at` = Now()
+                WHERE `id` = :idClient;
                 ;';
 
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $idClient, PDO::PARAM_INT);
+        $sth->bindValue(':idClient', $idClient, PDO::PARAM_INT);
         $sth->execute();
         $result = $sth->rowCount();
         return !empty($result);
@@ -509,13 +510,13 @@ class Client
 
     // IS ID EXIST - Controler si un ID existe dans la table clients
     /**
-     * Cette fonction permet de contrôler si un id de client existe
+     * Cette fonction permet de contrôler si un id du commentaire existe
      * Elle attend un paramètre d'entrée (format int), l'id a tester, et retourne un booleen true si l'id existe sinon false
-     * @param int $id
+     * @param int $idClient
      * 
      * @return bool
      */
-    public static function isIdExist(int $id): bool
+    public static function isIdExist(int $idClient): bool
     {
         // Connexion à la base de données
         $db = Database::connect();
@@ -523,12 +524,12 @@ class Client
         // Requête SQL
         $sql = "SELECT `id`
             FROM `clients`
-            WHERE   `id`  =   :id
+            WHERE   `id`  =   :idClient
             ;";
 
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        $sth->bindValue(':idClient', $idClient, PDO::PARAM_INT);
 
         // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
         $sth->execute();
@@ -555,5 +556,26 @@ class Client
         $sth->execute();
         $result = $sth->rowCount();
         return !empty($result);
+    }
+
+    public static function getback(int $idClient):bool{
+              // Connexion à la base de données
+              $db = Database::connect();
+
+              // Requête SQL
+              $sql = "UPDATE `clients`
+                          SET `deleted_at` = NULL
+                          WHERE   `id`  =   :idClient
+                          ;";
+      
+              // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
+              $sth = $db->prepare($sql);
+              $sth->bindValue(':idClient', $idClient, PDO::PARAM_INT);
+      
+              // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
+              $sth->execute();
+              $result = $sth->rowCount();
+              return !empty($result);
+        
     }
 }

@@ -32,3 +32,17 @@ td a{
 td a:hover{
     color: #484848;
 }
+
+#contactSubmit{
+    background-color: transparent;
+    color: #fff;
+    border-color: #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    width: 50%;
+}
+
+#contactSubmit:hover{
+    background-color: #484848;
+    color: #fbbc04;
+}

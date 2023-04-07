@@ -56,8 +56,14 @@ td>button{
 
 #numeroPage{
     width: 3rem;
-    
 }
+
+/* FORM */
+input{
+width: 30%;
+height: 2rem;
+}
+
 
 /* Couleur de l'enveloppe de l'email en fonction si l'inscription a été validé ou pas */
 .fa-envelope.noValidate{
@@ -87,4 +93,8 @@ td>button{
     border-color: #fbbc04!important;
     background-color: #242424;
     color: white;
+}
+
+a{
+    text-decoration: none;
 }

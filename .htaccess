@@ -24,7 +24,14 @@ RewriteRule Dashboard/Prestations/Edit /controllers/dashboard/pages/prestations/
 RewriteRule Dashboard/Prestations/Delete /controllers/dashboard/pages/prestations/deleteCtrl.php [L]
 # 
 RewriteRule Dashboard/PlaceDate /controllers/dashboard/pages/placeDatePageCrtl.php [L]
-RewriteRule Dashboard/Reviews /controllers/dashboard/pages/reviewsPageCrtl.php [L]
+# REVIEWS
+RewriteRule ^Dashboard/Reviews$ /controllers/dashboard/pages/reviewsPageCrtl.php [L]
+RewriteRule Dashboard/Reviews/List /controllers/dashboard/pages/reviews/listCtrl.php [L]
+RewriteRule Dashboard/Reviews/Edit /controllers/dashboard/pages/reviews/editCtrl.php [L]
+RewriteRule Dashboard/Reviews/Delete /controllers/dashboard/pages/reviews/deleteCtrl.php [L]
+RewriteRule Dashboard/Reviews/Validate /controllers/dashboard/pages/reviews/validateCtrl.php [L]
+RewriteRule Dashboard/Reviews/Getback /controllers/dashboard/pages/reviews/getbackCtrl.php [L]
+# 
 RewriteRule Dashboard/Contact /controllers/dashboard/pages/contactPageCrtl.php [L]
 
 # Clients
@@ -33,6 +40,7 @@ RewriteRule Dashboard/Clients/List /controllers/dashboard/clients/listCtrl.php [
 RewriteRule Dashboard/Clients/Edit /controllers/dashboard/clients/editCtrl.php [L]
 RewriteRule Dashboard/Clients/Delete /controllers/dashboard/clients/deleteCtrl.php [L]
 RewriteRule Dashboard/Clients/Validate /controllers/dashboard/clients/validateEmailCtrl.php [L]
+RewriteRule Dashboard/Clients/Getback /controllers/dashboard/clients/getbackCtrl.php [L]
 
 # Appointments
 RewriteRule Dashboard/Appointments/Add /controllers/dashboard/appointments/addCtrl.php [L]

@@ -1,0 +1,78 @@
+.homeCard{
+    border-radius: 1rem;
+    border: beige 1px solid;
+}
+
+a{
+    text-decoration: none;
+}
+
+#reviewAddForm input, #reviewEditForm input{
+    width: 40%;
+    height: 2rem;
+}
+
+#reviewAddBtn, #reviewEditBtn{
+    background-color: transparent;
+    font-size: 1.25rem;
+    color: #fff;
+    border-color: #fbbc04;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    width: auto!important;
+    height: auto!important;
+}
+
+#reviewAddBtn:hover, #reviewEditBtn:hover{
+    background-color: #484848;
+    color: #fbbc04;
+}
+
+/* Reviews List */
+.tableReviews{
+    width: 96%;
+    margin: 2vw;
+}
+
+tr>th{
+    border-top: #fbbc04 solid 1px;
+    border-bottom: #fbbc04 solid 1px;
+}
+
+th{
+    padding: 1rem 0;
+}
+
+td{
+    padding: 0.5rem 0;
+}
+
+.tdName{
+    justify-content: start;
+}
+
+.trReview2{
+    background-color: #363636;
+}
+
+td>a, td>button{
+    background-color: transparent;
+    border: none;
+}
+
+.trReview1:hover, .trReview2:hover{
+    background-color: #646464;
+    color: #fbbc04!important;
+}
+
+#numeroPageMax, #numeroPage{
+    color: white;
+    background-color: transparent;
+    border: none;
+    width:4rem;
+}
+
+#numeroPage{
+    width: 3rem;
+    
+}

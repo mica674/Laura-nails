@@ -255,9 +255,10 @@ class Comment
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `id`, `title`, `content`, `quotations`, `id_clients`, `created_at`
-                FROM `comments`' .
-            (($id) ? 'WHERE `id` = :id' : '')
+        $sql = 'SELECT `id`, `title`, `content`, `quotations`, `id_clients`, `created_at`, `moderated_at`, `deleted_at`
+                FROM `comments` 
+                WHERE `deleted_at` IS NULL ' .
+            (($id) ? ' AND `id` = :id' : '')
             . ' ORDER BY `created_at` DESC
             LIMIT 5;';
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
@@ -270,9 +271,39 @@ class Comment
         return $result;
     }
 
-    // !UPDATE - Modifier un client dans la base de données
+    // *GET _ Récupère toutes les informations de tous les commentaires d'un client si le paramètre $idClient est renseigné
     /**
-     * Cette fonction permet de modifier un client dans la base données.
+     * Cette fonction permet de récupérer toutes les informations des commentaires d'un client si $idClient est renseigné
+     * Elle attend un paramètre en entrée (format int) FACULTATIF, qui est l'idClient du commentaire ciblé et retourne un tableau (array) avec ses informations
+     * 
+     * @param int|null $idClient
+     * 
+     * @return array|bool
+     */
+    public static function getAll(int|null $idClient = null): array|bool
+    {
+        // Connexion à la base de données
+        $db = Database::connect();
+
+        // Requête SQL
+        $sql = 'SELECT `id`, `title`, `content`, `quotations`, `id_clients`, `created_at`, `moderated_at`, `deleted_at`
+                FROM `comments` ' .
+            (($idClient) ? ' WHERE `id_clients` = :idClient' : '')
+            . ' ORDER BY `created_at` DESC
+            ;';
+        // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
+        $sth = $db->prepare($sql);
+        (($idClient) ? ($sth->bindValue(':idClient', $idClient, PDO::PARAM_INT)) : '');
+        // Exécuter la requête
+        $sth->execute();
+        $result = $sth->fetchAll();
+        // retourner l'objet $result contenant les informations du client
+        return $result;
+    }
+
+    // !UPDATE - Modifier un avis dans la base de données
+    /**
+     * Cette fonction permet de modifier un avis dans la base données.
      * Elle attend aucun paramètre en entrée et return un booleen true si tout s'est bien passé
      * 
      * 
@@ -284,114 +315,122 @@ class Comment
         $db = Database::connect();
 
         // Requête SQL
-        $sql =  'UPDATE `clients`
-                SET `lastname`  =   :lastname,
-                    `firstname` =   :firstname,
-                    `email`     =   :email,
-                    `birthdate` =   :birthdate,
-                    `phone`     =   :phone
+        $sql =  'UPDATE `comments`
+                SET `title` =   :title,
+                    `content`     =   :content,
+                    `quotations` =   :quotations
                 WHERE `id`      =   :id
                 ;';
 
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
         $sth->bindValue(':id',          $this->id,          PDO::PARAM_INT);
-        $sth->bindValue(':lastname',    $this->lastname,    PDO::PARAM_STR);
-        $sth->bindValue(':firstname',   $this->firstname,   PDO::PARAM_STR);
-        $sth->bindValue(':email',       $this->email,       PDO::PARAM_STR);
-        $sth->bindValue(':password',    $this->password,    PDO::PARAM_STR);
-        $sth->bindValue(':phone',       $this->phone,       PDO::PARAM_STR);
-        $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR);
+        $sth->bindValue(':title',       $this->title,       PDO::PARAM_STR);
+        $sth->bindValue(':content',     $this->content,     PDO::PARAM_STR);
+        $sth->bindValue(':quotations',  $this->quotations,  PDO::PARAM_INT);
 
         // Executer la requête et retourner l'état de l'opération (true si tout s'est bien passé, sinon false)
         return $sth->execute();
     }
 
-    // !DELETE - Supprimer un client de la base de données
     /**
-     * Cette fonction permet de supprimer un client de la base données.
-     * Elle attend un paramètre d'entrée l'id du client à supprimer (format int)
-     * 
+     * Cette fonction permet de valider un commentaire
+     * Elle attend un paramètre d'entrée (format int), l'id du commentaire à valider, et retourne un booleen true si tout c'est bien passé sinon false
+     * @param int $idComment
      * 
      * @return bool
      */
-    public static function delete($idClient): bool
-    {
-        $db = Database::connect();
-        $sql = 'DELETE
-                FROM `clients`
-                WHERE `id` = :id;
-                ;';
-
-        $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $idClient, PDO::PARAM_INT);
-        $sth->execute();
-        $result = $sth->rowCount();
-        return !empty($result);
-    }
-
-
-
-    // ?OTHERS FUNCTIONS
-    // IS CLIENT EXIST - Controler si un client existe déjà dans la base de données
-    /**
-     * Cette fonction permet de contrôler si un client existe déjà dans la base données.
-     * Elle attend 4 paramètres en entrées (format string) et return un booleen true si un client avec ces 4 informations existe déjà
-     * 
-     * @param string $lastname
-     * @param string $firstname
-     * @param string $email
-     * @param string $birthdate
-     * 
-     * @return bool
-     */
-    public static function isClientExist($lastname, $firstname, $email, $birthdate): bool
+    public static function validate(int $idComment): bool
     {
         // Connexion à la base de données
         $db = Database::connect();
 
         // Requête SQL
-        $sql = "SELECT `lastname`, `firstname`, `email`, `birthdate`
-                FROM `clients`
-                WHERE   `lastname`  =   :lastname
-                    AND `firstname` =   :firstname
-                    AND `email`     =   :email
-                    AND `birthdate` =   :birthdate
+        $sql = "UPDATE `comments`
+                SET `moderated_at` = Now(),
+                    `deleted_at` = NULL
+                WHERE   `id`  =   :idComment
                 ;";
+
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
-        $sth->bindValue(':lastname', $lastname);
-        $sth->bindValue(':firstname', $firstname);
-        $sth->bindValue(':email', $email);
-        $sth->bindValue(':birthdate', $birthdate);
+        $sth->bindValue(':idComment', $idComment, PDO::PARAM_INT);
 
-        // Executer la requête et retourner l'état de l'opération (true si un client avec ces 4 informations existe déjà, sinon false)
+        // Executer la requête et retourner l'état de l'opération
         $sth->execute();
         $result = $sth->rowCount();
         return !empty($result);
     }
 
+    // !DELETE - Supprimer un commentaire (ajouter un timestamp à deleted_at)
     /**
-     * Cette fonction permet de contrôler si un id de client existe
-     * Elle attend un paramètre d'entrée (format int), l'id a tester, et retourne un booleen true si l'id existe sinon false
-     * @param int $id
+     * Cette fonction permet de supprimer un commentaire (le rend invisible en dehors du dashboard).
+     * Elle attend un paramètre d'entrée l'id du commentaire à supprimer (format int)
+     * 
+     * @param mixed $idClient
      * 
      * @return bool
      */
-    public static function isIdExist(int $id): bool
+    public static function delete(int $idComment): bool
+    {
+        $db = Database::connect();
+        $sql = 'UPDATE `comments`
+                SET `deleted_at` = Now()
+                WHERE `id` = :idComment;
+                ;';
+
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':idComment', $idComment, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
+    }
+
+
+    // ?OTHERS FUNCTIONS
+    // 
+    /**
+     * Cette fonction permet de contrôler si un id du commentaire existe
+     * Elle attend un paramètre d'entrée (format int), l'id a tester, et retourne un booleen true si l'id existe sinon false
+     * @param int $idComment
+     * 
+     * @return bool
+     */
+    public static function isIdExist(int $idComment): bool
     {
         // Connexion à la base de données
         $db = Database::connect();
 
         // Requête SQL
         $sql = "SELECT `id`
-            FROM `patients`
-            WHERE   `id`  =   :id
+            FROM `comments`
+            WHERE   `id`  =   :idComment
             ;";
 
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
         $sth = $db->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        $sth->bindValue(':idComment', $idComment, PDO::PARAM_INT);
+
+        // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
+    }
+
+    public static function getback(int $idComment): bool
+    {
+        // Connexion à la base de données
+        $db = Database::connect();
+
+        // Requête SQL
+        $sql = "UPDATE `comments`
+                    SET `deleted_at` = NULL
+                    WHERE   `id`  =   :idComment
+                    ;";
+
+        // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':idComment', $idComment, PDO::PARAM_INT);
 
         // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
         $sth->execute();

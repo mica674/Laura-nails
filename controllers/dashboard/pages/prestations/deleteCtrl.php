@@ -14,5 +14,8 @@ if (!Benefit::isExist($idPresta)) {
     if(Benefit::delete($idPresta)){
         Flash::flash('prestaDeleted', 'La prestation a bien été supprimée', FLASH_SUCCESS);
         header('Location: /Dashboard/Prestations/List');die;
-    };
+    }else {
+        Flash::flash('prestaDeleted', 'La prestation n\'a pas été supprimée', FLASH_DANGER);
+        header('Location: /Dashboard/Prestations/List');die;
+    }
 }

@@ -2,7 +2,7 @@
     <!-- Tableaux de tous les appointmen$appointments -->
     <table class="tableClients">
         <tr class="bgTh">
-            <td><i class="fa-solid fa-xmark" style="color: #ff0000;"></i> <i class="fa-solid fa-check" style="color: #01b701;"></i></td>
+            <th><i class="fa-solid fa-xmark" style="color: #ff0000;"></i> <i class="fa-solid fa-check" style="color: #01b701;"></i></th>
             <th class="text-center">Rendez-vous</th>
             <th class="text-center">Prestations choisis</th>
             <th class="d-none">Nom</th>

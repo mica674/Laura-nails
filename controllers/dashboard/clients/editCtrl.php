@@ -2,8 +2,11 @@
 // !INIT
 require_once(__DIR__ . '/../../../config/initDashboard.php');
 
-// !MODEL
+// !MODELS
 require_once(__DIR__ . '/../../../models/Client.php');
+require_once(__DIR__ . '/../../../models/Comment.php');
+
+
 
 // Récupérer l'id passé en GET avec le filtrage au passge
 $idClient = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
@@ -16,6 +19,8 @@ if (empty($idClient)) {
     $client = Client::get($idClient);
 }
 
+// Récupérer les commentaires du client
+$comments = Comment::getAll($idClient);
 
 // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
 // *PUIS REDIRECTION SI DONNEES VALIDEES
@@ -145,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
 
 
 // !HEADER
+$linkCss = 'clients/clients';
 include(__DIR__ . '/../../../views/dashboard/templates/header.php');
 
 

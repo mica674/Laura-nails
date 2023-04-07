@@ -7,7 +7,6 @@ require_once(__DIR__ . '/../../../config/initDashboard.php');
 require_once(__DIR__ . '/../../../models/Client.php');
 $clients = Client::get();
 
-
 // !HEADER
 $linkCss = 'clients/clients';
 include(__DIR__ . '/../../../views/dashboard/templates/header.php');

@@ -46,8 +46,9 @@ hr{
 
 /* CAROUSEL */
 .carouselItem>img{
+    object-fit: cover;
     width: 100vw; /* Largeur images carousel*/
-    height: 60vh; /* Hauteur images carousel*/
+    height: 80vh; /* Hauteur images carousel*/
 }
 
 .carouselTitle{
@@ -83,6 +84,7 @@ iframe{
 
 .calendarRendezVous>img{
     width: 100vw;
+    object-fit: cover;
 }
 
 .buttonPrendreRDV{

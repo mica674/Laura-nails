@@ -7,8 +7,6 @@ require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/Contact.php');
 
 // Informations de l'utilisateur connecté
-$firstname = 'Charles-Edouard';
-$email = 'jean.eude.charles.edouard@principaute.mon';
 
 try {
 
@@ -52,7 +50,7 @@ try {
             $contact->setContent($message);
             // Si l'utilisateur est connecté on associe son id_clients pour simplifié la récupération d'information plus tard
             if ($userConnected = true) {
-                $contact->setId_clients(1); //!VALEUR EN DUR POUR LES ESSAIS
+                $contact->setId_clients($methodToConnect=='session'?$_SESSION['client']->id:unserialize($_COOKIE['client'])->id);
             }
 
             // Ajouter le contact à la base de donnée & affecter le résultat de l'exécution de la requête à $result

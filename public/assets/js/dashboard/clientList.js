@@ -3,9 +3,6 @@
 let deleteBtns = document.querySelectorAll('.deleteBtn');
 // Boutons email
 let emailBtns = document.querySelectorAll('.emailBtn');
-// Elements de la modale
-// const modalDescriptionDelete = document.getElementById('modalDescriptionDelete');
-// const modalLinkDelete = document.getElementById('modalLinkDelete');
 
 // ---------- MODALS
 
@@ -25,8 +22,7 @@ function updateBtns() {
     // VALIDATE
     emailBtns.forEach(emailBtn => {
         emailBtn.addEventListener('click', () => {
-            console.log(emailBtn.dataset.validate);
-            modalDescriptionValidate.innerHTML = emailBtn.dataset.email + '(' + emailBtn.dataset.lastname + ' ' + emailBtn.dataset.firstname + ')';
+            modalDescriptionValidate.innerHTML = emailBtn.dataset.email + ' (' + emailBtn.dataset.lastname + ' ' + emailBtn.dataset.firstname + ')';
             let linkEmail = 'mailto:' + emailBtn.dataset.email;
             modalLinkEmail.setAttribute('href', linkEmail);
             if (emailBtn.dataset.validate == 0) {
@@ -65,7 +61,7 @@ function liveSearch() {
                 const options = { month: "long" }; //Option pour la récupération du mois dans le formattage de la date
 
                 clientsListResult.innerHTML = '';
-                data[0].forEach(client => {
+                data[0].forEach(client => {if (client.deleted_at == null) {
 
                     // Formattage de la date du rendez-vous
                     if (client.birthdate != null) {
@@ -92,7 +88,7 @@ function liveSearch() {
                     </tr>
                     `
                     nbLine++;
-                });
+                }});
 
                 // Nombre de pages 
                 numeroPageMax.value = Math.ceil(data[1][0].nbResultsSearch / parseInt(itemsPerPage.value));
