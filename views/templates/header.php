@@ -55,6 +55,9 @@
                                 <li class="d-flex justify-content-center mx-lg-2">
                                     <a class="loginButton d-flex align-items-center" href="/Deconnexion">Déconnexion</a>
                                 </li>
+                                <li class="d-flex justify-content-center mx-lg-2">
+                                    <a class="loginButton d-flex align-items-center border-0" href="/Profil"><i class="fa-regular fa-user"></i></a>
+                                </li>
                                 <?php
                             } elseif($clientConnected && $adminConnected) { ?>
                                 <li class="d-flex justify-content-center me-lg-2">

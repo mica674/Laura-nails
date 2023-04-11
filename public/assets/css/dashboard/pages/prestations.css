@@ -76,3 +76,8 @@ td>a, td>button{
     width: 3rem;
     
 }
+
+#addPrestationBtn:hover{
+    color: #fbbc04!important;
+    background-color: #646464;
+}

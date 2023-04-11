@@ -1,15 +1,20 @@
 // Ciblage des éléments HTML
-const slotInput = document.querySelectorAll("input");
-const modifyBtn = document.getElementById('slotEditBtn');
-let slotInputStart = slotInput[0].value;
-let slotInputEnd = slotInput[1].value;
-let slotInputStep = slotStep.value;
+let lastnameInput = lastname.value;
+let firstnameInput = firstname.value;
+let emailInput = email.value;
+let phoneInput = phone.value;
+let birthdateInput = birthdate.value;
+const profilInputs = document.querySelectorAll('.inputJS');
+
+console.log(profilInputs);
 // Fonctions
 // Comparer les valeurs des inputs avant et après les modifications
-function inputsValuesStillSame(slot) {
-    if (slot.getAttribute("id") == 'slotStart' && slotInputStart != slot.value
-        || slot.getAttribute("id") == 'slotEnd' && slotInputEnd != slot.value
-        || slot.getAttribute("id") == 'slotStep' && slotInputStep != slot.value
+function inputsValuesStillSame(profil) {
+    if (profil.getAttribute("id") == 'lastname' && lastnameInput != profil.value
+        || profil.getAttribute("id") == 'firstname' && firstnameInput != profil.value
+        || profil.getAttribute("id") == 'email' && emailInput != profil.value
+        || profil.getAttribute("id") == 'phone' && phoneInput != profil.value
+        || profil.getAttribute("id") == 'birthdate' && birthdateInput != profil.value
     ) {
         same = false;
     } else { same = true; }
@@ -33,17 +38,15 @@ function eventListener(input) {
         })
         input.addEventListener('change', () => {
             if (!inputsValuesStillSame(input)) {
-                modifyBtn.classList.remove('d-none');
+                profilBtn.classList.remove('d-none');
                 input.classList.add('bg-success');
             } else {
-                modifyBtn.classList.add('d-none');
+                profilBtn.classList.add('d-none');
             }
         })
     }
 }
 
-
-slotInput.forEach(input => {
+profilInputs.forEach(input => {
     eventListener(input)
 });
-eventListener(slotStep);

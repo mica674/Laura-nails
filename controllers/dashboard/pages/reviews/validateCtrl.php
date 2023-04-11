@@ -22,6 +22,7 @@ if (Comment::isIdExist($idComment)) {
             // Message flash
             Flash::flash('commentValidated', 'Le commentaire n\'a pas été validé !', FLASH_DANGER);
         }
+        header('Location: /Dashboard/Reviews/List');die;
     }else {//Sinon redirection pour faire la suppression
         header('Location: /Dashboard/Reviews/Delete?id='.$idComment. '&idClient='. $idClient);die;
     }

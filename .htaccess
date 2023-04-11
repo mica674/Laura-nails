@@ -5,6 +5,7 @@ RewriteRule ^Accueil$ /controllers/homeCtrl.php [L]
 RewriteRule ^Inscription$ /controllers/registrerCtrl.php [L]
 RewriteRule ^Connexion$ /controllers/logInCtrl.php [L]
 RewriteRule ^Deconnexion$ /controllers/logOutCtrl.php [L]
+RewriteRule ^Profil$ /controllers/profilCtrl.php [L]
 RewriteRule ^Lieux_et_horaires$ /controllers/placeDateCtrl.php [L]
 RewriteRule ^Prestations$ /controllers/prestationsCtrl.php [L]
 RewriteRule ^Rendez_vous$ /controllers/rendezVousCtrl.php [L]
@@ -22,6 +23,7 @@ RewriteRule Dashboard/Prestations/Add /controllers/dashboard/pages/prestations/a
 RewriteRule Dashboard/Prestations/List /controllers/dashboard/pages/prestations/listCtrl.php [L]
 RewriteRule Dashboard/Prestations/Edit /controllers/dashboard/pages/prestations/editCtrl.php [L]
 RewriteRule Dashboard/Prestations/Delete /controllers/dashboard/pages/prestations/deleteCtrl.php [L]
+RewriteRule Dashboard/Prestations/Getback /controllers/dashboard/pages/prestations/getbackCtrl.php [L]
 # 
 RewriteRule Dashboard/PlaceDate /controllers/dashboard/pages/placeDatePageCrtl.php [L]
 # REVIEWS

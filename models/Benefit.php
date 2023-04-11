@@ -275,7 +275,7 @@ class Benefit //Prestations
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'SELECT `id`, `title`, `description`, `duration`, `price`
+        $sql = 'SELECT `id`, `title`, `description`, `duration`, `price`, `deleted_at`
                 FROM `services`' . //Concaténation avec '.'
             (($idPresta) ? 'WHERE `id` = :id' : '')
             . ' ORDER BY `created_at`';
@@ -341,8 +341,8 @@ class Benefit //Prestations
         $db = Database::connect();
 
         // Requête SQL
-        $sql = 'DELETE
-                FROM `services`
+        $sql = 'UPDATE `services`
+                SET `deleted_at` = Now()
                 WHERE `id` = :id;
                 ;';
 
@@ -389,4 +389,26 @@ class Benefit //Prestations
         // Retourner l'état de l'opération (true si une prestation correspond à la requête SQL, sinon false)
         return !empty($result);
     }
+
+    public static function getback(int $idPresta): bool
+    {
+        // Connexion à la base de données
+        $db = Database::connect();
+
+        // Requête SQL
+        $sql = "UPDATE `services`
+                    SET `deleted_at` = NULL
+                    WHERE   `id`  =   :idPresta
+                    ;";
+
+        // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
+        $sth = $db->prepare($sql);
+        $sth->bindValue(':idPresta', $idPresta, PDO::PARAM_INT);
+
+        // Executer la requête et retourner l'état de l'opération (true si un id existe, sinon false)
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
+    }
+
 }

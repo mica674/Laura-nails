@@ -18,7 +18,7 @@
         ?>
             <tr class="my-3 trClient<?= ($nbLine % 2) + 1 ?>">
                 <td>
-                    <button type="button" class="validateBtn" data-bs-toggle="modal" data-bs-target="#validateAppointmentModal" data-id="<?= $appointment->id ?>" data-appointment="<?=$appointment->appointment?>" data-email="<?= $appointment->email ?>">
+                    <button type="button" class="validateBtn" <?=!$appointment->validated_at?'data-bs-toggle="modal" data-bs-target="#validateAppointmentModal"':''?> data-id="<?= $appointment->id ?>" data-appointment="<?=$appointment->appointment?>" data-email="<?= $appointment->email ?>">
                         <?= $appointment->validated_at ? '<i class="fa-solid fa-check" style="color: #01b701;"></i>' : '<i class="fa-solid fa-xmark fa-shake" style="color: #ff0000;"></i>' ?>
                     </button>
                 </td>

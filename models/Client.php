@@ -428,9 +428,9 @@ class Client
                 SET `lastname`  =   :lastname,
                     `firstname` =   :firstname,
                     `email`     =   :email,
-                    `birthdate` =   :birthdate,
-                    `phone`     =   :phone
-                WHERE `id`      =   :id
+                    `phone`     =   :phone'. 
+                    (($this->birthdate != '')?', `birthdate` =   :birthdate':'').
+                ' WHERE `id`      =   :id
                 ;';
 
         // Preparer la requête SQl (prepare) et affectater des valeurs avec les marqueurs nommés (bindValue)
@@ -440,10 +440,12 @@ class Client
         $sth->bindValue(':firstname',   $this->firstname,   PDO::PARAM_STR);
         $sth->bindValue(':email',       $this->email,       PDO::PARAM_STR);
         $sth->bindValue(':phone',       $this->phone,       PDO::PARAM_STR);
-        $sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR);
+        (($this->birthdate != '')?($sth->bindValue(':birthdate',   $this->birthdate,   PDO::PARAM_STR)):'');
 
         // Executer la requête et retourner l'état de l'opération (true si tout s'est bien passé, sinon false)
-        return $sth->execute();
+        $sth->execute();
+        $result = $sth->rowCount();
+        return !empty($result);
     }
 
     // !DELETE - Supprimer un client de la base de données

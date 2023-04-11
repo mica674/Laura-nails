@@ -11,7 +11,7 @@ Dashboard C'EST QUOI CE BLOB ?
 Dashboard calque page avec numéro des photos et input pour modifier les images
 Dashboard calque page avec numéro des zones de texte et text area pour modifier les zones de texte
 
-<!-- !Intégration page avis reviews: -->
+<!-- !Intégration page avis reviews + Dashboard: -->
 <!--* - list des 5 derniers avis -->
 <!--* - Affichage du vote (étoiles) dans l'affichage des derniers avis -->
 <!--* - nettoyage et validation des données ajouté par l'utilisateur à la soumission du formulaire -->
@@ -21,10 +21,16 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Interdire l'accès si l'utilisateur n'est pas connecté -->
 <!--* - CSS complet -->
 - Méthodes Update/ Delete à revoir dans model Comment
-<!-- - Liste des commentaires supprimés dans l'edit du client --> 
-- View edit 1 commentaire
-- Dans la liste des commentaires permettre la validation/suppression et la récup s'il est supprimés
-- Lite des commentaires supprimés
+<!--* - Liste des commentaires supprimés dans l'edit du client --> 
+<!--* - View edit 1 commentaire -->
+<!--* - Dans la liste des commentaires permettre la validation/suppression et la récup s'il est supprimés -->
+<!--* - Lite des commentaires supprimés -->
+<!--* - JS modale suppression LIST -->
+- Au delete du client faire un delete de ses reviews
+- idem à la récupératio du client
+<!--* - JS EDIT -->
+<!--* - Validation X/V List -->
+<!--* - Modifier la méthod getAll pour trier soit par rapport au modération soit par rapport à la date de création -->
 
 <!-- !Intégration page contact : -->
 <!--* - Intégration HTML/CSS -->
@@ -50,6 +56,11 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Modale pour confirmer la suppression -->
 <!--* - Controller du delete -->
 - (Optionnel) Ajouter une prestation Autre avec un input -> Filtrer/valider pour faire une proposition, qui n'est pas présente dans la liste  des prestations, lors de la demande du rdv
+<!-- - Liste des prestations supprimés -->
+<!-- - Boutons de récupération -->
+<!-- - Update avec deleted_at et pas un delete dans la méthode delete -->
+<!-- - Méthode getback pour la récupération -->
+- CSS touche ajouter une prestation LIST
 
 <!-- !Intégration page dashboard clients -->
 <!--* - Intégration via cards formulaires ajout et à la liste -->
@@ -75,9 +86,9 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
     + envoi d'email
 - Controller pour gérer la suppression 
     + envoi d'email
-<!-- - List des com' supprimés modifier icone à gauche par un '!' -->
+<!--* - List des com' supprimés modifier icone à gauche par un '!' -->
 <!-- ?END -->
-<!-- - Liste des clients supprimés sous la liste des clients (pas encore supprimés) -->
+<!--* - Liste des clients supprimés sous la liste des clients (pas encore supprimés) -->
 
 
 <!-- !Intégration page dashboard appointments -->
@@ -141,7 +152,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 <!--* - Filtrer et valider les données des checkbox et de la demande de rdv (date, heure, minutes) -->
 <!--* - Créer le model AppointmentBenefit -->
 <!--* - Model -> construct fait le ADD et renvoi la réponse = 1 ligne dans le controller -->
-- Limiter à 3 prestations sélectionnées max /PHP OK/ Le verrouiller en JS
+<!-- - Limiter à 3 prestations sélectionnées max /PHP OK/ Le verrouiller en JS -->
 
 <!-- !Intégration page Home -->
 - Faire une boucle pour les slides du carrousel
@@ -159,6 +170,10 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 - renvoi page connexion
 
 <!-- !Intégration page profile CLIENT -->
+<!-- - HTacess -->
+- Formulaire en readonly
+- JS pour gérer les inputs changements de couleur, etc.
+- Controller pour gérer les modifications que l'utilisateur fait
 
 <!-- !Intégration page profile ADMIN -->
 
@@ -166,6 +181,7 @@ Dashboard calque page avec numéro des zones de texte et text area pour modifier
 
 <!-- ? Autres/Astuces -->
 MODIFIER LES SUPPRESSION EN UPDATE DE DELETED_AT
+connexion impossible si compte supprimé
 mentions légales
 AJAX champ de recherche rendezvous
 Balise title dans les a

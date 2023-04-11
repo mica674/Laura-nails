@@ -276,11 +276,12 @@ class Comment
      * Cette fonction permet de récupérer toutes les informations des commentaires d'un client si $idClient est renseigné
      * Elle attend un paramètre en entrée (format int) FACULTATIF, qui est l'idClient du commentaire ciblé et retourne un tableau (array) avec ses informations
      * 
+     * @param string $method (moderated par défaut)
      * @param int|null $idClient
      * 
      * @return array|bool
      */
-    public static function getAll(int|null $idClient = null): array|bool
+    public static function getAll(string $method = 'moderated', int|null $idClient = null): array|bool
     {
         // Connexion à la base de données
         $db = Database::connect();
@@ -289,8 +290,8 @@ class Comment
         $sql = 'SELECT `id`, `title`, `content`, `quotations`, `id_clients`, `created_at`, `moderated_at`, `deleted_at`
                 FROM `comments` ' .
             (($idClient) ? ' WHERE `id_clients` = :idClient' : '')
-            . ' ORDER BY `created_at` DESC
-            ;';
+            . (($method == 'moderated') ? ' ORDER BY `moderated_at`, `created_at` DESC ' : ' ORDER BY `created_at` DESC, `moderated_at` ') .
+            ';';
         // Preparer la requête SQl (prepare) et affecter des valeurs avec bindvalue
         $sth = $db->prepare($sql);
         (($idClient) ? ($sth->bindValue(':idClient', $idClient, PDO::PARAM_INT)) : '');

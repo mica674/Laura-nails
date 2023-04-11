@@ -7,7 +7,7 @@ body{
     text-align: center;
     align-items: center;
     height: 100vh;
-    animation: switchColor 0.1s infinite;
+    animation: switchColor 0.3s infinite;
 }
 @keyframes switchColor{
     0% {

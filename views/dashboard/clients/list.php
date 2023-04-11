@@ -43,7 +43,13 @@
             <i class="fa-solid fa-chevron-right"></i>
         </button>
     </div>
-
+    
+    <!-- Touche pour aller sur la page pour ajouter un client -->
+    <div class="bg-transparent d-flex my-3">
+        <a href="/Dashboard/Clients/Add" class="mx-auto text-white addBtn text-decoration-none rounded p-2" id="addClientBtn">Ajouter un client</a>
+    </div>
+    
+    
     <div class="container-fluid">
         <!-- COMMENT DELETED -->
         <h2 class="text-center mt-5">Clients supprimés</h2>
@@ -86,10 +92,6 @@
         </table>
 
 
-        <!-- Touche pour aller sur la page pour ajouter un client -->
-        <div class="bg-transparent d-flex my-3">
-            <a href="/Dashboard/Clients/Add" class="mx-auto text-white addBtn text-decoration-none rounded p-2" id="addClientBtn">Ajouter un client</a>
-        </div>
 
         <!-- MODALE VALIDATE -->
         <div class="modal fade" id="validateEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

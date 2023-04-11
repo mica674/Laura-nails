@@ -12,10 +12,22 @@
             <div class="card d-flex align-items-center">
                 <h3 class="mt-4 ">Titre magazine 1</h3>
                 <div class="section2Img d-flex flex-wrap justify-content-evenly">
-                    <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" alt="">
-                    <img src="/public/assets/img/photos/pexels-photo-1367219.webp" alt="">
-                    <img src="/public/assets/img/photos/pexels-photo-2268404.webp" alt="">
-                    <img src="/public/assets/img/photos/pexels-photo-963757.webp" alt="">
+                    <div class="card image-fluid w-50 h-75">
+
+                        <img src="/public/assets/img/photos/pexels-photo-1164339.jpeg" alt="">
+                    </div>
+                    <div class="card image-fluid w-50 h-75">
+
+                        <img src="/public/assets/img/photos/pexels-photo-1367219.webp" alt="">
+                    </div>
+                    <div class="card image-fluid w-50 h-75">
+                        
+                        <img src="/public/assets/img/photos/pexels-photo-2268404.webp" alt="">
+                    </div>
+                    <div class="card image-fluid w-50 h-75">
+
+                        <img src="/public/assets/img/photos/pexels-photo-963757.webp" alt="">
+                    </div>
                 </div>
             </div>
             <div class="card d-flex align-items-center">
