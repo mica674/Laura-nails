@@ -1,14 +1,14 @@
     <!-- MAIN -->
     <main>
         <!-- Section 1 - Photos de prestations en tête -->
-        <section class="prestationsImgPres">
+        <section class="prestationsImgPres d-none">
             <img class="imgPrestaPres" id="imgPrestaPres1" src="/public/assets/img/photos/pexels-photo-1373748.jpeg" alt="image vernis">
             <img class="imgPrestaPres rounded-circle" id="imgPrestaPres2" src="/public/assets/img/photos/pexels-photo-3557600.jpeg" alt="image ongle">
         </section>
         <!-- Section 1 end -->
 
         <!-- Section 2 - Cards de présentations des prestations -->
-        <section id="section2">
+        <section id="section2" class="d-none">
             <div class="card d-flex align-items-center">
                 <h3 class="mt-4 ">Titre magazine 1</h3>
                 <div class="section2Img d-flex flex-wrap justify-content-evenly">
@@ -61,10 +61,10 @@
                 <div class="row justify-content-evenly">
 
                     <?php
-                    foreach ($prestations as $prestation) { ?>
+                    foreach ($prestations as $key =>$prestation) { ?>
 
                         <!-- Nouvelle card de prestation -->
-                        <div class="col-12 col-md-5 my-2 cardPresta cardPresta<?= $prestation->id ?>">
+                        <div class="col-12 col-md-5 my-2 cardPresta cardPresta<?= $key+1 ?> rounded">
                             <div class="titleCard mb-5">
                                 <h3 class="fw-bold"><?= $prestation->title ?></h3>
                             </div>

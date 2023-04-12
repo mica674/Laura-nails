@@ -5,7 +5,7 @@
                     <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <!-- <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="3" aria-label="Slide 4"></button> -->
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item carouselItem active">
@@ -17,9 +17,6 @@
                     <div class="carousel-item carouselItem">
                         <img src="/public/assets/img/photos/carousel3.jpg" alt="mains manucurées en forme de cercle">
                     </div>
-                    <div class="carousel-item carouselItem">
-                        <img src="/public/assets/img/photos/carousel4.jpg" alt="mains manucurées en forme de cercle">
-                    </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -30,11 +27,10 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div class="carouselSubTitle">
-                <h2 class="carouselTitle text-center">Photos / Ongles</h2>
-            </div>
         </section>
         <!-- CAROUSEL end -->
+
+        
 
 
         <!-- Séparation de section -->
@@ -46,7 +42,7 @@
         <section>
             <div class="placeDate text-center" id="place">
                 <p class="placeDate-placeText my-5">
-                <?= explode(',',LAURA_ADDRESS)[0] . '<br>' . explode(',', LAURA_ADDRESS)[1]?>
+                    <?= explode(',', LAURA_ADDRESS)[0] . '<br>' . explode(',', LAURA_ADDRESS)[1] ?>
                 </p>
                 <p class="placeDate-dateText mb-5">
                     lundi au vendredi : 9h - 17h
@@ -59,33 +55,6 @@
         <!-- PLACE & DATE end -->
 
 
-        <!-- Séparation de section -->
-        <div class="hr my-3">
-            <hr>
-        </div>
-
-        <!-- RENDEZ-VOUS -->
-        <section>
-            <div class="rendezVousTitle text-center my-5">
-                <h3>Rendez-vous</h3>
-            </div>
-            <div class="calendarRendezVous">
-                <img src="/public/assets/img/calendar.jpg" alt="Calendrier des rendez-vous">
-            </div>
-            <div class="buttonRendezVous d-flex justify-content-center my-3">
-                <a href="/Rendez_vous" class="text-center buttonPrendreRDV">
-                    Prendre rendez-vous
-                </a>
-            </div>
-        </section>
-        <!-- RENDEZ-VOUS end -->
-
-
-        <!-- Séparation de section -->
-        <div class="hr my-3">
-            <hr>
-        </div>
-
         <!-- REVIEW -->
         <section>
             <!-- Titre de la section -->
@@ -94,81 +63,49 @@
             </div>
             <!-- Affichage de commentaires déjà postés -->
             <div class="container">
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
+
+                <?php
+                foreach ($last5Comments as $comment) {
+                    if (!is_null($comment->moderated_at)) {
+                ?>
+
+                        <div class="reviewCard mb-2 rounded">
+                            <div class="row reviewRow align-items-center">
+                                <div class="reviewNickname ms-3 col-5">
+                                    <p class="mb-0 ms-2"><?= Client::get($comment->id_clients)->firstname ?></p>
+                                </div>
+                                <div class="reviewDate col-5 offset-1">
+                                    <p class="mb-0 ms-2"><?= $comment->title ?><small class="d-none d-md-inline ms-5"><?= datefmt_format(DATE_FORMAT_HOUR, strtotime($comment->created_at)) ?></small></p>
+                                </div>
+                            </div>
+                            <div class="row reviewRow align-items-center">
+                                <div class="reviewComment col-11 ms-3 mb-2">
+                                    <p class="mb-0 ms-2"><?= $comment->content ?>
+                                        <small>
+                                            <?php
+                                            $stars = $comment->quotations; //Nombre d'étoiles de l'avis
+                                            $star = 1; //Initialisation première étoile
+                                            while ($star <= $stars) { ?>
+                                                <!-- Etoile pleine -->
+                                                <i class="fa-solid fa-star"></i>
+                                            <?php $star++;
+                                            }
+                                            while ($star <= 5) { ?>
+                                                <!-- Etoile vide -->
+                                                <i class="fa-regular fa-star"></i>
+                                            <?php $star++;
+                                            }
+                                            ?></small>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewCard mb-2">
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewNickname ms-3 col-5">
-                            <p class="mb-0">Pseudo</p>
-                        </div>
-                        <div class="reviewDate col-5 offset-1">
-                            <p class="mb-0">Date</p>
-                        </div>
-                    </div>
-                    <div class="row reviewRow align-items-center">
-                        <div class="reviewComment col-11 ms-3 mb-3">
-                            <p class="mb-0">Excellent, je recommande !</p>
-                        </div>
-                    </div>
-                </div>
+
+                <?php
+                    }
+                }
+                ?>
+
             </div>
             <div class="d-flex justify-content-center">
                 <a href="/Avis" id="reviewBtn" class="text-center">

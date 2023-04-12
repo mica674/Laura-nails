@@ -1,0 +1,27 @@
+#client,
+#day,
+select {
+    height: 2rem;
+    color: white;
+    background-color: #484848;
+    border: 1px solid #484848;
+}
+
+.prestaField {
+    margin: 0 auto;
+    background-color: #484848;
+    width: 80vw;
+    max-width: 400px;
+}
+
+#addAppointmentBtn {
+    background-color: #484848;
+    color: white;
+    border: none;
+font-size: 2rem;
+}
+
+#addAppointmentBtn:hover {
+    color: #484848;
+    background-color: #fbbc04;
+}

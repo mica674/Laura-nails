@@ -35,7 +35,7 @@
     </table>
     <!-- Touche pour aller sur la page ADD prestation -->
     <div class="bg-transparent d-flex my-3">
-        <a href="/Dashboard/Prestations/Add" class="mx-auto text-white addBtn" id="addPrestationBtn">Ajouter une prestation</a>
+        <a href="/Dashboard/Prestations/Add" class="mx-auto text-white addBtn rounded p-1" id="addPrestationBtn">Ajouter une prestation</a>
     </div>
 
     <div class="container-fluid">

@@ -37,9 +37,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/Prestations">Prestations</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="/Lieux_et_horaires">Lieux et horaires</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="/Rendez_vous">Rendez-vous</a>
                         </li>

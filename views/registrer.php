@@ -35,7 +35,7 @@
             <small <?= ($error['birthdate'] ?? false) ? 'class="text-danger"' : '' ?>><?= $error['birthdate'] ?? '' ?></small>
 
             <!-- Required fields informations -->
-            <small class="registrationSmall me-5 mt-3">* Champs obligatoires pour s'inscrire</small>
+            <small class="registrationSmall mt-3">* Champs obligatoires pour s'inscrire</small>
 
 
             <!-- Button to registrer -->

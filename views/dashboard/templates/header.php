@@ -47,10 +47,10 @@
                                 <div class="dropdown-menu ms-5 text-end" id="dropdownPages">
                                     <a class="dropdown-item fs-5" href="/Dashboard/Home">Accueil</a>
                                     <a class="dropdown-item fs-5" href="/Dashboard/Prestations">Prestations</a>
-                                    <a class="dropdown-item fs-5" href="/Dashboard/PlaceDate">Lieux/horaires</a>
-                                    <a class="dropdown-item fs-5" href="/Dashboard/Appointments">Rendez-vous</a>
-                                    <a class="dropdown-item fs-5" href="/Dashboard/Reviews">Avis</a>
-                                    <a class="dropdown-item fs-5" href="/Dashboard/Contact">Contact</a>
+                                    <!-- <a class="dropdown-item fs-5 text-danger" href="/Dashboard/PlaceDate">Lieux/horaires</a> -->
+                                    <a class="dropdown-item fs-5 text-danger" href="#">Rendez-vous</a>
+                                    <a class="dropdown-item fs-5" href="/Dashboard/Reviews/List">Avis</a>
+                                    <a class="dropdown-item fs-5 text-danger" href="/Dashboard/Contact">Contact</a>
                                 </div>
                             </li>
                             <li class="nav-item dropend my-lg-3">

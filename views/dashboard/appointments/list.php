@@ -5,8 +5,8 @@
             <th><i class="fa-solid fa-xmark" style="color: #ff0000;"></i> <i class="fa-solid fa-check" style="color: #01b701;"></i></th>
             <th class="text-center">Rendez-vous</th>
             <th class="text-center">Prestations choisis</th>
-            <th class="d-none">Nom</th>
-            <th class="d-none">Prénom</th>
+            <th class="d-none d-md-table-cell">Nom</th>
+            <th class="d-none d-md-table-cell">Prénom</th>
             <th class="text-center">Email</th>
             <th class="text-center">Téléphone</th>
             <th class="text-center">Actions</th>
@@ -26,8 +26,8 @@
                 <td class="text-center"><?php foreach ($appointmentsServices as $key => $prestation) {
                                             echo $prestation->title . (($key != 2) ? ' <br>' : '');
                                         } ?></td>
-                <td class="tdAppointment tdName d-none"><a href="/Dashboard/Clients/Edit?id=<?= $appointment->idClients ?>"><i class="fa-regular fa-user"></i></a> <?= $appointment->lastname ?></td>
-                <td class="tdAppointment tdName d-none"><a href="/Dashboard/Clients/Edit?id=<?= $appointment->idClients ?>"><i class="fa-regular fa-user"></i></a> <?= $appointment->firstname ?></td>
+                <td class="tdAppointment tdName d-none d-md-table-cell"><a href="/Dashboard/Clients/Edit?id=<?= $appointment->idClients ?>"><i class="fa-regular fa-user"></i></a> <?= $appointment->lastname ?></td>
+                <td class="tdAppointment tdName d-none d-md-table-cell"><a href="/Dashboard/Clients/Edit?id=<?= $appointment->idClients ?>"><i class="fa-regular fa-user"></i></a> <?= $appointment->firstname ?></td>
                 <td class="tdAppointment text-center"><a href="mailto:<?= $appointment->email ?>"><i class="fa-regular fa-envelope"></i></a></td>
                 <td class="tdAppointment text-center"><a href="tel:<?= $appointment->phone ?>"><?= $appointment->phone ?></a></td>
                 <td class="text-center"><a href="/Dashboard/Appointments/Edit?id=<?= $appointment->id ?>"><i class="fa-solid fa-pen"></i></a> &emsp;

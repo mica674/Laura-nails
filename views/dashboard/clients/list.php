@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    <h2 class="ms-5">Liste des clients</h2>
 
     <div class="container d-flex align-items-center justify-content-end me-3">
         <!-- Nombre de résultats de la recherche -->
@@ -52,7 +53,7 @@
     
     <div class="container-fluid">
         <!-- COMMENT DELETED -->
-        <h2 class="text-center mt-5">Clients supprimés</h2>
+        <h3 class="text-center mt-5">Clients supprimés</h3>
 
         <table class="tableClients">
             <tr class="bgTh">

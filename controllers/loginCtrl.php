@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
         Flash::flash('clientConnected', 'Vous êtes connecté', FLASH_INFO);
         
         if ($client->adminADMIN == 1) {
-            header('Location: /Dashboard');die;
+            header('Location: /Dashboard/Appointments/List');die;
         } else {    
             header('Location: /Accueil');
             die;

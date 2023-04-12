@@ -14,7 +14,7 @@
                     <div class="place m-2 py-3 text-center rounded">
                         <p class="mb-0">Pour prendre rendez-vous :</p>
                         <ol>
-                            <li>Sélectionner le(s) prestations souhaitée(s) <br> Attention aux temps des prestations !</li>
+                            <li>Sélectionner le(s) prestation(s) souhaitée(s) <br> Attention aux temps des prestations !</li>
                             <li>Choisir une date et une heure voulue pour le rendez-vous</li>
                             <li>Laura vous confirmera la date et l'heure du rendez-vous rapidement</li>
                         </ol>
@@ -31,7 +31,7 @@
             <div class="col-12 col-lg-5 p-0 mx-auto">
                 <!-- Section 3 - Liste des prestations à cocher -->
                 <form class="d-flex flex-column justify-content-center w-auto" method="post">
-                    <?php foreach ($prestations as $prestation) { ?>
+                    <?php foreach ($prestations as $prestation) {  if (!$prestation->deleted_at) {?>
 
                         <fieldset class="d-flex justify-content-center">
                             <div class="prestaField d-flex mx-3 my-1 justify-content-between rounded">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                    <?php } ?>
+                    <?php } } ?>
                     <small id="smallPresta" class="text-center <?= ($error['presta'] ?? false) ? 'text-danger' : '' ?>"><?= $error['presta'] ?? 'Veuillez sélectionnez 1 prestation minimum et 3 maximum' ?></small>
 
                     <!-- Section 3 - END -->

@@ -55,9 +55,6 @@ body{
     background-color: #484848;
 }
 
-.prestaField{
-    background-color:#484848;
-}
 
 .labels{
     width: 80%;
@@ -82,6 +79,7 @@ select#hour, select#minutes{
     border: 1px solid #484848;
     /* box-shadow: rgba(255, 255, 255, 0.3) 0px 3px 10px 2px; */
 }
+
 #hour>option:hover{
     color: #fbbc04;
     background-color: #484848;

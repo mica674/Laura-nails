@@ -4,7 +4,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="d-none">
         <!-- ClickableLinks -->
         <div class="clickableLinks d-flex align-items-center justify-content-center">
             <p>BUILDING IN PROGRESS...</p>
