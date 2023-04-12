@@ -14,13 +14,13 @@ if (empty($idClient)) {
     Flash::flash('clientEdited', 'Ce client n\'existe pas', FLASH_DANGER);
     header('Location: /Dashboard/Clients/List');
     exit;
-}else {
+} else {
     // Appel de la méthode static get de la class Client pour récupérer les infos du client 
     $client = Client::get($idClient);
 }
 
 // Récupérer les commentaires du client
-$comments = Comment::getAll('created_at',$idClient);
+$comments = Comment::getAll('created_at', $idClient);
 
 // *VERIFICATIONS DES DONNEES DU FORMULAIRE 
 // *PUIS REDIRECTION SI DONNEES VALIDEES
@@ -96,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Si les données sont bien envoyée
     $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_NUMBER_INT));
 
 
-    if (empty($birthdate)) { //Si $birthdate est vide
-        $error["birthdate"] = 'La date de naissance n\'est pas renseigné'; //Message d'erreur birthdate
-    } elseif (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
-        $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur birthdate
+    if (!empty($birthdate)) { //Si $birthdate est vide
+        if (!filter_var($birthdate, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDATE . '/')))) { //Sinon si $url ne correspond pas à un format url
+            $error["birthdate"] = 'La date de naissance n\'est pas valide'; //Message d'erreur birthdate
+        }
     }
 
 

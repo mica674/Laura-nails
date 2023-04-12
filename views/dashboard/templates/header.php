@@ -45,7 +45,7 @@
                                     <span class="ms-1 d-none d-sm-inline">Pages</span>
                                 </a>
                                 <div class="dropdown-menu ms-5 text-end" id="dropdownPages">
-                                    <a class="dropdown-item fs-5" href="/Dashboard/Home">Accueil</a>
+                                    <a class="dropdown-item fs-5 text-danger" href="/Dashboard/Home">Accueil</a>
                                     <a class="dropdown-item fs-5" href="/Dashboard/Prestations">Prestations</a>
                                     <!-- <a class="dropdown-item fs-5 text-danger" href="/Dashboard/PlaceDate">Lieux/horaires</a> -->
                                     <a class="dropdown-item fs-5 text-danger" href="#">Rendez-vous</a>

@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../../config/initDashboard.php');
 
 
 // !HEADER
-$linkCss = 'client';
+$linkCss = 'home';
 include(__DIR__ . '/../../views/dashboard/templates/header.php');
 
 FLASH::flash();
